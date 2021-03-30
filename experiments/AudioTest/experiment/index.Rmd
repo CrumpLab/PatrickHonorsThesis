@@ -6,6 +6,7 @@ output:
     mathjax: null
     highlight: null
     theme: null
+    self_contained: FALSE
     css: jspsych-6.3.0/css/jspsych.css
 ---
 
