@@ -10,10 +10,10 @@ library(jspsychr)
 # The assumption is your folder is inside an R project, which controls the default working directory
 
 # compiles the experiment file into html
-rmarkdown::render("AudioTest/experiment/index.Rmd", "html_document")
+rmarkdown::render("experiments/AudioTest/experiment/index.Rmd", "html_document")
 
 # runs the html in your browser
-run_locally(path="AudioTest",
+run_locally(path="experiments/AudioTest",
             show_in = "browser",
             jspsychr_host = "127.0.0.1",
             jspsychr_port = 8000)
