@@ -1,0 +1,98 @@
+---
+title: "Experiment Name"
+author: "Your Name"
+output:
+  html_document:
+    mathjax: null
+    highlight: null
+    theme: null
+    css: jspsych-6.3.0/css/jspsych.css
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message=FALSE, warning=FALSE)
+# load the plugin scripts in plugins.html which is included in the header.
+```
+
+```{r}
+# load jspsych and plugin scripts
+# note: this is an r code chunk
+library(htmltools)
+tagList(
+tags$script(src='jspsych-6.3.0/jspsych.js'),
+tags$script(src='jspsych-6.3.0/plugins/jspsych-html-keyboard-response.js'),
+tags$script(src='jspsych-6.3.0/plugins/jspsych-image-keyboard-response.js'),
+tags$script(src='jspsychr/jspsychr.js')
+)
+```
+
+```{js}
+var timeline = [];
+
+var instructionsA = {
+  type: "html-keyboard-response",
+  stimulus: `
+  <p> press A for this cat </p>
+  <img src="imgs/A.jpeg">
+  `,
+  post_trial_gap: 0
+};
+
+var instructionsB = {
+  type: "html-keyboard-response",
+  stimulus: `
+  <p> press B for this cat </p>
+  <img src="imgs/B.jpeg">
+  `,
+  post_trial_gap: 0
+};
+
+var thanks = {
+  type: "html-keyboard-response",
+  stimulus: `
+  <p> Thanks for participating </p>
+  `,
+  post_trial_gap: 0
+};
+
+var test_stimuli = [
+  { stimulus: "imgs/A.jpeg"},
+  { stimulus: "imgs/B.jpeg"}
+];
+
+var fixation = {
+  type: 'html-keyboard-response',
+  stimulus: '<div style="font-size:60px;">+</div>',
+  choices: jsPsych.NO_KEYS,
+  trial_duration: 1000,
+}
+
+var test = {
+  type: "image-keyboard-response",
+  stimulus: jsPsych.timelineVariable('stimulus'),
+  choices: ['f', 'j']
+}
+
+var test_procedure = {
+  timeline: [fixation, test],
+  timeline_variables: test_stimuli,
+  repetitions: 5,
+  randomize_order: true
+}
+
+timeline.push(instructionsA);
+timeline.push(instructionsB);
+timeline.push(test_procedure);
+timeline.push(thanks);
+
+
+
+jsPsych.init({
+  timeline: timeline,
+  on_finish: function() {
+    jsPsych.data.displayData();
+  }
+});
+
+```
