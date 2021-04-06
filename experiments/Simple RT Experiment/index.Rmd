@@ -31,35 +31,56 @@ tags$script(src='jspsychr/jspsychr.js')
 ```{js}
 var timeline = [];
 
-var instructionsA = {
+var welcome = {
   type: "html-keyboard-response",
   stimulus: `
-  <p> press A for this cat </p>
-  <img src="imgs/A.jpeg">
+  <p> Welcome to my experiment </p>
+  <p> Press any key to continue </p>
+
   `,
   post_trial_gap: 0
 };
 
+
+var instructionsA = {
+    type: 'audio-keyboard-response',
+    stimulus: 'audio/A3.mp3',
+    prompt:' <p> Press A for this sound </p>',
+    post_trial_gap: 0
+};
+
 var instructionsB = {
-  type: "html-keyboard-response",
-  stimulus: `
-  <p> press B for this cat </p>
-  <img src="imgs/B.jpeg">
-  `,
-  post_trial_gap: 0
+    type: 'audio-keyboard-response',
+    stimulus: 'audio/C3.mp3',
+    prompt:' <p> Press B for this sound </p>',
+    post_trial_gap: 0
+};
+
+var instructionsC = {
+    type: 'audio-keyboard-response',
+    stimulus: 'audio/E4.mp3',
+    prompt:' <p> Press C for this sound </p>',
+    post_trial_gap: 0
+};
+
+var instructionsD = {
+    type: 'audio-keyboard-response',
+    stimulus: 'audio/E5.mp3',
+    prompt:' <p> Press D for this sound </p>',
+    post_trial_gap: 0
 };
 
 var thanks = {
   type: "html-keyboard-response",
-  stimulus: `
-  <p> Thanks for participating </p>
-  `,
+  stimulus: ` <p> Thanks for participating </p>`,
   post_trial_gap: 0
 };
 
 var test_stimuli = [
   { stimulus: "audio/A3.mp3"},
-  { stimulus: "audio/C3.mp3"}
+  { stimulus: "audio/C3.mp3"},
+  { stimulus: "audio/E4.mp3"},
+  { stimulus: "audio/E5.mp3"}
 ];
 
 var fixation = {
@@ -72,22 +93,22 @@ var fixation = {
 var test = {
   type: "audio-keyboard-response",
   stimulus: jsPsych.timelineVariable('stimulus'),
-  choices: ['f', 'j']
+  choices: ['a', 'b','c', 'd']
 }
 
 var test_procedure = {
   timeline: [fixation, test],
   timeline_variables: test_stimuli,
-  repetitions: 5,
+  repetitions: 40,
   randomize_order: true
 }
-
+timeline.push(welcome);
 timeline.push(instructionsA);
 timeline.push(instructionsB);
+timeline.push(instructionsC);
+timeline.push(instructionsD);
 timeline.push(test_procedure);
 timeline.push(thanks);
-
-
 
 jsPsych.init({
   timeline: timeline,
