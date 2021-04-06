@@ -99,9 +99,10 @@ var test = {
 var test_procedure = {
   timeline: [fixation, test],
   timeline_variables: test_stimuli,
-  repetitions: 40,
+  repetitions: 2,
   randomize_order: true
 }
+
 timeline.push(welcome);
 timeline.push(instructionsA);
 timeline.push(instructionsB);
@@ -114,6 +115,7 @@ jsPsych.init({
   timeline: timeline,
   on_finish: function() {
     jsPsych.data.displayData();
+    jspsychr.save_locally();
   }
 });
 
