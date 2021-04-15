@@ -1,0 +1,122 @@
+---
+title: "Experiment Name"
+author: "Your Name"
+output:
+  html_document:
+    mathjax: null
+    highlight: null
+    theme: null
+    css: jspsych-6.3.0/css/jspsych.css
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message=FALSE, warning=FALSE)
+# load the plugin scripts in plugins.html which is included in the header.
+```
+
+```{r}
+# load jspsych and plugin scripts
+# note: this is an r code chunk
+library(htmltools)
+tagList(
+tags$script(src='jspsych-6.3.0/jspsych.js'),
+tags$script(src='jspsych-6.3.0/plugins/jspsych-html-keyboard-response.js'),
+tags$script(src='jspsych-6.3.0/plugins/jspsych-image-keyboard-response.js'),
+tags$script(src='jspsych-6.3.0/plugins/jspsych-audio-keyboard-response.js'),
+tags$script(src='jspsychr/jspsychr.js')
+)
+```
+
+```{js}
+var timeline = [];
+
+var welcome = {
+  type: "html-keyboard-response",
+  stimulus: `
+  <p> Welcome to my experiment </p>
+  <p> Press any key to continue </p>
+
+  `,
+  post_trial_gap: 0
+};
+
+
+var instructionsA = {
+    type: 'audio-keyboard-response',
+    stimulus: 'audio/A3.mp3',
+    prompt:' <p> Press A for this sound </p>',
+    post_trial_gap: 0
+};
+
+var instructionsB = {
+    type: 'audio-keyboard-response',
+    stimulus: 'audio/C3.mp3',
+    prompt:' <p> Press B for this sound </p>',
+    post_trial_gap: 0
+};
+
+var instructionsC = {
+    type: 'audio-keyboard-response',
+    stimulus: 'audio/E4.mp3',
+    prompt:' <p> Press C for this sound </p>',
+    post_trial_gap: 0
+};
+
+var instructionsD = {
+    type: 'audio-keyboard-response',
+    stimulus: 'audio/E5.mp3',
+    prompt:' <p> Press D for this sound </p>',
+    post_trial_gap: 0
+};
+
+var thanks = {
+  type: "html-keyboard-response",
+  stimulus: ` <p> Thanks for participating </p>`,
+  post_trial_gap: 0
+};
+
+var test_stimuli = [
+  { stimulus: "audio/A3.mp3"},
+  { stimulus: "audio/C3.mp3"},
+  { stimulus: "audio/E4.mp3"},
+  { stimulus: "audio/E5.mp3"}
+];
+
+var fixation = {
+  type: 'html-keyboard-response',
+  stimulus: '<div style="font-size:60px;">+</div>',
+  choices: jsPsych.NO_KEYS,
+  trial_duration: 1000,
+}
+
+var test = {
+  type: "audio-keyboard-response",
+  stimulus: jsPsych.timelineVariable('stimulus'),
+  choices: ['a', 'b','c', 'd']
+}
+
+var test_procedure = {
+  timeline: [fixation, test],
+  timeline_variables: test_stimuli,
+  repetitions: 2,
+  randomize_order: true
+}
+
+timeline.push(welcome);
+timeline.push(instructionsA);
+timeline.push(instructionsB);
+timeline.push(instructionsC);
+timeline.push(instructionsD);
+timeline.push(test_procedure);
+timeline.push(thanks);
+
+jsPsych.init({
+  timeline: timeline,
+  on_finish: function() {
+    jsPsych.data.displayData();
+    jspsychr.save_locally();
+  }
+});
+
+```
