@@ -36,38 +36,46 @@ var welcome = {
   stimulus: `
   <p> Welcome to my experiment </p>
   <p> Press any key to continue </p>
-
   `,
   post_trial_gap: 0
 };
 
+var encoding_instructions = {
+  type: "html-keyboard-response",
+  stimulus: `
+  <p> You will hear some sounds </p>
+  <p> Remember them for a later memory test </p>
+  <p> Press any key to continue </p>
+  `,
+  post_trial_gap: 0
+};
 
 var instructionsA = {
     type: 'audio-keyboard-response',
     stimulus: 'audio/A3.mp3',
-    prompt:' <p> Press A for this sound </p>',
+    prompt:' <p> Press any key to continue </p>',  
     post_trial_gap: 0
 };
 
 var instructionsB = {
     type: 'audio-keyboard-response',
     stimulus: 'audio/C3.mp3',
-    prompt:' <p> Press B for this sound </p>',
+    prompt:' <p> Press any key to continue </p>',
     post_trial_gap: 0
 };
 
 var instructionsC = {
     type: 'audio-keyboard-response',
     stimulus: 'audio/E4.mp3',
-    prompt:' <p> Press C for this sound </p>',
+    prompt:' <p> Press any key to continue </p>',
     post_trial_gap: 0
 };
 
 var instructionsD = {
     type: 'audio-keyboard-response',
     stimulus: 'audio/E5.mp3',
-    prompt:' <p> Press D for this sound </p>',
-    post_trial_gap: 0
+    prompt:' <p> Press any key to continue </p>',
+    post_trial_gap: 0  
 };
 
 var thanks = {
@@ -76,46 +84,81 @@ var thanks = {
   post_trial_gap: 0
 };
 
+var debrief_block = {
+  type: "html-keyboard-response",
+  stimulus: function() {
+
+    var trials = jsPsych.data.get().filter({task: 'response'});
+    var correct_trials = trials.filter({correct: true});
+    var accuracy = Math.round(correct_trials.count() / trials.count() * 100);
+    var rt = Math.round(correct_trials.select('rt').mean());
+
+    return `<p>You responded correctly on ${accuracy}% of the trials.</p>
+      <p>Your average response time was ${rt}ms.</p>
+      <p>Press any key to complete the experiment. Thank you!</p>`;
+
+  }
+};
+
 var test_stimuli = [
-  { stimulus: "audio/A3.mp3"},
-  { stimulus: "audio/C3.mp3"},
-  { stimulus: "audio/E4.mp3"},
-  { stimulus: "audio/E5.mp3"}
-];
+  { stimulus: "audio/A3.mp3", correct_response: 'o'},
+  { stimulus: "audio/C4.mp3", correct_response: 'n'},
+  { stimulus: "audio/C3.mp3", correct_response: 'o'},
+  { stimulus: "audio/C5.mp3", correct_response: 'n'},
+  { stimulus: "audio/E4.mp3", correct_response: 'o'},
+  { stimulus: "audio/E5.mp3", correct_response: 'o'}
+];  
+
+
+var testing_instructions = {
+  type: "html-keyboard-response",
+  stimulus: `
+  <p> You will hear some old sounds, and some new sounds </p>
+  <p> Press O for old sound and N for new sounds </p>
+  <p> Press any key to continue </p>
+  `,
+  post_trial_gap: 0
+};  
 
 var fixation = {
   type: 'html-keyboard-response',
   stimulus: '<div style="font-size:60px;">+</div>',
   choices: jsPsych.NO_KEYS,
   trial_duration: 1000,
-}
+};
 
 var test = {
   type: "audio-keyboard-response",
   stimulus: jsPsych.timelineVariable('stimulus'),
-  choices: ['a', 'b','c', 'd']
+    data:  {
+    task: 'response',
+    correct_response: jsPsych.timelineVariable('correct_response')
+  },
+  choices: ['o', 'n'],
 }
 
 var test_procedure = {
   timeline: [fixation, test],
   timeline_variables: test_stimuli,
-  repetitions: 2,
+  repetitions: 1,
   randomize_order: true
 }
-
 timeline.push(welcome);
+timeline.push(encoding_instructions); 
 timeline.push(instructionsA);
 timeline.push(instructionsB);
 timeline.push(instructionsC);
 timeline.push(instructionsD);
+timeline.push(testing_instructions);
 timeline.push(test_procedure);
+timeline.push(debrief_block);
 timeline.push(thanks);
+
 
 jsPsych.init({
   timeline: timeline,
   on_finish: function() {
     jsPsych.data.displayData();
-    jspsychr.save_locally();
   }
 });
 
