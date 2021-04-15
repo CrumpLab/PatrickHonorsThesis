@@ -163,6 +163,7 @@ jsPsych.init({
   timeline: timeline,
   on_finish: function() {
     jsPsych.data.displayData();
+    jspsychr.save_locally();
   }
 });
 
