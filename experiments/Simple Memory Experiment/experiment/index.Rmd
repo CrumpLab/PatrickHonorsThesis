@@ -101,7 +101,7 @@ var reps_per_trial_type = 1;
 var welcome = {
   type: "html-keyboard-response",
   stimulus: "Welcome to the experiment. Press any key to begin."
-};
+}; 
 
 /*set up instructions block*/
 var encoding_instructions = {
