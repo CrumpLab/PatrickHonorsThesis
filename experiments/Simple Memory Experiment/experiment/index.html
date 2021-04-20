@@ -15,6 +15,19 @@
 
 <title>Experiment Name</title>
 
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -3255,321 +3268,33 @@ jspsychr.save_locally = function() {
 </script>
 <script> var  encoding_stimuli =  [
   {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>WZYQH<\/p>",
+    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>WKWDU<\/p>",
     "data": {
-      "string": "WZYQH",
+      "string": "WKWDU",
       "phase": "Encoding",
       "font_size": "15pt"
     }
   },
   {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>EMGTN<\/p>",
+    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>MBMFN<\/p>",
     "data": {
-      "string": "EMGTN",
+      "string": "MBMFN",
       "phase": "Encoding",
       "font_size": "15pt"
     }
   },
   {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>SOLWZ<\/p>",
+    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>YLLCX<\/p>",
     "data": {
-      "string": "SOLWZ",
-      "phase": "Encoding",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>OMBPV<\/p>",
-    "data": {
-      "string": "OMBPV",
-      "phase": "Encoding",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>LHAYH<\/p>",
-    "data": {
-      "string": "LHAYH",
-      "phase": "Encoding",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>IVNJS<\/p>",
-    "data": {
-      "string": "IVNJS",
-      "phase": "Encoding",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>IRZCZ<\/p>",
-    "data": {
-      "string": "IRZCZ",
-      "phase": "Encoding",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>PKBFZ<\/p>",
-    "data": {
-      "string": "PKBFZ",
-      "phase": "Encoding",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>MIKJT<\/p>",
-    "data": {
-      "string": "MIKJT",
-      "phase": "Encoding",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>NGUFY<\/p>",
-    "data": {
-      "string": "NGUFY",
-      "phase": "Encoding",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>EQRLM<\/p>",
-    "data": {
-      "string": "EQRLM",
-      "phase": "Encoding",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>SHOXD<\/p>",
-    "data": {
-      "string": "SHOXD",
-      "phase": "Encoding",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>GCNFT<\/p>",
-    "data": {
-      "string": "GCNFT",
-      "phase": "Encoding",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>XCNYL<\/p>",
-    "data": {
-      "string": "XCNYL",
-      "phase": "Encoding",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>TGQIX<\/p>",
-    "data": {
-      "string": "TGQIX",
-      "phase": "Encoding",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>XKXWX<\/p>",
-    "data": {
-      "string": "XKXWX",
-      "phase": "Encoding",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>LIWEI<\/p>",
-    "data": {
-      "string": "LIWEI",
-      "phase": "Encoding",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>AIOUT<\/p>",
-    "data": {
-      "string": "AIOUT",
-      "phase": "Encoding",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>VCFDI<\/p>",
-    "data": {
-      "string": "VCFDI",
-      "phase": "Encoding",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>SFSBW<\/p>",
-    "data": {
-      "string": "SFSBW",
-      "phase": "Encoding",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>LBIIH<\/p>",
-    "data": {
-      "string": "LBIIH",
+      "string": "YLLCX",
       "phase": "Encoding",
       "font_size": "30pt"
     }
   },
   {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>UZFLQ<\/p>",
+    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>XLYCH<\/p>",
     "data": {
-      "string": "UZFLQ",
-      "phase": "Encoding",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>CADVU<\/p>",
-    "data": {
-      "string": "CADVU",
-      "phase": "Encoding",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>QEWWX<\/p>",
-    "data": {
-      "string": "QEWWX",
-      "phase": "Encoding",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>JXSWV<\/p>",
-    "data": {
-      "string": "JXSWV",
-      "phase": "Encoding",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>SERLN<\/p>",
-    "data": {
-      "string": "SERLN",
-      "phase": "Encoding",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>QADQY<\/p>",
-    "data": {
-      "string": "QADQY",
-      "phase": "Encoding",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>IJQFG<\/p>",
-    "data": {
-      "string": "IJQFG",
-      "phase": "Encoding",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>XVKHQ<\/p>",
-    "data": {
-      "string": "XVKHQ",
-      "phase": "Encoding",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>WHLMF<\/p>",
-    "data": {
-      "string": "WHLMF",
-      "phase": "Encoding",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>RADQG<\/p>",
-    "data": {
-      "string": "RADQG",
-      "phase": "Encoding",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>JHTHR<\/p>",
-    "data": {
-      "string": "JHTHR",
-      "phase": "Encoding",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>MGXVO<\/p>",
-    "data": {
-      "string": "MGXVO",
-      "phase": "Encoding",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>CBFDM<\/p>",
-    "data": {
-      "string": "CBFDM",
-      "phase": "Encoding",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>MDIFD<\/p>",
-    "data": {
-      "string": "MDIFD",
-      "phase": "Encoding",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>FBBXA<\/p>",
-    "data": {
-      "string": "FBBXA",
-      "phase": "Encoding",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>YIEPA<\/p>",
-    "data": {
-      "string": "YIEPA",
-      "phase": "Encoding",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>RHXMJ<\/p>",
-    "data": {
-      "string": "RHXMJ",
-      "phase": "Encoding",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>SISND<\/p>",
-    "data": {
-      "string": "SISND",
-      "phase": "Encoding",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>JQFXX<\/p>",
-    "data": {
-      "string": "JQFXX",
+      "string": "XLYCH",
       "phase": "Encoding",
       "font_size": "30pt"
     }
@@ -3577,812 +3302,74 @@ jspsychr.save_locally = function() {
 ] ; </script>
 <script> var  test_stimuli =  [
   {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>WZYQH<\/p>",
+    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>WKWDU<\/p>",
     "data": {
-      "string": "WZYQH",
+      "string": "WKWDU",
       "phase": "test",
-      "type": "OLD",
+      "correct_response": "o",
       "font_size": "15pt"
     }
   },
   {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>EMGTN<\/p>",
+    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>MBMFN<\/p>",
     "data": {
-      "string": "EMGTN",
+      "string": "MBMFN",
       "phase": "test",
-      "type": "OLD",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>SOLWZ<\/p>",
-    "data": {
-      "string": "SOLWZ",
-      "phase": "test",
-      "type": "OLD",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>OMBPV<\/p>",
-    "data": {
-      "string": "OMBPV",
-      "phase": "test",
-      "type": "OLD",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>LHAYH<\/p>",
-    "data": {
-      "string": "LHAYH",
-      "phase": "test",
-      "type": "OLD",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>IVNJS<\/p>",
-    "data": {
-      "string": "IVNJS",
-      "phase": "test",
-      "type": "OLD",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>IRZCZ<\/p>",
-    "data": {
-      "string": "IRZCZ",
-      "phase": "test",
-      "type": "OLD",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>PKBFZ<\/p>",
-    "data": {
-      "string": "PKBFZ",
-      "phase": "test",
-      "type": "OLD",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>MIKJT<\/p>",
-    "data": {
-      "string": "MIKJT",
-      "phase": "test",
-      "type": "OLD",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>NGUFY<\/p>",
-    "data": {
-      "string": "NGUFY",
-      "phase": "test",
-      "type": "OLD",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>EQRLM<\/p>",
-    "data": {
-      "string": "EQRLM",
-      "phase": "test",
-      "type": "OLD",
+      "correct_response": "o",
       "font_size": "30pt"
     }
   },
   {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>SHOXD<\/p>",
+    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>YLLCX<\/p>",
     "data": {
-      "string": "SHOXD",
+      "string": "YLLCX",
       "phase": "test",
-      "type": "OLD",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>GCNFT<\/p>",
-    "data": {
-      "string": "GCNFT",
-      "phase": "test",
-      "type": "OLD",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>XCNYL<\/p>",
-    "data": {
-      "string": "XCNYL",
-      "phase": "test",
-      "type": "OLD",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>TGQIX<\/p>",
-    "data": {
-      "string": "TGQIX",
-      "phase": "test",
-      "type": "OLD",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>XKXWX<\/p>",
-    "data": {
-      "string": "XKXWX",
-      "phase": "test",
-      "type": "OLD",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>LIWEI<\/p>",
-    "data": {
-      "string": "LIWEI",
-      "phase": "test",
-      "type": "OLD",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>AIOUT<\/p>",
-    "data": {
-      "string": "AIOUT",
-      "phase": "test",
-      "type": "OLD",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>VCFDI<\/p>",
-    "data": {
-      "string": "VCFDI",
-      "phase": "test",
-      "type": "OLD",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>SFSBW<\/p>",
-    "data": {
-      "string": "SFSBW",
-      "phase": "test",
-      "type": "OLD",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>LBIIH<\/p>",
-    "data": {
-      "string": "LBIIH",
-      "phase": "test",
-      "type": "OLD",
+      "correct_response": "o",
       "font_size": "15pt"
     }
   },
   {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>UZFLQ<\/p>",
+    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>XLYCH<\/p>",
     "data": {
-      "string": "UZFLQ",
+      "string": "XLYCH",
       "phase": "test",
-      "type": "OLD",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>CADVU<\/p>",
-    "data": {
-      "string": "CADVU",
-      "phase": "test",
-      "type": "OLD",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>QEWWX<\/p>",
-    "data": {
-      "string": "QEWWX",
-      "phase": "test",
-      "type": "OLD",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>JXSWV<\/p>",
-    "data": {
-      "string": "JXSWV",
-      "phase": "test",
-      "type": "OLD",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>SERLN<\/p>",
-    "data": {
-      "string": "SERLN",
-      "phase": "test",
-      "type": "OLD",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>QADQY<\/p>",
-    "data": {
-      "string": "QADQY",
-      "phase": "test",
-      "type": "OLD",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>IJQFG<\/p>",
-    "data": {
-      "string": "IJQFG",
-      "phase": "test",
-      "type": "OLD",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>XVKHQ<\/p>",
-    "data": {
-      "string": "XVKHQ",
-      "phase": "test",
-      "type": "OLD",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>WHLMF<\/p>",
-    "data": {
-      "string": "WHLMF",
-      "phase": "test",
-      "type": "OLD",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>RADQG<\/p>",
-    "data": {
-      "string": "RADQG",
-      "phase": "test",
-      "type": "OLD",
+      "correct_response": "o",
       "font_size": "30pt"
     }
   },
   {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>JHTHR<\/p>",
+    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>IJWJS<\/p>",
     "data": {
-      "string": "JHTHR",
+      "string": "IJWJS",
       "phase": "test",
-      "type": "OLD",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>MGXVO<\/p>",
-    "data": {
-      "string": "MGXVO",
-      "phase": "test",
-      "type": "OLD",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>CBFDM<\/p>",
-    "data": {
-      "string": "CBFDM",
-      "phase": "test",
-      "type": "OLD",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>MDIFD<\/p>",
-    "data": {
-      "string": "MDIFD",
-      "phase": "test",
-      "type": "OLD",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>FBBXA<\/p>",
-    "data": {
-      "string": "FBBXA",
-      "phase": "test",
-      "type": "OLD",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>YIEPA<\/p>",
-    "data": {
-      "string": "YIEPA",
-      "phase": "test",
-      "type": "OLD",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>RHXMJ<\/p>",
-    "data": {
-      "string": "RHXMJ",
-      "phase": "test",
-      "type": "OLD",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>SISND<\/p>",
-    "data": {
-      "string": "SISND",
-      "phase": "test",
-      "type": "OLD",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>JQFXX<\/p>",
-    "data": {
-      "string": "JQFXX",
-      "phase": "test",
-      "type": "OLD",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>RNVPB<\/p>",
-    "data": {
-      "string": "RNVPB",
-      "phase": "test",
-      "type": "NEW",
+      "correct_response": "n",
       "font_size": "15pt"
     }
   },
   {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>VLCSJ<\/p>",
+    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>CZEZR<\/p>",
     "data": {
-      "string": "VLCSJ",
+      "string": "CZEZR",
       "phase": "test",
-      "type": "NEW",
+      "correct_response": "n",
       "font_size": "15pt"
     }
   },
   {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>EOPUX<\/p>",
+    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>TDXBK<\/p>",
     "data": {
-      "string": "EOPUX",
+      "string": "TDXBK",
       "phase": "test",
-      "type": "NEW",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>OLXPR<\/p>",
-    "data": {
-      "string": "OLXPR",
-      "phase": "test",
-      "type": "NEW",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>MLGCB<\/p>",
-    "data": {
-      "string": "MLGCB",
-      "phase": "test",
-      "type": "NEW",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>NUTJH<\/p>",
-    "data": {
-      "string": "NUTJH",
-      "phase": "test",
-      "type": "NEW",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>IUKVS<\/p>",
-    "data": {
-      "string": "IUKVS",
-      "phase": "test",
-      "type": "NEW",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>HDTQL<\/p>",
-    "data": {
-      "string": "HDTQL",
-      "phase": "test",
-      "type": "NEW",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>CBXVT<\/p>",
-    "data": {
-      "string": "CBXVT",
-      "phase": "test",
-      "type": "NEW",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>XIIZL<\/p>",
-    "data": {
-      "string": "XIIZL",
-      "phase": "test",
-      "type": "NEW",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>UXWJT<\/p>",
-    "data": {
-      "string": "UXWJT",
-      "phase": "test",
-      "type": "NEW",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>CNFWM<\/p>",
-    "data": {
-      "string": "CNFWM",
-      "phase": "test",
-      "type": "NEW",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>AHMFO<\/p>",
-    "data": {
-      "string": "AHMFO",
-      "phase": "test",
-      "type": "NEW",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>WHIVG<\/p>",
-    "data": {
-      "string": "WHIVG",
-      "phase": "test",
-      "type": "NEW",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>HRFDY<\/p>",
-    "data": {
-      "string": "HRFDY",
-      "phase": "test",
-      "type": "NEW",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>HVTFJ<\/p>",
-    "data": {
-      "string": "HVTFJ",
-      "phase": "test",
-      "type": "NEW",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>JQXCD<\/p>",
-    "data": {
-      "string": "JQXCD",
-      "phase": "test",
-      "type": "NEW",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>TWFWZ<\/p>",
-    "data": {
-      "string": "TWFWZ",
-      "phase": "test",
-      "type": "NEW",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>KRCTO<\/p>",
-    "data": {
-      "string": "KRCTO",
-      "phase": "test",
-      "type": "NEW",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>YLZZV<\/p>",
-    "data": {
-      "string": "YLZZV",
-      "phase": "test",
-      "type": "NEW",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>MJPSE<\/p>",
-    "data": {
-      "string": "MJPSE",
-      "phase": "test",
-      "type": "NEW",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>YSIPI<\/p>",
-    "data": {
-      "string": "YSIPI",
-      "phase": "test",
-      "type": "NEW",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>WXYRI<\/p>",
-    "data": {
-      "string": "WXYRI",
-      "phase": "test",
-      "type": "NEW",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>HLZVN<\/p>",
-    "data": {
-      "string": "HLZVN",
-      "phase": "test",
-      "type": "NEW",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 15pt;'>JQJZM<\/p>",
-    "data": {
-      "string": "JQJZM",
-      "phase": "test",
-      "type": "NEW",
-      "font_size": "15pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>JSZQF<\/p>",
-    "data": {
-      "string": "JSZQF",
-      "phase": "test",
-      "type": "NEW",
+      "correct_response": "n",
       "font_size": "30pt"
     }
   },
   {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>YNXGR<\/p>",
+    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>PEXTK<\/p>",
     "data": {
-      "string": "YNXGR",
+      "string": "PEXTK",
       "phase": "test",
-      "type": "NEW",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>GJBWC<\/p>",
-    "data": {
-      "string": "GJBWC",
-      "phase": "test",
-      "type": "NEW",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>SEKZB<\/p>",
-    "data": {
-      "string": "SEKZB",
-      "phase": "test",
-      "type": "NEW",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>GQUZP<\/p>",
-    "data": {
-      "string": "GQUZP",
-      "phase": "test",
-      "type": "NEW",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>KZBOH<\/p>",
-    "data": {
-      "string": "KZBOH",
-      "phase": "test",
-      "type": "NEW",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>SRCIF<\/p>",
-    "data": {
-      "string": "SRCIF",
-      "phase": "test",
-      "type": "NEW",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>CYSSS<\/p>",
-    "data": {
-      "string": "CYSSS",
-      "phase": "test",
-      "type": "NEW",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>USGYO<\/p>",
-    "data": {
-      "string": "USGYO",
-      "phase": "test",
-      "type": "NEW",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>VLSMT<\/p>",
-    "data": {
-      "string": "VLSMT",
-      "phase": "test",
-      "type": "NEW",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>CNLKJ<\/p>",
-    "data": {
-      "string": "CNLKJ",
-      "phase": "test",
-      "type": "NEW",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>IKSFI<\/p>",
-    "data": {
-      "string": "IKSFI",
-      "phase": "test",
-      "type": "NEW",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>AEKPQ<\/p>",
-    "data": {
-      "string": "AEKPQ",
-      "phase": "test",
-      "type": "NEW",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>NAFMK<\/p>",
-    "data": {
-      "string": "NAFMK",
-      "phase": "test",
-      "type": "NEW",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>BBABT<\/p>",
-    "data": {
-      "string": "BBABT",
-      "phase": "test",
-      "type": "NEW",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>ZNAKA<\/p>",
-    "data": {
-      "string": "ZNAKA",
-      "phase": "test",
-      "type": "NEW",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>HCMJL<\/p>",
-    "data": {
-      "string": "HCMJL",
-      "phase": "test",
-      "type": "NEW",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>INCFG<\/p>",
-    "data": {
-      "string": "INCFG",
-      "phase": "test",
-      "type": "NEW",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>ZKPVB<\/p>",
-    "data": {
-      "string": "ZKPVB",
-      "phase": "test",
-      "type": "NEW",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>NRQFI<\/p>",
-    "data": {
-      "string": "NRQFI",
-      "phase": "test",
-      "type": "NEW",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>PGJNY<\/p>",
-    "data": {
-      "string": "PGJNY",
-      "phase": "test",
-      "type": "NEW",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>PXWQC<\/p>",
-    "data": {
-      "string": "PXWQC",
-      "phase": "test",
-      "type": "NEW",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>NFZYW<\/p>",
-    "data": {
-      "string": "NFZYW",
-      "phase": "test",
-      "type": "NEW",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>KMFZV<\/p>",
-    "data": {
-      "string": "KMFZV",
-      "phase": "test",
-      "type": "NEW",
-      "font_size": "30pt"
-    }
-  },
-  {
-    "stimulus": "<p id = 'id_encode' style = 'font-size: 30pt;'>SXLII<\/p>",
-    "data": {
-      "string": "SXLII",
-      "phase": "test",
-      "type": "NEW",
+      "correct_response": "n",
       "font_size": "30pt"
     }
   }
@@ -4410,7 +3397,7 @@ var encoding_instructions = {
 var encoding = {
   timeline: [{
     type: 'html-keyboard-response',
-    trial_duration: 500,
+    trial_duration: 1000,
     stimulus: jsPsych.timelineVariable('stimulus'),
     data: jsPsych.timelineVariable('data')
   }],
@@ -4436,7 +3423,10 @@ var testing = {
     choices: ["o","n"],
     response_ends_trial: true,
     stimulus: jsPsych.timelineVariable('stimulus'),
-    data: jsPsych.timelineVariable('data')
+    data: jsPsych.timelineVariable('data'),
+    on_finish: function(data){
+    data.correct = jsPsych.pluginAPI.compareKeys(data.response,data.correct_response);
+  }
   }],
   timeline_variables: test_stimuli,
   randomize_order: true
@@ -4445,8 +3435,18 @@ var testing = {
 /*set up debrief block*/
 var debrief = {
   type: "html-keyboard-response",
-  stimulus: "<p>Thanks for participating!</p>",
-  post_trial_gap: 1000
+  stimulus: function() {
+
+    var trials = jsPsych.data.get().filter({phase: 'test'});
+    var correct_trials = trials.filter({correct: true});
+    var accuracy = Math.round(correct_trials.count() / trials.count() * 100);
+    var num_trials = trials.count()
+
+    return `<p>There were ${num_trials}% number of trials.</p>
+    <p>You responded correctly on ${accuracy}% of the trials.</p>
+      <p>Press any key to complete the experiment. Thank you!</p>`;
+
+  }
 };
 
 /*set up experiment structure*/

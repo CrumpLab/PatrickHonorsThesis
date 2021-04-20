@@ -38,11 +38,13 @@ generate_random_string <- function(n_letters = 5){
 non_words <- unique(replicate(200,generate_random_string(5)))
 non_words <- non_words[1:100]
 
+words_per_condition <- 2
+
 # make encoding dataframe
 encoding_df <- data.frame(stimulus = NA,
-                          string = non_words[1:40],
+                          string = non_words[1:(words_per_condition*2)],
                           phase = "Encoding",
-                          font_size = rep(c("15pt","30pt"), each = 20)
+                          font_size = rep(c("15pt","30pt"), each = words_per_condition)
                           )
 
 encoding_df$stimulus <- html_stimulus(df = encoding_df, 
@@ -53,19 +55,19 @@ encoding_df$stimulus <- html_stimulus(df = encoding_df,
                                 id = "id_encode")
 # make test dataframe
 test_df <- data.frame(stimulus = NA,
-                          string = non_words[1:40],
+                          string = non_words[1:(words_per_condition*2)],
                           phase = "test",
-                          type = "OLD",
-                          encoding_context = rep(c("15pt","30pt"), each = 20),
-                          font_size = rep(rep(c("15pt","30pt"), each = 10),2)
+                          correct_response = "o",
+                          encoding_context = rep(c("15pt","30pt"), each = words_per_condition),
+                          font_size = rep(rep(c("15pt","30pt"), each = (words_per_condition/2)),2)
                           ) %>%
   rbind(
     data.frame(stimulus = NA,
-                          string = non_words[51:100],
+                          string = non_words[((words_per_condition*2)+1):(words_per_condition*4)],
                           phase = "test",
-                          type = "NEW",
+                          correct_response = "n",
                           encoding_context = "none",
-                          font_size = rep(c("15pt","30pt"), each = 25)
+                          font_size = rep(c("15pt","30pt"), each = words_per_condition)
                           )
   )
 test_df$stimulus <- html_stimulus(df = test_df, 
@@ -80,7 +82,7 @@ encoding_json <- stimulus_df_to_json(df = encoding_df,
                                      data = c("string","phase","font_size"))
 test_json <- stimulus_df_to_json(df = test_df,
                                      stimulus = "stimulus",
-                                     data = c("string","phase","type","font_size"))
+                                     data = c("string","phase","correct_response","font_size"))
 ```
 
 ```{r, results="asis"}
@@ -116,7 +118,7 @@ var encoding_instructions = {
 var encoding = {
   timeline: [{
     type: 'html-keyboard-response',
-    trial_duration: 500,
+    trial_duration: 1000,
     stimulus: jsPsych.timelineVariable('stimulus'),
     data: jsPsych.timelineVariable('data')
   }],
@@ -142,7 +144,10 @@ var testing = {
     choices: ["o","n"],
     response_ends_trial: true,
     stimulus: jsPsych.timelineVariable('stimulus'),
-    data: jsPsych.timelineVariable('data')
+    data: jsPsych.timelineVariable('data'),
+    on_finish: function(data){
+    data.correct = jsPsych.pluginAPI.compareKeys(data.response,data.correct_response);
+  }
   }],
   timeline_variables: test_stimuli,
   randomize_order: true
@@ -151,8 +156,18 @@ var testing = {
 /*set up debrief block*/
 var debrief = {
   type: "html-keyboard-response",
-  stimulus: "<p>Thanks for participating!</p>",
-  post_trial_gap: 1000
+  stimulus: function() {
+
+    var trials = jsPsych.data.get().filter({phase: 'test'});
+    var correct_trials = trials.filter({correct: true});
+    var accuracy = Math.round(correct_trials.count() / trials.count() * 100);
+    var num_trials = trials.count()
+
+    return `<p>There were ${num_trials} number of trials.</p>
+    <p>You responded correctly on ${accuracy}% of the trials.</p>
+      <p>Press any key to complete the experiment. Thank you!</p>`;
+
+  }
 };
 
 /*set up experiment structure*/
