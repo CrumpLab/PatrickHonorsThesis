@@ -1,0 +1,19 @@
+file_id,rt,stimulus,response,trial_type,trial_index,time_elapsed,internal_node_id,string,phase,font_size,correct_response,correct
+data_2021-05-03-20-51-05_k58tck9li7,3881,Welcome to the experiment. Press any key to begin.,NA,html-keyboard-response,0,3888,0.0-0.0,NA,NA,NA,NA,NA
+data_2021-05-03-20-51-05_k58tck9li7,2458.999999999999,<p>You will see some nonwords</p><p>Remember them for a later memory test</p><p>Press any key to begin.</p>,NA,html-keyboard-response,1,6350,0.0-1.0,NA,NA,NA,NA,NA
+data_2021-05-03-20-51-05_k58tck9li7,null,<p id = 'id_encode' style = 'font-size: 15pt;'>ILHDK</p>,null,html-keyboard-response,2,8353,0.0-2.0-0.0,ILHDK,Encoding,15pt,NA,NA
+data_2021-05-03-20-51-05_k58tck9li7,null,<p id = 'id_encode' style = 'font-size: 30pt;'>DNOUZ</p>,null,html-keyboard-response,3,9356,0.0-2.0-0.1,DNOUZ,Encoding,30pt,NA,NA
+data_2021-05-03-20-51-05_k58tck9li7,null,<p id = 'id_encode' style = 'font-size: 30pt;'>OYEKW</p>,null,html-keyboard-response,4,10358,0.0-2.0-0.2,OYEKW,Encoding,30pt,NA,NA
+data_2021-05-03-20-51-05_k58tck9li7,null,<p id = 'id_encode' style = 'font-size: 15pt;'>WMVBE</p>,null,html-keyboard-response,5,11359,0.0-2.0-0.3,WMVBE,Encoding,15pt,NA,NA
+data_2021-05-03-20-51-05_k58tck9li7,1025,"<p>You will see some OLD nonwords</p><p>And some NEW nonwords</p><p>Press O for OLD, and N for NEW</p><p>Press any key to begin.</p>",NA,html-keyboard-response,6,12386,0.0-3.0,NA,NA,NA,NA,NA
+data_2021-05-03-20-51-05_k58tck9li7,1372.0000000000018,<p id = 'id_encode' style = 'font-size: 15pt;'>RHBPP</p>,n,html-keyboard-response,7,14762,0.0-4.0-0.0,RHBPP,test,15pt,n,TRUE
+data_2021-05-03-20-51-05_k58tck9li7,1933,<p id = 'id_encode' style = 'font-size: 15pt;'>WMVBE</p>,o,html-keyboard-response,8,16696,0.0-4.0-0.1,WMVBE,test,15pt,o,TRUE
+data_2021-05-03-20-51-05_k58tck9li7,861,<p id = 'id_encode' style = 'font-size: 30pt;'>JSJFQ</p>,n,html-keyboard-response,9,17558,0.0-4.0-0.2,JSJFQ,test,30pt,n,TRUE
+data_2021-05-03-20-51-05_k58tck9li7,1206,<p id = 'id_encode' style = 'font-size: 30pt;'>ILHDK</p>,o,html-keyboard-response,10,18765,0.0-4.0-0.3,ILHDK,test,30pt,o,TRUE
+data_2021-05-03-20-51-05_k58tck9li7,1099,<p id = 'id_encode' style = 'font-size: 15pt;'>DNOUZ</p>,o,html-keyboard-response,11,19865,0.0-4.0-0.4,DNOUZ,test,15pt,o,TRUE
+data_2021-05-03-20-51-05_k58tck9li7,856,<p id = 'id_encode' style = 'font-size: 30pt;'>OYEKW</p>,o,html-keyboard-response,12,20723,0.0-4.0-0.5,OYEKW,test,30pt,o,TRUE
+data_2021-05-03-20-51-05_k58tck9li7,1067,<p id = 'id_encode' style = 'font-size: 30pt;'>BYXPA</p>,n,html-keyboard-response,13,21791,0.0-4.0-0.6,BYXPA,test,30pt,n,TRUE
+data_2021-05-03-20-51-05_k58tck9li7,1105,<p id = 'id_encode' style = 'font-size: 15pt;'>WKEZM</p>,o,html-keyboard-response,14,22897,0.0-4.0-0.7,WKEZM,test,15pt,n,FALSE
+data_2021-05-03-20-51-05_k58tck9li7,3353,"<p>There were 8 number of trials.</p>
+    <p>You responded correctly on 88% of the trials.</p>
+      <p>Press any key to complete the experiment. Thank you!</p>",NA,html-keyboard-response,15,26252,0.0-5.0,NA,NA,NA,NA,NA

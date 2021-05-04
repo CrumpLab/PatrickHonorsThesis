@@ -28,3 +28,37 @@ plot(pressure)
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
+
+```{r}
+library(dplyr)
+library(magrittr)
+
+
+a <- read.csv("/Users/patrick/Documents/GitHub/IncidentalContextMemory/experiments/Simple Memory Experiment/data/data_2021-05-03-20-53-54_1awy8b7qbf.csv")
+a_mat <- as.matrix(a)
+A_red <- a_mat[(1+7):16, (1+0):13]
+A_df <- as.data.frame(t(A_red))
+a_df = subset(A_df, select = -c(V9))
+row_to_keep = c("rt", "response", "string", "font_size", "correct_response", "correct")
+myData_a = a_df[row_to_keep,]
+X <- rowSums(Filter(is.numeric, myData_a), na.rm = FALSE)
+X
+
+b <- read.csv("/Users/patrick/Documents/GitHub/IncidentalContextMemory/experiments/Simple Memory Experiment/data/data_2021-05-03-20-55-52_j7gu61m01t.csv")
+b_mat <- as.matrix(b)
+B_red <- b_mat[(1+7):16, (1+0):13]
+B_df <- as.data.frame(t(B_red))
+b_df = subset(B_df, select = -c(V9))
+myData_b = b_df[row_to_keep,]
+
+
+c <- read.csv("/Users/patrick/Documents/GitHub/IncidentalContextMemory/experiments/Simple Memory Experiment/data/data_2021-05-03-20-51-05_k58tck9li7.csv")
+c_mat <- as.matrix(c)
+C_red <- c_mat[(1+7):16, (1+0):13]
+C_df <- as.data.frame(t(C_red))
+c_df = subset(C_df, select = -c(V9))
+myData_c = c_df[row_to_keep,]
+
+```
