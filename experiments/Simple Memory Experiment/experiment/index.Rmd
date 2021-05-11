@@ -55,7 +55,7 @@ encoding_df$stimulus <- html_stimulus(df = encoding_df,
                                 id = "id_encode")
 # make test dataframe
 test_df <- data.frame(stimulus = NA,
-                          string = non_words[1:(words_per_condition*2)],
+                          string = non_words[1:(words_per_condition*16)],
                           phase = "test",
                           correct_response = "o",
                           encoding_context = rep(c("15pt","30pt"), each = words_per_condition),
@@ -63,7 +63,7 @@ test_df <- data.frame(stimulus = NA,
                           ) %>%
   rbind(
     data.frame(stimulus = NA,
-                          string = non_words[((words_per_condition*2)+1):(words_per_condition*4)],
+                          string = non_words[((words_per_condition*2)+1):(words_per_condition*32)],
                           phase = "test",
                           correct_response = "n",
                           encoding_context = "none",
@@ -118,7 +118,7 @@ var encoding_instructions = {
 var encoding = {
   timeline: [{
     type: 'html-keyboard-response',
-    trial_duration: 1000,
+    trial_duration: 32000,
     stimulus: jsPsych.timelineVariable('stimulus'),
     data: jsPsych.timelineVariable('data')
   }],
