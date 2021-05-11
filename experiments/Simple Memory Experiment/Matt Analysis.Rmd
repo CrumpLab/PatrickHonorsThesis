@@ -1,0 +1,106 @@
+---
+title: "Matt's Analysis"
+author: "Matt Crump"
+date: "5/4/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## load data
+
+```{r}
+# don't need full file paths
+# will work relative to folder that rmd is in
+a <- read.csv("data/data_2021-05-03-20-53-54_1awy8b7qbf.csv")
+
+file_names <- list.files("data/")
+file_names[1]
+paste0("data/",file_names[1])
+
+#read in one file
+s1 <- read.csv(paste0("data/",file_names[1]))
+s2 <- read.csv(paste0("data/",file_names[2]))
+s3 <- read.csv(paste0("data/",file_names[3]))
+
+# fread() from data.table package is a fast csv file reader
+
+class(s1)
+
+#combine to one dataframe
+
+all_data <- rbind(s1,s2,s3)
+
+## loop to read in all data files
+
+file_names <- list.files("data/")
+all_data <- data.frame()
+for(i in file_names){
+ temp_data <- read.csv(paste0("data/",i))
+ all_data <- rbind(all_data,temp_data)
+}
+
+```
+
+## old vs new
+
+```{r}
+#load files
+
+file_names <- list.files("data/")
+all_data <- data.frame()
+for(i in file_names){
+ temp_data <- read.csv(paste0("data/",i))
+ all_data <- rbind(all_data,temp_data)
+}
+
+# selects, group, and summarize data
+
+library(dplyr)
+
+test_data <- all_data %>%
+  filter(phase == "test") %>% # get the data you want
+  group_by(file_id,correct_response) %>% # group by the factor or factors you want
+  summarize(total_correct = sum(correct),
+            percent_correct = sum(correct)/4)
+  
+library(ggplot2)
+
+# plot the data
+ggplot(test_data, aes(x=correct_response, y=percent_correct,
+                      group=file_id,
+                      color=file_id))+
+  geom_point()+
+  geom_line()
+
+```
+
+## Item type (Old vs new) and font size (15 vs 30)
+
+```{r}
+# selects, group, and summarize data
+
+library(dplyr)
+
+test_data <- all_data %>%
+  filter(phase == "test") %>% # get the data you want
+  group_by(file_id,font_size,correct_response) %>% # group by the factor or factors you want
+  summarize(total_correct = sum(correct),
+            percent_correct = sum(correct)/2)
+  
+library(ggplot2)
+
+# plot the data
+ggplot(test_data, aes(x=correct_response, 
+                      y=percent_correct,
+                      group=file_id,
+                      color=file_id))+
+  geom_point()+
+  geom_line()+
+  facet_wrap(~font_size)
+
+```
+
+

@@ -38,7 +38,7 @@ generate_random_string <- function(n_letters = 5){
 non_words <- unique(replicate(200,generate_random_string(5)))
 non_words <- non_words[1:100]
 
-words_per_condition <- 2
+words_per_condition <- 16
 
 # make encoding dataframe
 encoding_df <- data.frame(stimulus = NA,
@@ -82,7 +82,7 @@ encoding_json <- stimulus_df_to_json(df = encoding_df,
                                      data = c("string","phase","font_size"))
 test_json <- stimulus_df_to_json(df = test_df,
                                      stimulus = "stimulus",
-                                     data = c("string","phase","correct_response","font_size"))
+                                     data = c("string","phase","correct_response","font_size","encoding_context"))
 ```
 
 ```{r, results="asis"}
