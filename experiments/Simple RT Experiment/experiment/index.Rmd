@@ -130,14 +130,11 @@ var fixation = {
 var test = {
   type: "audio-keyboard-response",
   stimulus: jsPsych.timelineVariable('stimulus'),
-  data:  {
+    data:  {
     task: 'response',
     correct_response: jsPsych.timelineVariable('correct_response')
   },
   choices: ['o', 'n'],
-  on_finish: function(data){
-    data.correct = jsPsych.pluginAPI.compareKeys(data.response,data.correct_response);
-  }
 }
 
 var test_procedure = {
@@ -146,7 +143,6 @@ var test_procedure = {
   repetitions: 1,
   randomize_order: true
 }
-
 timeline.push(welcome);
 timeline.push(encoding_instructions); 
 timeline.push(instructionsA);
@@ -163,7 +159,6 @@ jsPsych.init({
   timeline: timeline,
   on_finish: function() {
     jsPsych.data.displayData();
-    jspsychr.save_locally();
   }
 });
 
