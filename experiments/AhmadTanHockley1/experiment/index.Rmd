@@ -33,11 +33,8 @@ tags$script(src='jspsychr/jspsychr.js')
 library(jspsychr)
 library(dplyr)
 
-# load file names
-image_names <- list.files("Scenes/68-scenes/iceberg-68/",
-                          pattern = "\\.jpg$")
+# locate folders containing pictures used in original study
 
-# replication_picture_categories <- c()
 replication_picture_categories <- data.frame(
   folder_name = c("beach-68","underwater-68","castle-68","skyscraper-68","garden-68",
                   "stairscase-68","bedroom-68","diningroom-68","gym-68","church-inside-68",
@@ -47,11 +44,15 @@ replication_picture_categories <- data.frame(
   list = c(rep("study",10),rep("new",10))
 )
 
-greenhouse-68
-lobby-68
-kitchen-68
-bar-68
-classroom-68
+# get 12 pictures from each folder
+
+
+
+# load file names
+image_names <- list.files("Scenes/68-scenes/iceberg-68/",
+                          pattern = "\\.jpg$")
+
+
 
 # choose 12
 choose_12 <- sample(image_names,12)
