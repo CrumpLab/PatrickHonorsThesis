@@ -27,6 +27,7 @@ tags$script(src='jspsychr/jspsychr.js')
 )
 ```
 
+
 ```{js}
 var timeline = [];
 
