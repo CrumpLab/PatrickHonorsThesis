@@ -130,6 +130,7 @@ stimulus_table <- data.frame(
 stimulus_json <- stimulus_df_to_json(df = table_stimuli,
                                      stimulus = "stimulus",
                                      data = c("category","encoding_instruction"))
+
 # write json object to script
 write_to_script(stimulus_json,"test_stimuli")
 ```
