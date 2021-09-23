@@ -20,6 +20,7 @@ knitr::opts_chunk$set(echo = FALSE, message=FALSE, warning=FALSE)
 # note: this is an r code chunk
 library(htmltools)
 tagList(
+tags$script(src='stimlist.js'),
 tags$script(src='jspsych-6-2/jspsych.js'),
 tags$script(src='jspsych-6-2/plugins/jspsych-html-keyboard-response.js'),
 tags$script(src='jspsych-6-2/plugins/jspsych-image-keyboard-response.js'),
@@ -27,11 +28,97 @@ tags$script(src='jspsychr/jspsychr.js')
 )
 ```
 
-```{r, results="asis"}
+```{r, results="asis", eval=FALSE}
 # Define stimuli in R, output as script 
 # note: this is an r code chunk, with results = "asis"
 library(jspsychr)
 library(dplyr)
+
+# get all folder names for indoor and outdoor scenes
+indoor_folders <- list.files('Scenes/indoor/')
+outdoor_folders <- list.files('Scenes/outdoor/')
+
+# select number of categories to use throughout
+num_categories <- 5
+
+# sample num_categories amount of random categories for each
+choose_indoor_folders <- sample(indoor_folders,num_categories*2)
+choose_outdoor_folders <- sample(outdoor_folders,num_categories*2)
+
+# generate category table for study items, exemplar, and novel tests
+category_structure <- data.frame(
+  study_categories = c(choose_indoor_folders[1:num_categories],
+                       choose_outdoor_folders[1:num_categories]),
+  exemplar_tests = c(choose_indoor_folders[1:num_categories],
+                       choose_outdoor_folders[1:num_categories]),
+  s_e_type  = rep(c("indoor","outdoor"), each = num_categories),
+  novel_tests = c(choose_outdoor_folders[(num_categories+1):(num_categories*2)],
+                       choose_indoor_folders[(num_categories+1):(num_categories*2)]),
+  n_type  = rep(c("outdoor","indoor"), each = num_categories)
+)
+
+num_pics_per_category <- 12 #should be even number, to split between R/F items later
+
+## generate pool of novel test pictures
+
+novel_table <- data.frame()
+for(i in 1:dim(category_structure)[1]){
+  
+  novel_pic_names <- list.files(paste0("Scenes/",category_structure$n_type[i],"/",
+                                   category_structure$novel_tests[i],"/"),
+                            pattern = "\\.jpg$")
+  
+  novel_pic_names <- sample(novel_pic_names,num_pics_per_category/2)
+  
+  temp_df <- data.frame(pic = novel_pic_names,
+                        category = category_structure$novel_tests[i],
+                        category_type = category_structure$n_type[i]
+                        )
+  
+  novel_table <- rbind(novel_table,temp_df)
+}
+
+# create table of individual stimuli
+# include picture, category, type of category, and associated exemplar and novel test pictures
+
+stimulus_table <- data.frame()
+for(i in 1:dim(category_structure)[1]){
+  
+  study_pic_names <- list.files(paste0("Scenes/",category_structure$s_e_type[i],"/",
+                                   category_structure$study_categories[i],"/"),
+                            pattern = "\\.jpg$")
+  # randomize study pic items
+  study_pic_names <- sample(study_pic_names,(num_pics_per_category+(num_pics_per_category/2)) )
+  
+   temp_df <- data.frame(pic = study_pic_names,
+                        category = category_structure$study_categories[i],
+                        category_type = category_structure$s_e_type[i],
+                        type = c(rep("study",num_pics_per_category),
+                                 rep("exemplar",num_pics_per_category/2))
+                        )
+  
+  stimulus_table <- rbind(stimulus_table,temp_df)
+}
+
+## create full table
+
+exemplar_test_table <- stimulus_table %>%
+  filter(type == "exemplar")
+
+exemplar_test_table <- cbind(exemplar_test_table,
+                             indexes = 1:dim(exemplar_test_table)[1])
+
+study_table <- stimulus_table %>%
+  filter(type == "study")
+
+novel_table <- novel_table[sample(1:dim(novel_table)[1]),]
+
+for(i in 1:dim(category_structure)[1]){
+  exemplar_test_table %>%
+    filter(category == category_structure$exemplar_tests[i])
+}
+
+## need to be careful here to pair outdoor with outdoor etc. for novel categories
 
 # locate folders containing pictures used in original study
 
@@ -40,37 +127,323 @@ replication_picture_categories <- data.frame(
                   "stairscase-68","bedroom-68","diningroom-68","gym-68","church-inside-68",
                   "barn-68","bridge-68","woods-68","canyon-68","desert-68",
                   "greenhouse-68","lobby-68","kitchen-68","bar-68","classroom-68"),
-  indoor_outdoor = c(rep("outdoor",5),rep("indoor",5),rep("outdoor",5),rep("indoor",5)),
-  list = c(rep("study",10),rep("new",10))
+  indoor_outdoor = c(rep("outdoor",5),rep("indoor",5),rep("outdoor",5),rep("indoor",5))
 )
 
-# get 12 pictures from each folder
+# get all pictures from each folder
+stimulus_table <- data.frame()
+for(i in 1:dim(replication_picture_categories)[1]){
+  #get all picture file names
+  image_names <- list.files(paste0("Scenes/68-scenes/",
+                                   replication_picture_categories$folder_name[i],"/"),
+                            pattern = "\\.jpg$")
+  
+  # get all picture file names
+  choose_all <- paste0("Scenes/68-scenes/",
+                      replication_picture_categories$folder_name[i],"/",
+                      image_names)
+  
+  #write temporary stimulus dataframe
+  temp_stim_df <- data.frame(picture = choose_all,
+                             indoor_outdoor = replication_picture_categories$indoor_outdoor[i]
+                             )
+  
+  #add temporary dataframe to full stimulus dataframe
+  stimulus_table <- rbind(stimulus_table,temp_stim_df)
+}
 
+# add unique stim id column
+stim_num <- 1:dim(stimulus_table[1])
+stimulus_table <- cbind(stimulus_table, stim_num)
 
+# add encoding instruction as a column to simulus_table
 
-# load file names
-image_names <- list.files("Scenes/68-scenes/iceberg-68/",
-                          pattern = "\\.jpg$")
-
-
-
-# choose 12
-choose_12 <- sample(image_names,12)
-choose_12 <- paste0("Scenes/68-scenes/iceberg-68/", choose_12)
-
-stimulus_table <- data.frame(
-  stimulus = choose_12,
-  category = "iceberg",
-  encoding_instruction = sample(c(rep("R",6),rep("F",6)))
-)
+#encoding_instruction <- c(rep(rep(c("R","F"),each=6),10),rep(NA,120))
+#stimulus_table <- cbind(stimulus_table,encoding_instruction)
 
 # convert df to json
 stimulus_json <- stimulus_df_to_json(df = stimulus_table,
-                                     stimulus = "stimulus",
-                                     data = c("category","encoding_instruction"))
+                                     stimulus = "picture",
+                                     data = c("indoor_outdoor", "stim_num"))
 # write json object to script
 write_to_script(stimulus_json,"test_stimuli")
 ```
+
+
+```{r, eval=FALSE}
+# get all folder names for indoor and outdoor scenes
+indoor_folders <- list.files('Scenes/indoor/')
+outdoor_folders <- list.files('Scenes/outdoor/')
+
+all_images <- data.frame()
+for(i in indoor_folders){
+  
+  image_name <- list.files(paste0("Scenes/indoor/",i,"/"),
+                            pattern = "\\.jpg$")
+  
+  file_path <- paste0("Scenes/indoor/",i,"/",image_name)
+  
+  temp_df <- data.frame(
+    image_name = image_name,
+    file_path = file_path,
+    category_type = "indoor",
+    category = i,
+    imnum = 1:length(image_name)
+  )
+  
+  all_images <- rbind(all_images,
+                      temp_df)
+}
+
+for(i in outdoor_folders){
+  
+  image_name <- list.files(paste0("Scenes/outdoor/",i,"/"),
+                            pattern = "\\.jpg$")
+  
+  file_path <- paste0("Scenes/outdoor/",i,"/",image_name)
+  
+  temp_df <- data.frame(
+    image_name = image_name,
+    file_path = file_path,
+    category_type = "outdoor",
+    category = i,
+    imnum = 1:length(image_name)
+  )
+  
+  all_images <- rbind(all_images,
+                      temp_df)
+}
+
+JSON_images <- jsonlite::toJSON(all_images,auto_unbox = TRUE, pretty=pretty)
+JSON_images <- paste0("var all_images = ",JSON_images,";")
+write(JSON_images,file='stimlist.js')
+
+## test pictures per folder
+#all_images %>%
+#  group_by(category) %>%
+#  count()
+```
+
+```{js}
+/*
+A helpful website with tricks for js
+http://learnjsdata.com/
+*/
+
+
+
+var num_categories = 5;
+var num_pictures = 12;
+
+/*filter by object property 
+split images into all indoor and outdoor*/
+var all_indoor = all_images.filter(x => x.category_type === "indoor");
+var all_outdoor = all_images.filter(x => x.category_type === "outdoor");
+
+/*get distinct indoor and outdoor categories*/
+var indoor_categories = [...new Set(all_indoor.map(x => x.category))];
+var outdoor_categories = [...new Set(all_outdoor.map(x => x.category))];
+
+/*randomize and choose num_categories*2 for each*/
+indoor_categories = jsPsych.randomization.shuffle(indoor_categories).slice(0,num_categories*2);
+outdoor_categories = jsPsych.randomization.shuffle(outdoor_categories).slice(0,num_categories*2);
+
+/* assign categories to study and test conditions*/
+var study_indoor = indoor_categories.slice(0,num_categories);
+var study_outdoor = outdoor_categories.slice(0,num_categories);
+var novel_indoor = indoor_categories.slice(num_categories,indoor_categories.length);
+var novel_outdoor = outdoor_categories.slice(num_categories,outdoor_categories.length);
+
+/* create pools of novel items
+
+var keysExact = ['category'];
+var valuesExact = novel_indoor;
+
+var all_novel_indoor_pics = all_images.filter((item) =>
+  keysExact.every((a) => valuesExact.includes(item[a]))
+);
+
+jsPsych.randomization.shuffle(Array(8).fill().map((element, index) => index + 1))
+
+*/
+
+/* create pools of novel items for indoor and outdoor categories*/
+
+var novel_indoor_pics = [];
+for (const i of novel_indoor){
+  let temp_images = all_images.filter(x => x.category === i);
+  let random_select = jsPsych.randomization.shuffle(Array(temp_images.length).fill().map((element, index) => index-1 + 1)).slice(0,num_pictures/2);
+  novel_indoor_pics.push(random_select.map(x=>temp_images[x]));
+}
+novel_indoor_pics = jsPsych.randomization.shuffle(novel_indoor_pics.flat());
+
+var novel_outdoor_pics = [];
+for (const i of novel_outdoor){
+  let temp_images = all_images.filter(x => x.category === i);
+  let random_select = jsPsych.randomization.shuffle(Array(temp_images.length).fill().map((element, index) => index-1 + 1)).slice(0,num_pictures/2);
+  novel_outdoor_pics.push(random_select.map(x=>temp_images[x]));
+}
+novel_outdoor_pics = jsPsych.randomization.shuffle(novel_outdoor_pics.flat());
+
+/* create study pools and exemplar test pools*/
+
+var study_indoor_pics = [];
+var exemplar_indoor_pics = [];
+for (const i of study_indoor){
+  let temp_images = all_images.filter(x => x.category === i);
+  let random_select = jsPsych.randomization.shuffle(Array(temp_images.length).fill().map((element, index) => index-1 + 1)).slice(0,num_pictures+(num_pictures/2));
+  study_indoor_pics.push(random_select.slice(0,num_pictures).map(x=>temp_images[x]));
+  exemplar_indoor_pics.push(random_select.slice(num_pictures,random_select.length).map(x=>temp_images[x]));
+}
+study_indoor_pics = study_indoor_pics.flat();
+exemplar_indoor_pics = exemplar_indoor_pics.flat();
+
+var study_outdoor_pics = [];
+var exemplar_outdoor_pics = [];
+for (const i of study_outdoor){
+  let temp_images = all_images.filter(x => x.category === i);
+  let random_select = jsPsych.randomization.shuffle(Array(temp_images.length).fill().map((element, index) => index-1 + 1)).slice(0,num_pictures+(num_pictures/2));
+  study_outdoor_pics.push(random_select.slice(0,num_pictures).map(x=>temp_images[x]));
+  exemplar_outdoor_pics.push(random_select.slice(num_pictures,random_select.length).map(x=>temp_images[x]));
+}
+study_outdoor_pics = study_outdoor_pics.flat();
+exemplar_outdoor_pics = exemplar_outdoor_pics.flat();
+
+/* pair each study item with a exemplar or novel test item 
+write indoor list
+*/
+
+main_list = [];
+var main_list_counter = 0;
+var exemplar_counter = 0;
+var novel_counter = 0;
+var study_item = {};
+var test_item = {};
+for(i=0; i<study_indoor_pics.length; i++){
+ study_item = study_indoor_pics[i];
+ study_item["item_type"] = "study";
+ 
+ if(main_list_counter < num_pictures/2){
+  test_item = exemplar_indoor_pics[exemplar_counter];
+  test_item["item_type"] = "exemplar";
+  exemplar_counter++;
+ }
+ if(main_list_counter >= num_pictures/2){
+  test_item = novel_outdoor_pics[novel_counter];
+  test_item["item_type"] = "novel";
+  novel_counter++;
+ }
+ 
+ main_list.push([{study_item,test_item}]);
+
+ main_list_counter++;
+ if(main_list_counter >= num_pictures) main_list_counter = 0;
+}
+
+/* reset and write outdoor list to main */
+
+main_list_counter = 0;
+exemplar_counter = 0;
+novel_counter = 0;
+study_item = {};
+test_item = {};
+
+for(i=0; i<study_outdoor_pics.length; i++){
+ study_item = study_outdoor_pics[i];
+ study_item["item_type"] = "study";
+ 
+ if(main_list_counter < num_pictures/2){
+  test_item = exemplar_outdoor_pics[exemplar_counter];
+  test_item["item_type"] = "exemplar";
+  exemplar_counter++;
+ }
+ if(main_list_counter >= num_pictures/2){
+  test_item = novel_indoor_pics[novel_counter];
+  test_item["item_type"] = "novel";
+  novel_counter++;
+ }
+ 
+ main_list.push([{study_item,test_item}]);
+
+ main_list_counter++;
+ if(main_list_counter >= num_pictures) main_list_counter = 0;
+}
+
+/*create timeline variable for encoding phase from main list */
+
+var study_timeline = [];
+var stimulus_presentation_times = [2000,1000,500];
+var stim_time_counter = 0;
+for(i=0; i<main_list.length; i++){
+
+  study_timeline.push({
+    stimulus: main_list[i][0].study_item.file_path,
+    data: main_list[i][0].study_item
+  });
+
+  if(i%2 ==0){
+    study_timeline[i].data["encoding_instruction"] = "R";
+  } else {
+    study_timeline[i].data["encoding_instruction"] = "F";
+  }
+  
+  study_timeline[i].data["experiment_phase"] = "study";
+  study_timeline[i].data["stimulus_time"] = stimulus_presentation_times[stim_time_counter];
+  stim_time_counter++;
+  if(stim_time_counter >=2) {stim_time_counter = 0;}
+}
+
+
+/*
+category: main_list[i][0].study_item.category,
+    category_type: main_list[i][0].study_item.category_type, 
+    item_type: main_list[i][0].study_item.item_type, 
+    
+*/
+
+/*create timeline variable for testing phase from main list */
+
+var test_timeline = [];
+
+for(i=0; i<main_list.length; i++){
+ 
+  let image_position = jsPsych.randomization.shuffle(["S","T"]);
+  let correct_position = "";
+  if(image_position[0]=="S"){
+      correct_position = "1";
+      } else {
+      correct_position = "2";
+      };
+  if(image_position[0] == "S"){
+    test_timeline.push({
+    stimulus: "<div> <img src ='" + main_list[i][0].study_item.file_path + " '> <img src = '" + main_list[i][0].test_item.file_path + "'> </div>"
+  })
+  } else {
+    test_timeline.push({
+    stimulus: "<div> <img src ='" + main_list[i][0].test_item.file_path + " '> <img src = '" + main_list[i][0].study_item.file_path + "'> </div>"
+  })
+  }
+  
+  test_timeline[i]["data"] = {
+    left_image_type: image_position[0],
+    right_image_type: image_position[1],
+    correct_choice: correct_position,
+    encoding_instruction: main_list[i][0].study_item.encoding_instruction,
+    test_condition : main_list[i][0].test_item.item_type,
+    study_item_image_name:  main_list[i][0].study_item.image_name,
+    study_item_category:  main_list[i][0].study_item.category,
+    study_item_category_type:  main_list[i][0].study_item.category_type,
+    study_item_item_type:  main_list[i][0].study_item.item_type,
+    test_item_image_name:  main_list[i][0].test_item.image_name,
+    test_item_category:  main_list[i][0].test_item.category,
+    test_item_category_type:  main_list[i][0].test_item.category_type,
+    test_item_item_type:  main_list[i][0].test_item.item_type,
+    experiment_phase: "test"
+  };
+}
+
+```
+
 
 
 ```{js}
@@ -90,26 +463,21 @@ var welcome = {
   post_trial_gap: 0
 };
 
-var oneimage = {
-  type: "image-keyboard-response",
-  stimulus: "Scenes/68-scenes/iceberg-68/_MG_4705_iceberg_500.jpg",
-  post_trial_gap: 0
-};
-
 var fixation = {
   type: 'html-keyboard-response',
   stimulus: '<div style="font-size:60px;">+</div>',
   choices: jsPsych.NO_KEYS,
-  trial_duration: 1000,
+  trial_duration: 500,
 };
 
-var multipleimages = {
+var encoding_phase = {
   timeline: [fixation, {
     type: 'image-keyboard-response',
-    choices: ["o","n"],
-    trial_duration: 4000,
-    response_allowed_while_playing: true,
-    response_ends_trial: true,
+    trial_duration: function(){
+    var data = jsPsych.timelineVariable('data', true);
+    return data.stimulus_time;
+  },
+    choices: jsPsych.NO_KEYS,
     stimulus: jsPsych.timelineVariable('stimulus'),
     data: jsPsych.timelineVariable('data'),
   },
@@ -117,13 +485,27 @@ var multipleimages = {
   type: 'html-keyboard-response',
   stimulus: function(){
     var data = jsPsych.timelineVariable('data', true);
-    var html="<p>"+ data.encoding_instruction + "</p>";
+    var html='<div style="font-size:60px;">'+ data.encoding_instruction + '</div>';
     return html;
   },
   choices: jsPsych.NO_KEYS,
-  trial_duration: 1000
+  trial_duration: 3000
 }],
-  timeline_variables: test_stimuli,
+  timeline_variables: study_timeline,
+  sample: {type: 'fixed-repetitions', size: reps_per_trial_type}
+};
+
+var testing_phase = {
+  timeline: [fixation, {
+    type: 'html-keyboard-response',
+    choices: ["1","2"],
+    trial_duration: 0,
+    response_allowed_while_playing: true,
+    response_ends_trial: true,
+    stimulus: jsPsych.timelineVariable('stimulus'),
+    data: jsPsych.timelineVariable('data'),
+  }],
+  timeline_variables: test_timeline,
   sample: {type: 'fixed-repetitions', size: reps_per_trial_type}
 };
 
@@ -137,15 +519,26 @@ var end = {
 };
 
 timeline.push(welcome);
-timeline.push(oneimage);
-timeline.push(multipleimages);
+timeline.push(encoding_phase);
+timeline.push(testing_phase);
 timeline.push(end);
 
-jsPsych.init({
-  timeline: timeline,
-  on_finish: function() {
-    jsPsych.data.displayData();
-  }
-});
+  jsPsych.init({
+    timeline: timeline,
+    on_finish: function() {
+      var resultJson = jsPsych.data.get().json();
+      jatos.submitResultData(resultJson, jatos.startNextComponent);
+    }
+  });
+
+
+/* 
+
+on_finish: function() {
+      jsPsych.data.displayData();
+    }
+    
+    */
+
 
 ```

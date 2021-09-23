@@ -15,6 +15,35 @@ This experiment script attempts to closely replicate the design of Experiment 1.
 
 Changes will be listed here:
 
+downloaded natural scenes from Brady
+edited file names to lowercase jpg
+
+## testing out the idea of random factors
+
+```{r}
+
+stimulus_times <- runif(n = 100*120, min = .1, max = 5)
+cue_times <- runif(n = 100*120, min = .5, max = 5)
+
+trials <- data.frame(stimulus_times,cue_times)
+
+plot(stimulus_times,cue_times)
+
+```
+
+
+```{r}
+#load sample data
+library(dplyr)
+a<- jsonlite::fromJSON("test_json.txt")
+
+#check encoding trials have equal F and R trials per category
+a %>%
+  filter(experiment_phase == "study")%>%
+  group_by(category_type,category,encoding_instruction) %>%
+  count()
+
+```
 
 
 
