@@ -1,6 +1,6 @@
 ---
-title: "Replication of Experiment 1 from Ahmad et al. 2019"
-author: "your name"
+title: "Directed Forgetting Pictures 1: Stimulus presentation time"
+author: "Patrick Ihejirika and Matt Crump"
 date: "8/16/2019"
 output: html_document
 ---
@@ -8,6 +8,8 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 ```
+
+This file functions as a readme and sketchpad for experiment design during project development
 
 Ahmad, F. N., Tan, P., & Hockley, W. E. (2019). Directed forgetting for categorised pictures: Recognition memory for perceptual details versus gist. Memory, 27(7), 894–903. https://doi.org/10/gmgg3g
 
