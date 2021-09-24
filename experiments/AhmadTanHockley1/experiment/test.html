@@ -1,246 +1,24 @@
----
-title: "Experiment Name"
-author: "Your Name"
-output:
-  html_document:
-    mathjax: null
-    highlight: null
-    theme: null
-    css: jspsych-6-2/css/jspsych.css
----
-
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, message=FALSE, warning=FALSE)
-# load the plugin scripts in plugins.html which is included in the header.
-```
-
-```{r, eval=FALSE}
-# load jspsych and plugin scripts
-# note: this is an r code chunk
-library(htmltools)
-tagList(
-tags$script(src='stimlist.js'),
-tags$script(src='jspsych-6-2/jspsych.js'),
-tags$script(src='jspsych-6-2/plugins/jspsych-html-keyboard-response.js'),
-tags$script(src='jspsych-6-2/plugins/jspsych-image-keyboard-response.js'),
-tags$script(src='jspsychr/jspsychr.js')
-)
-```
-
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<meta name="author" content="Matt Crump" />
+<title>DF1</title>
+<link rel="stylesheet" href="jspsych-6-2/css/jspsych.css" />
+<script src="test_files/header-attrs-2.11/header-attrs.js"></script>
+</head>
+<body>
 <script src="stimlist.js"></script>
+<script src="jatos.js"></script>
 <script src="jspsych-6-2/jspsych.js"></script>
 <script src="jspsych-6-2/plugins/jspsych-html-keyboard-response.js"></script>
 <script src="jspsych-6-2/plugins/jspsych-image-keyboard-response.js"></script>
 <script src="jspsychr/jspsychr.js"></script>
-
-
-
-
-
-```{r, results="asis", eval=FALSE}
-# Define stimuli in R, output as script 
-# note: this is an r code chunk, with results = "asis"
-library(jspsychr)
-library(dplyr)
-
-# get all folder names for indoor and outdoor scenes
-indoor_folders <- list.files('Scenes/indoor/')
-outdoor_folders <- list.files('Scenes/outdoor/')
-
-# select number of categories to use throughout
-num_categories <- 5
-
-# sample num_categories amount of random categories for each
-choose_indoor_folders <- sample(indoor_folders,num_categories*2)
-choose_outdoor_folders <- sample(outdoor_folders,num_categories*2)
-
-# generate category table for study items, exemplar, and novel tests
-category_structure <- data.frame(
-  study_categories = c(choose_indoor_folders[1:num_categories],
-                       choose_outdoor_folders[1:num_categories]),
-  exemplar_tests = c(choose_indoor_folders[1:num_categories],
-                       choose_outdoor_folders[1:num_categories]),
-  s_e_type  = rep(c("indoor","outdoor"), each = num_categories),
-  novel_tests = c(choose_outdoor_folders[(num_categories+1):(num_categories*2)],
-                       choose_indoor_folders[(num_categories+1):(num_categories*2)]),
-  n_type  = rep(c("outdoor","indoor"), each = num_categories)
-)
-
-num_pics_per_category <- 12 #should be even number, to split between R/F items later
-
-## generate pool of novel test pictures
-
-novel_table <- data.frame()
-for(i in 1:dim(category_structure)[1]){
-  
-  novel_pic_names <- list.files(paste0("Scenes/",category_structure$n_type[i],"/",
-                                   category_structure$novel_tests[i],"/"),
-                            pattern = "\\.jpg$")
-  
-  novel_pic_names <- sample(novel_pic_names,num_pics_per_category/2)
-  
-  temp_df <- data.frame(pic = novel_pic_names,
-                        category = category_structure$novel_tests[i],
-                        category_type = category_structure$n_type[i]
-                        )
-  
-  novel_table <- rbind(novel_table,temp_df)
-}
-
-# create table of individual stimuli
-# include picture, category, type of category, and associated exemplar and novel test pictures
-
-stimulus_table <- data.frame()
-for(i in 1:dim(category_structure)[1]){
-  
-  study_pic_names <- list.files(paste0("Scenes/",category_structure$s_e_type[i],"/",
-                                   category_structure$study_categories[i],"/"),
-                            pattern = "\\.jpg$")
-  # randomize study pic items
-  study_pic_names <- sample(study_pic_names,(num_pics_per_category+(num_pics_per_category/2)) )
-  
-   temp_df <- data.frame(pic = study_pic_names,
-                        category = category_structure$study_categories[i],
-                        category_type = category_structure$s_e_type[i],
-                        type = c(rep("study",num_pics_per_category),
-                                 rep("exemplar",num_pics_per_category/2))
-                        )
-  
-  stimulus_table <- rbind(stimulus_table,temp_df)
-}
-
-## create full table
-
-exemplar_test_table <- stimulus_table %>%
-  filter(type == "exemplar")
-
-exemplar_test_table <- cbind(exemplar_test_table,
-                             indexes = 1:dim(exemplar_test_table)[1])
-
-study_table <- stimulus_table %>%
-  filter(type == "study")
-
-novel_table <- novel_table[sample(1:dim(novel_table)[1]),]
-
-for(i in 1:dim(category_structure)[1]){
-  exemplar_test_table %>%
-    filter(category == category_structure$exemplar_tests[i])
-}
-
-## need to be careful here to pair outdoor with outdoor etc. for novel categories
-
-# locate folders containing pictures used in original study
-
-replication_picture_categories <- data.frame(
-  folder_name = c("beach-68","underwater-68","castle-68","skyscraper-68","garden-68",
-                  "stairscase-68","bedroom-68","diningroom-68","gym-68","church-inside-68",
-                  "barn-68","bridge-68","woods-68","canyon-68","desert-68",
-                  "greenhouse-68","lobby-68","kitchen-68","bar-68","classroom-68"),
-  indoor_outdoor = c(rep("outdoor",5),rep("indoor",5),rep("outdoor",5),rep("indoor",5))
-)
-
-# get all pictures from each folder
-stimulus_table <- data.frame()
-for(i in 1:dim(replication_picture_categories)[1]){
-  #get all picture file names
-  image_names <- list.files(paste0("Scenes/68-scenes/",
-                                   replication_picture_categories$folder_name[i],"/"),
-                            pattern = "\\.jpg$")
-  
-  # get all picture file names
-  choose_all <- paste0("Scenes/68-scenes/",
-                      replication_picture_categories$folder_name[i],"/",
-                      image_names)
-  
-  #write temporary stimulus dataframe
-  temp_stim_df <- data.frame(picture = choose_all,
-                             indoor_outdoor = replication_picture_categories$indoor_outdoor[i]
-                             )
-  
-  #add temporary dataframe to full stimulus dataframe
-  stimulus_table <- rbind(stimulus_table,temp_stim_df)
-}
-
-# add unique stim id column
-stim_num <- 1:dim(stimulus_table[1])
-stimulus_table <- cbind(stimulus_table, stim_num)
-
-# add encoding instruction as a column to simulus_table
-
-#encoding_instruction <- c(rep(rep(c("R","F"),each=6),10),rep(NA,120))
-#stimulus_table <- cbind(stimulus_table,encoding_instruction)
-
-# convert df to json
-stimulus_json <- stimulus_df_to_json(df = stimulus_table,
-                                     stimulus = "picture",
-                                     data = c("indoor_outdoor", "stim_num"))
-# write json object to script
-write_to_script(stimulus_json,"test_stimuli")
-```
-
-
-```{r, eval=FALSE}
-# get all folder names for indoor and outdoor scenes
-indoor_folders <- list.files('Scenes/indoor/')
-outdoor_folders <- list.files('Scenes/outdoor/')
-
-all_images <- data.frame()
-for(i in indoor_folders){
-  
-  image_name <- list.files(paste0("Scenes/indoor/",i,"/"),
-                            pattern = "\\.jpg$")
-  
-  file_path <- paste0("Scenes/indoor/",i,"/",image_name)
-  
-  temp_df <- data.frame(
-    image_name = image_name,
-    file_path = file_path,
-    category_type = "indoor",
-    category = i,
-    imnum = 1:length(image_name)
-  )
-  
-  all_images <- rbind(all_images,
-                      temp_df)
-}
-
-for(i in outdoor_folders){
-  
-  image_name <- list.files(paste0("Scenes/outdoor/",i,"/"),
-                            pattern = "\\.jpg$")
-  
-  file_path <- paste0("Scenes/outdoor/",i,"/",image_name)
-  
-  temp_df <- data.frame(
-    image_name = image_name,
-    file_path = file_path,
-    category_type = "outdoor",
-    category = i,
-    imnum = 1:length(image_name)
-  )
-  
-  all_images <- rbind(all_images,
-                      temp_df)
-}
-
-JSON_images <- jsonlite::toJSON(all_images,auto_unbox = TRUE, pretty=pretty)
-JSON_images <- paste0("var all_images = ",JSON_images,";")
-write(JSON_images,file='stimlist.js')
-
-## test pictures per folder
-#all_images %>%
-#  group_by(category) %>%
-#  count()
-```
-
-```{js}
-/*
-A helpful website with tricks for js
-http://learnjsdata.com/
-*/
-
-
+<script type="text/javascript">
+/* Experimental design construction
+Generate study and test timeline variables */
 
 var num_categories = 5;
 var num_pictures = 12;
@@ -452,12 +230,17 @@ for(i=0; i<main_list.length; i++){
   };
 }
 
-```
+/*
+A helpful website with tricks for js
+http://learnjsdata.com/
+*/
 
-
-
-```{js}
-/* Note this is a js (javascript) code chunk */
+</script>
+<script type="text/javascript">
+/* Run Experiment
+Define jsPsych plugins
+Initialize and run
+*/
 
 var timeline = [];
 
@@ -533,22 +316,47 @@ timeline.push(encoding_phase);
 timeline.push(testing_phase);
 timeline.push(end);
 
-  jsPsych.init({
-    timeline: timeline,
-    on_finish: function() {
-      var resultJson = jsPsych.data.get().json();
-      jatos.submitResultData(resultJson, jatos.startNextComponent);
-    }
+var run_simulation = true;
+var jatos = false;
+
+if(jatos == true){
+  jatos.onLoad(function() {
+    jsPsych.init({
+        timeline: timeline,
+        on_finish: function() {
+          var resultJson = jsPsych.data.get().json();
+          jatos.submitResultData(resultJson, jatos.startNextComponent);
+        },
+        on_trial_start: function(trial) {
+          if(run_simulation == true){
+            trial.trial_duration = 0;
+          }
+      }
+      });
   });
+} else {
+  jsPsych.init({
+      timeline: timeline,
+      on_finish: function() {
+      jsPsych.data.displayData();
+      },
+      on_trial_start: function(trial) {
+        if(run_simulation == true){
+          trial.trial_duration = 0;
+        }
+    }
+    });
+}
+
+  
 
 
 /* 
 
-on_finish: function() {
-      jsPsych.data.displayData();
-    }
     
     */
 
 
-```
+</script>
+</body>
+</html>

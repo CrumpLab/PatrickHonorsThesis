@@ -35,12 +35,12 @@ plot(stimulus_times,cue_times)
 ```{r}
 #load sample data
 library(dplyr)
-a<- jsonlite::fromJSON("test_json.txt")
+a<- jsonlite::fromJSON("jatos_results_20210923214529.txt")
 
 #check encoding trials have equal F and R trials per category
 a %>%
   filter(experiment_phase == "study")%>%
-  group_by(category_type,category,encoding_instruction) %>%
+  group_by(category_type,category,encoding_instruction,stimulus_time) %>%
   count()
 
 ```
