@@ -178,7 +178,7 @@ for(i=0; i<main_list.length; i++){
   study_timeline[i].data["experiment_phase"] = "study";
   study_timeline[i].data["stimulus_time"] = stimulus_presentation_times[stim_time_counter];
   stim_time_counter++;
-  if(stim_time_counter >=2) {stim_time_counter = 0;}
+  if(stim_time_counter > 2) {stim_time_counter = 0;}
 }
 
 
