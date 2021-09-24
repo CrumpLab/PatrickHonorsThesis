@@ -1,0 +1,54 @@
+---
+title: "Directed Forgetting Pictures 1: Stimulus presentation time"
+author: "Patrick Ihejirika and Matt Crump"
+date: "8/16/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+This file functions as a readme and sketchpad for experiment design during project development
+
+Ahmad, F. N., Tan, P., & Hockley, W. E. (2019). Directed forgetting for categorised pictures: Recognition memory for perceptual details versus gist. Memory, 27(7), 894–903. https://doi.org/10/gmgg3g
+
+This experiment script attempts to closely replicate the design of Experiment 1.
+
+Changes will be listed here:
+
+downloaded natural scenes from Brady
+edited file names to lowercase jpg
+
+## testing out the idea of random factors
+
+```{r}
+
+stimulus_times <- runif(n = 100*120, min = .1, max = 5)
+cue_times <- runif(n = 100*120, min = .5, max = 5)
+
+trials <- data.frame(stimulus_times,cue_times)
+
+plot(stimulus_times,cue_times)
+
+```
+
+
+```{r}
+#load sample data
+library(dplyr)
+a<- jsonlite::fromJSON("test_json.txt")
+
+#check encoding trials have equal F and R trials per category
+a %>%
+  filter(experiment_phase == "study")%>%
+  group_by(category_type,category,encoding_instruction,stimulus_time) %>%
+  count()
+
+filtered <-a %>% filter(experiment_phase %in% c("study","test")) %>%
+  select(stimulus,study_item_image_name,test_item_image_name)
+
+```
+
+
+
