@@ -26,7 +26,6 @@ cat('
 <script src="jspsych-6-2/jspsych.js"></script>
 <script src="jspsych-6-2/plugins/jspsych-html-keyboard-response.js"></script>
 <script src="jspsych-6-2/plugins/jspsych-image-keyboard-response.js"></script>
-<script src="jspsychr/jspsychr.js"></script>
 ')
 ```
 
