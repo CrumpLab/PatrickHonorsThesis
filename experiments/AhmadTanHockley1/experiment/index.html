@@ -15,7 +15,6 @@
 <script src="jspsych-6-2/jspsych.js"></script>
 <script src="jspsych-6-2/plugins/jspsych-html-keyboard-response.js"></script>
 <script src="jspsych-6-2/plugins/jspsych-image-keyboard-response.js"></script>
-<script src="jspsychr/jspsychr.js"></script>
 <script type="text/javascript">
 /* Experimental design construction
 Generate study and test timeline variables */
@@ -244,6 +243,12 @@ Initialize and run
 
 /* experiment parameters */
 
+var runshort = true;
+if(runshort == true){
+  study_timeline = study_timeline.slice(0,10);
+  test_timeline = test_timeline.slice(0,10);
+}
+
 var reps_per_trial_type = 1;
 
 /* define plugins */
@@ -292,7 +297,7 @@ var testing_phase = {
   timeline: [fixation, {
     type: 'html-keyboard-response',
     choices: ["1","2"],
-    trial_duration: 0,
+    trial_duration: 5000,
     response_allowed_while_playing: true,
     response_ends_trial: true,
     stimulus: jsPsych.timelineVariable('stimulus'),
@@ -320,7 +325,7 @@ timeline.push(encoding_phase);
 timeline.push(testing_phase);
 timeline.push(end);
 
-var run_simulation = true;
+var run_simulation = false;
 var jatos = false;
 
 if(jatos == true){
