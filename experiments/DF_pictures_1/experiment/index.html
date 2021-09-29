@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
 <meta name="author" content="Matt Crump" />
 <title>DF1</title>
-<link rel="stylesheet" href="jspsych-6-2/css/jspsych.css" />
+<link rel="stylesheet" href="jspsych-6.3.1/css/jspsych.css" />
 <script src="index_files/header-attrs-2.11/header-attrs.js"></script>
 </head>
 <body>
@@ -275,6 +275,30 @@ var welcome = {
   post_trial_gap: 0
 };
 
+var study_instructions = {
+  type: "html-keyboard-response",
+  stimulus: `
+  <h2> Instructions </h2>
+  <p> You will be shown a series of pictures for a later memory test </p>
+  <p> After each picture you will see an R or F </p>
+  <p> If you see an R, try to remember the picture </p>
+  <p> If you see an F, try to forget the picture </p>
+  `,
+  post_trial_gap: 0
+};
+
+var test_instructions = {
+  type: "html-keyboard-response",
+  stimulus: `
+  <h2> Memory Test </h2>
+  <p> You will be shown two pictures at a time </p>
+  <p> One picture was presented during the encoding phase, and the other picture was never presented</p>
+  <p> Your task is to identify the picture that was presented during the encoding phase </p>
+  <p> press 1 for the left picture, press 2 for the right picture </p>
+  `,
+  post_trial_gap: 0
+};
+
 var fixation = {
   type: 'html-keyboard-response',
   stimulus: '<div style="font-size:60px;">+</div>',
@@ -336,7 +360,9 @@ var timeline = [];
 
 timeline.push(welcome);
 timeline.push(preload);
+timeline.push(study_instructions);
 timeline.push(encoding_phase);
+timeline.push(test_instructions);
 timeline.push(testing_phase);
 timeline.push(end);
 
