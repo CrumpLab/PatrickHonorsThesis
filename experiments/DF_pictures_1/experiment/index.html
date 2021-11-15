@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
 <meta name="author" content="Matt Crump" />
 <title>DF1</title>
+<link rel="stylesheet" href="css/custom.css" />
 <link rel="stylesheet" href="jspsych-6.3.1/css/jspsych.css" />
 <script src="index_files/header-attrs-2.11/header-attrs.js"></script>
 </head>
@@ -14,6 +15,9 @@
 <script src="jatos.js"></script>
 <script src="jspsych-6.3.1/jspsych.js"></script>
 <script src="jspsych-6.3.1/plugins/jspsych-preload.js"></script>
+<script src="consent/jspsych-external-html2.js"></script>
+<script src="custom_plugins/jspsych-html-keyboard-response-feedback.js"></script>
+<script src="jspsych-6.3.1/plugins/jspsych-external-html.js"></script>
 <script src="jspsych-6.3.1/plugins/jspsych-html-keyboard-response.js"></script>
 <script src="jspsych-6.3.1/plugins/jspsych-image-keyboard-response.js"></script>
 <script type="text/javascript">
@@ -268,11 +272,20 @@ var preload = {
 }
 
 var welcome = {
-  type: "html-keyboard-response",
-  stimulus: `
-  <p> Welcome to the experiment, press a key to continue </p>
-  `,
-  post_trial_gap: 0
+  type: "external-html",
+  url: 'consent/welcome.html',
+  cont_btn: "continue"
+};
+
+var consent = {
+  type: "external-html2",
+  url: 'consent/consent.html',
+  cont_btn: ["accept","decline"],
+  on_finish: function(data){
+    if(data.response == "decline"){
+      jatos.abortStudy('Thank you for considering participation.');
+    }
+  }
 };
 
 var study_instructions = {
@@ -318,14 +331,15 @@ var encoding_phase = {
     data: jsPsych.timelineVariable('data'),
   },
   {
-  type: 'html-keyboard-response',
+  type: 'html-keyboard-response-feedback',
   stimulus: function(){
     var data = jsPsych.timelineVariable('data', true);
     var html='<div style="font-size:60px;">'+ data.encoding_instruction + '</div>';
     return html;
   },
-  choices: jsPsych.NO_KEYS,
-  trial_duration: 3000
+  choices: ['f','r'],
+  trial_duration: 3000,
+  response_ends_trial: false
 }],
   timeline_variables: study_timeline,
   sample: {type: 'fixed-repetitions', size: reps_per_trial_type}
@@ -346,13 +360,15 @@ var testing_phase = {
 };
 
 
-var end = {
-  type: "html-keyboard-response",
-  stimulus: `
-  <p> Thanks for participating </p>
-  `,
-  post_trial_gap: 0
-};
+var debrief_mturk = {
+      type: "external-html",
+      url: 'consent/debrief_mturk.html',
+      cont_btn: "continue",
+      on_start:  function() {
+        var resultJson = jsPsych.data.get().json();
+        jatos.submitResultData(resultJson);
+     }
+    };
 
 /*push to timeline*/
 
@@ -360,11 +376,12 @@ var timeline = [];
 
 timeline.push(welcome);
 timeline.push(preload);
+timeline.push(consent);
 timeline.push(study_instructions);
 timeline.push(encoding_phase);
 timeline.push(test_instructions);
 timeline.push(testing_phase);
-timeline.push(end);
+timeline.push(debrief_mturk);
 
 /* Run */
 
@@ -375,6 +392,7 @@ if(run_jatos === true){
   jatos.onLoad(function() {
     jsPsych.init({
         timeline: timeline,
+        show_progress_bar: true,
         on_finish: function() {
           var resultJson = jsPsych.data.get().json();
           jatos.submitResultData(resultJson, jatos.startNextComponent);

@@ -52,3 +52,21 @@ filtered <-a %>% filter(experiment_phase %in% c("study","test")) %>%
 
 
 
+```{r}
+
+remember <- rbinom(60,1,prob=.9)
+forget <- rbinom(60,1,prob=.9-.07)
+
+sum(rbinom(60,1,prob=.9))/60
+sum(rbinom(60,1,prob=.83))/60
+
+get_df_effect <- function(r,f){
+(sum(rbinom(60,1,prob=r))/60) - (sum(rbinom(60,1,prob=f))/60)
+}
+
+get_df_effect(.9,.83)
+
+hist(replicate(50,get_df_effect(.9,.89)))
+
+```
+
