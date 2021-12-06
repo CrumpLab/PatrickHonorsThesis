@@ -18,7 +18,7 @@ knitr::opts_chunk$set(echo = TRUE)
 knitr::include_graphics("imgs/ccp.png")
 ```
 
-Welcome, this experiment takes approximately 15 minutes.
+Welcome, this experiment requires your full attention for approximately 20 minutes.
 
 Continue to consent form and instructions
 

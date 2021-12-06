@@ -19,7 +19,10 @@
 <script src="custom_plugins/jspsych-html-keyboard-response-feedback.js"></script>
 <script src="jspsych-6.3.1/plugins/jspsych-external-html.js"></script>
 <script src="jspsych-6.3.1/plugins/jspsych-html-keyboard-response.js"></script>
+<script src="jspsych-6.3.1/plugins/jspsych-html-button-response.js"></script>
 <script src="jspsych-6.3.1/plugins/jspsych-image-keyboard-response.js"></script>
+<script src="jspsych-6.3.1/plugins/jspsych-survey-html-form.js"></script>
+<script src="jspsych-6.3.1/plugins/jspsych-survey-text.js"></script>
 <script type="text/javascript">
 /* Experimental design construction
 Generate study and test timeline variables */
@@ -45,19 +48,6 @@ var study_indoor = indoor_categories.slice(0,num_categories);
 var study_outdoor = outdoor_categories.slice(0,num_categories);
 var novel_indoor = indoor_categories.slice(num_categories,indoor_categories.length);
 var novel_outdoor = outdoor_categories.slice(num_categories,outdoor_categories.length);
-
-/* create pools of novel items
-
-var keysExact = ['category'];
-var valuesExact = novel_indoor;
-
-var all_novel_indoor_pics = all_images.filter((item) =>
-  keysExact.every((a) => valuesExact.includes(item[a]))
-);
-
-jsPsych.randomization.shuffle(Array(8).fill().map((element, index) => index + 1))
-
-*/
 
 /* create pools of novel items for indoor and outdoor categories*/
 
@@ -101,7 +91,7 @@ for (const i of study_outdoor){
 study_outdoor_pics = study_outdoor_pics.flat();
 exemplar_outdoor_pics = exemplar_outdoor_pics.flat();
 
-/* pair each study item with a exemplar or novel test item 
+/* pair each study item with an exemplar or novel test item 
 write indoor list
 */
 
@@ -185,19 +175,11 @@ for(i=0; i<main_list.length; i++){
   if(stim_time_counter > 2) {stim_time_counter = 0;}
 }
 
-
-/*
-category: main_list[i][0].study_item.category,
-    category_type: main_list[i][0].study_item.category_type, 
-    item_type: main_list[i][0].study_item.item_type, 
-    
-*/
-
 /*create timeline variable for testing phase from main list */
 
 var test_timeline = [];
 
-for(i=0; i<main_list.length; i++){
+for(i=0; i < main_list.length; i++){
  
   let image_position = jsPsych.randomization.shuffle(["S","T"]);
   let correct_position = "";
@@ -254,9 +236,14 @@ Define jsPsych plugins
 Initialize and run
 */
 
+var rand_subject_id = jsPsych.randomization.randomID(16);
+// add the ID to the data for all trials
+jsPsych.data.addProperties({ID: rand_subject_id});
+
+
 /* experiment parameters */
 
-var runshort = true;
+var runshort = false;
 if(runshort == true){
   study_timeline = study_timeline.slice(0,10);
   test_timeline = test_timeline.slice(0,10);
@@ -288,14 +275,63 @@ var consent = {
   }
 };
 
+/* Demographics */
+
+var demographics = {
+  type: 'survey-html-form',
+  preamble: `<p>We are collecting basic demographic information as a part of this study</p>
+  <p>Please answer the following questions </p>`,
+  html: `<label for="age">Age (enter or select a number):</label>
+<input type="number" id="age" name="age" min="1" max="100" />
+<br>
+<label for="sex-select">What is your sex?</label>
+<select name="sex" id="sex-select">
+    <option value="">choose</option>
+    <option value="female">Female</option>
+    <option value="male">Male</option>
+</select>
+<br>
+<label for="hand-select">What is your handedness?</label>
+<select name="hand" id="hand-select">
+    <option value="">choose</option>
+    <option value="Left">Left</option>
+    <option value="Right">Right</option>
+    <option value="Both">Both</option>
+</select>
+<br>
+<label for="vision-select">How is your vision?</label>
+<select name="vision" id="vision-select">
+    <option value="">choose</option>
+    <option value="Normal">Normal vision</option>
+    <option value="Corrected">Corrected-to-normal vision</option>
+    <option value="Impaired">Impaired vision</option>
+</select>
+<br>
+<label for="english-select">What is your English ability?</label>
+<select name="english" id="english-select">
+    <option value="">choose</option>
+    <option value="First">First-language</option>
+    <option value="Second">Second-language</option>
+    <option value="None">No-English ability</option>
+</select>
+<br>
+<p> Thank you, press continue </p>
+<br><br>`,
+  autofocus: 'test-resp-box'
+};
+
 var study_instructions = {
   type: "html-keyboard-response",
   stimulus: `
-  <h2> Instructions </h2>
+  <h2> Part I Instructions </h2>
   <p> You will be shown a series of pictures for a later memory test </p>
   <p> After each picture you will see an R or F </p>
-  <p> If you see an R, try to remember the picture </p>
-  <p> If you see an F, try to forget the picture </p>
+  <p> If you see an R, try to REMEMBER the picture, and press the R button on the keyboard </p>
+  <p> If you see an F, try to FORGET the picture, and press the F button on the keyboard </p>
+  <p> There are 120 pictures, and they are presented fairly quickly. </p>
+  <p> Part I takes about 8-10 minutes </p>
+  <p> This phase will require your full attention </p>
+  <p> Press any key to begin </p>
   `,
   post_trial_gap: 0
 };
@@ -305,9 +341,10 @@ var test_instructions = {
   stimulus: `
   <h2> Memory Test </h2>
   <p> You will be shown two pictures at a time </p>
-  <p> One picture was presented during the encoding phase, and the other picture was never presented</p>
-  <p> Your task is to identify the picture that was presented during the encoding phase </p>
-  <p> press 1 for the left picture, press 2 for the right picture </p>
+  <p> One picture was shown before and the other was not </p>
+  <p> Choose the picture that was shown as best you can </p>
+  <p> This phase takes about 5 minutes </p>
+  <p> Press any key to begin</p>
   `,
   post_trial_gap: 0
 };
@@ -339,7 +376,40 @@ var encoding_phase = {
   },
   choices: ['f','r'],
   trial_duration: 3000,
-  response_ends_trial: false
+  response_ends_trial: false,
+  on_finish: function(data){
+      var correct = false;
+      var last_instruction = jsPsych.data.get().last(2).values()[0].encoding_instruction;
+      if(data.response != null){
+        if(last_instruction == data.response.toUpperCase() && data.rt > -1){
+          correct = true;
+        }
+      }
+      data.correct = correct;
+      data.experiment_phase = "study";
+    }
+},{
+  type: 'html-keyboard-response',
+  stimulus: function(){
+    // Feedback about not responding to instruction cue
+    stim = "<p></p>";
+    var last_trial= jsPsych.data.get().last(1).values()[0];
+    if(last_trial.correct == false){
+      stim = "<p>Oops, wrong button</p>";
+    }
+    if(last_trial.response == null){
+      stim = "<p>Press R for Remember the picture <br> F for Forget the picture</p>";
+    }
+    return stim;
+  },
+  trial_duration: function(){
+    var last_trial = jsPsych.data.get().last(1).values()[0];
+    if(last_trial.correct == false || last_trial.response == null ) {
+      return 1000;
+    } else {
+      return 0;
+    }
+  }
 }],
   timeline_variables: study_timeline,
   sample: {type: 'fixed-repetitions', size: reps_per_trial_type}
@@ -347,17 +417,53 @@ var encoding_phase = {
 
 var testing_phase = {
   timeline: [fixation, {
-    type: 'html-keyboard-response',
-    choices: ["1","2"],
+    type: 'html-button-response',
+    choices: ["Left","Right"],
+    prompt: "<p> Choose the picture that was shown before </p>",
     trial_duration: 5000,
-    response_allowed_while_playing: true,
     response_ends_trial: true,
     stimulus: jsPsych.timelineVariable('stimulus'),
     data: jsPsych.timelineVariable('data'),
-  }],
+    on_finish: function(data){
+      var correct = false;
+      if(data.response != null){
+        if (data.response == 0 && data.correct_choice == 1){
+          correct = true;
+        }
+        if (data.response == 1 && data.correct_choice == 2){
+          correct = true;
+        }
+      }
+      data.correct = correct;
+    }
+  },{
+  type: 'html-keyboard-response',
+  stimulus: function(){
+    // The feedback stimulus
+    var last_trial_correct = jsPsych.data.get().last(1).values()[0].correct;
+    if(last_trial_correct){
+      return "<p>Correct!</p>";
+    } else {
+      return "<p>Incorrect</p>";
+    }
+  },
+  trial_duration: 500
+}],
   timeline_variables: test_timeline,
   sample: {type: 'fixed-repetitions', size: reps_per_trial_type}
 };
+
+/* task questions and hit feedback */
+
+var end_task_questions = {
+      type: "survey-text",
+      preamble: "Please answer the following questions in a sentence or two. In the first part of this task, you were asked to remember some pictures and forget other pictures",
+      questions:[
+      {prompt: 'How did you go about trying to remember pictures?', rows: 5},
+      {prompt: 'How did you go about trying to forget pictures?', rows: 5},
+      {prompt: 'If you would like to give us additional feedback, please answer here', rows: 5}
+      ]
+    };
 
 
 var debrief_mturk = {
@@ -377,10 +483,12 @@ var timeline = [];
 timeline.push(welcome);
 timeline.push(preload);
 timeline.push(consent);
+timeline.push(demographics);
 timeline.push(study_instructions);
 timeline.push(encoding_phase);
 timeline.push(test_instructions);
 timeline.push(testing_phase);
+timeline.push(end_task_questions);
 timeline.push(debrief_mturk);
 
 /* Run */

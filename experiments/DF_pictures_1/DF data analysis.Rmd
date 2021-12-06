@@ -1,0 +1,108 @@
+---
+title: "test data analysis"
+author: "Matt Crump"
+date: "10/5/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library(pacman)
+library(dplyr)
+library(tidyverse)
+library(jsonlite)
+# Read the text file from JATOS ...
+read_file('jatos_results_20211203215207.txt') %>%
+  # ... split it into lines ...
+  str_split('\n') %>% first() %>%
+  # ... filter empty rows ...
+  discard(function(x) x == '') %>%
+  # ... parse JSON into a data.frame
+  map_dfr(fromJSON, flatten=T) -> data
+
+# get test trials
+
+filtered_data <- data %>%
+  filter(experiment_phase == "test")
+
+get_means <- filtered_data %>%
+  group_by(ID,encoding_instruction,test_condition)%>%
+  summarize(mean_correct = mean(correct))
+
+get_means
+  
+
+```
+
+
+```{r}
+
+# add stimulus encoding factor
+
+all_data <- data.frame()
+for( sub in unique(data$ID)){
+  
+  temp_data <- data %>%
+    filter(ID==sub)
+  
+  temp_study <- temp_data %>%
+    filter(experiment_phase == "study")
+  
+  temp_test <- temp_data %>%
+    filter(experiment_phase == "test")
+  
+  encoding_time <- c()
+  for(i in 1: dim(temp_test)[1]){
+    im_name <- temp_test[i,]$study_item_image_name
+    get_trial <- temp_study %>%
+      filter(image_name == im_name)
+    encoding_time[i]<-get_trial$stimulus_time
+  }
+  
+  temp_test <- cbind(temp_test,encoding_time)
+  all_data <- rbind(all_data,temp_test)
+}
+
+# get test trials
+
+filtered_data <- all_data %>%
+  filter(experiment_phase == "test")
+
+get_means <- filtered_data %>%
+  group_by(ID,encoding_time,encoding_instruction,test_condition)%>%
+  summarize(mean_correct = mean(correct))
+
+library(ggplot2)
+
+ggplot(get_means, aes(x=encoding_instruction,y=mean_correct,group=test_condition, color=test_condition))+
+  geom_line()+
+  geom_point()+
+  facet_wrap(~ID*encoding_time)
+
+```
+
+```{r}
+## collapsed
+
+filtered_data <- all_data %>%
+  filter(experiment_phase == "test") %>%
+  mutate(correct = response == correct_choice) %>%
+  filter(is.na(correct) == FALSE)
+
+get_means <- filtered_data %>%
+  group_by(encoding_time,encoding_instruction,test_condition)%>%
+  summarize(mean_correct = mean(correct))
+
+library(ggplot2)
+
+ggplot(get_means, aes(x=encoding_instruction,y=mean_correct,group=test_condition, color=test_condition))+
+  geom_line()+
+  geom_point()+
+  facet_wrap(~encoding_time)
+
+```
+
