@@ -1,0 +1,98 @@
+---
+title: "DF_1_Power_analysis"
+author: "Matt Crump"
+date: "11/29/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# generate simulated data for one subject
+
+```{r}
+
+library(dplyr)
+library(ggplot2)
+
+subject_data <- data.frame(
+  encoding_cue = rep(c("R","F"), each = 60),
+  image_duration = rep(rep(c(.5,1,2), each = 20),2),
+  test_condition = rep(rep(c("Novel","Exemplar"),each = 10),6),
+  accuracy = rbinom(120,1,.5)
+)
+
+create_n_subjects <- function(n){
+  
+  all_data <- data.frame()
+  for(i in 1:n){
+    subject_data <- data.frame(
+      sub_num = i,
+      encoding_cue = rep(c("R","F"), each = 60),
+      image_duration = rep(rep(c(.5,1,2), each = 20),2),
+      test_condition = rep(rep(c("Novel","Exemplar"),each = 10),6),
+      accuracy = rbinom(120,1,.5)
+    )
+    
+    all_data <- rbind(all_data,subject_data)
+  }
+  
+  return(all_data)
+  
+}
+
+simulated_data <- create_n_subjects(n=20)
+simulated_data$sub_num <- as.factor(simulated_data$sub_num)
+simulated_data$encoding_cue <- as.factor(simulated_data$encoding_cue)
+simulated_data$image_duration <- as.factor(simulated_data$image_duration)
+simulated_data$test_condition <- as.factor(simulated_data$test_condition)
+
+sim_means <- simulated_data %>%
+  group_by(encoding_cue,image_duration,test_condition) %>%
+  summarize(mean_accuracy =  mean(accuracy))
+
+ggplot(sim_means, aes(x=image_duration,y = mean_accuracy, fill=encoding_cue))+
+  geom_bar(stat="identity", position="dodge")+
+  geom_hline(yintercept=.5)+
+  facet_wrap(~test_condition)
+
+ANOVA_means <- simulated_data %>%
+  group_by(sub_num,encoding_cue,image_duration,test_condition) %>%
+  summarize(mean_accuracy =  mean(accuracy))
+
+sim_anova <- aov(mean_accuracy ~ encoding_cue*image_duration*test_condition + Error(sub_num/(encoding_cue*image_duration*test_condition)), data = ANOVA_means)
+
+summary(sim_anova)
+
+```
+
+# power analysis
+
+
+```{r}
+
+# need to specify the effect-sizes for each condition
+
+subject_data <- data.frame(
+  encoding_cue = rep(c("R","F"), each = 60),
+  image_duration = rep(rep(c(.5,1,2), each = 20),2),
+  test_condition = rep(rep(c("Novel","Exemplar"),each = 10),6),
+  accuracy = rbinom(.75,1,60),rbinom(.65,1,60)
+)
+
+# R vs F rbinom(.75,1,60),rbinom(.65,1,60)
+
+#GLM general linear model
+
+# Baseline_accuracy + encoding_cue + image_duration + test_condition ...
+
+.6 
+
+# R condition .6 + .1
+# F condition .6 + 0
+
+# R condition .6 + .1 + (0,.05,.1)
+# F condition .6 + 0 + (0,.05,.1)
+```
+
