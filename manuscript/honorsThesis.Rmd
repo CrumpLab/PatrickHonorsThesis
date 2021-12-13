@@ -66,7 +66,7 @@ The directed forgetting procedure instructs participants to selectively remember
 
 ## A classic demonstration of directed forgetting
 
-@bjorkTheoreticalImplicationsDirected1972 provides a description of traditional directed forgetting procedures. Generally, these procedures present participants with a series of items and cues. There are a number of ways to cue various item sets, including intraserial cuing, postinput cuing and pre-input cuing. The most common method of cuing item sets throughout traditional directed forgetting procedures is  intraserial cuing. Intraserial cuing sequentially presents participants with a set of items and directs them to either forget or remember said item using the cue's instruction. Though the item presented during such experiments may vary,  traditional directed-forgetting procedures discussed throughout this paper use word stimuli as the presented items. 
+@bjorkTheoreticalImplicationsDirected1972 provides a description of traditional directed forgetting procedures. Generally, these procedures present participants with a series of items and cues. There are a number of ways to cue various item sets, including intraserial cuing, postinput cuing and pre-input cuing. The most common method of cuing item sets throughout traditional directed forgetting procedures is  intraserial cuing. Intra-serial cuing sequentially presents participants with a set of items and directs them to either forget or remember said item using the cue's instruction. Though the item presented during such experiments may vary,  traditional directed-forgetting procedures discussed throughout this paper use word stimuli as the presented items. 
 Traditional directed forgetting procedures also determine the presence and magnitude of a directed forgetting effect using either recognition or recall based testing conditions. Testing conditions which operationalize the directed forgetting effect as the accurate recall of "Forget-cued" stimuli do so by having participants recall as many wordage items as possible, without regard to the cue instructions. Previous research employing this recall-based directed forgetting procedure has identified a directed forgetting effect of 10-15% for F- cued wordage stimuli, compared to the R- cued wordage stimuli (Weiner & Reed, 1969). Testing conditions which operationalize the directed forgetting effect as the accurate recognition of "Forget-cued" stimuli do so by having participants identify as many previously seen wordage items as possible, without regard to the cue instructions. 
 
 <!--
@@ -75,13 +75,13 @@ Traditional directed forgetting procedures also determine the presence and magni
 
 ## What do we empirically know about directed forgetting?
 
-Mcleod (1998) has identified 38 factors with the potential to influence the  directed-forgetting effect. This paper will specifically focus on 4 of these 38 factors. These 4 factors include cue presentation time, stimulus presentation time, stimulus detail and stimulus type. 
+@macleodDirectedForgetting1998 has identified 38 factors with the potential to influence the  directed-forgetting effect. This paper will specifically focus on 4 of these 38 factors. These 4 factors include cue presentation time, stimulus presentation time, stimulus detail and stimulus type. 
 
-Wetzel and Hunt (1977) used a directed forgetting procedure to explore the effects of cue duration on the participant recall accuracy of word stimuli. This exploration required the manipulation of both the stimuli presentation duration and the cue presentation duration during the encoding phase, creating two separate experimental conditions. These experimental conditions are known as the long delay condition and the short delay condition. The long-delay condition presents the word stimuli for a duration of 2, 4 or 8 seconds and the cue for a duration of 1 second, while the short-delay condition presents the word stimuli for a duration of 1 second and the cue for a duration of 2, 4 or 8 seconds. The result of this experiment indicates that short delay conditions, specifically conditions with short stimulus duration and long cue duration lead to an increased directed forgetting effect. These results serve as a motivation for the factorial manipulation of stimuli presentation duration within my experiment.
+@WetzelC1977 used a directed forgetting procedure to explore the effects of cue duration on the participant recall accuracy of word stimuli. This exploration required the manipulation of both the stimuli presentation duration and the cue presentation duration during the encoding phase, creating two separate experimental conditions. These experimental conditions are known as the long delay condition and the short delay condition. The long-delay condition presents the word stimuli for a duration of 2, 4 or 8 seconds and the cue for a duration of 1 second, while the short-delay condition presents the word stimuli for a duration of 1 second and the cue for a duration of 2, 4 or 8 seconds. The result of this experiment indicates that short delay conditions, specifically conditions with short stimulus duration and long cue duration lead to an increased directed forgetting effect. These results serve as a motivation for the factorial manipulation of stimuli presentation duration within my experiment.
 
-Ahmad et al (2019) used a directed forgetting procedure which explored the effects of stimuli details on accuracy of participant recognition of encoding phase stimuli.  This was done through the introduction of novel testing conditions and exemplar conditions into the testing phase. Novel conditions present the same stimuli from the encoding phase against previously unseen stimuli, completely different to that of the encoding stimuli. Exemplar conditions present the same stimuli from the encoding phase against previously unseen stimuli similar to that of the encoding stimuli. Both conditions task participants to accurately identify the stimulus presented in the encoding phase. The results of this experiment indicate the existence of a significantly lower directed forgetting effect for novel testing conditions. This indication of significantly higher accuracy in participant recognition for novel testing conditions than exemplar testing conditions serves as a motivation for my experiment.
+@ahmadDirectedForgettingCategorised2019 used a directed forgetting procedure which explored the effects of stimuli details on accuracy of participant recognition of encoding phase stimuli.  This was done through the introduction of novel testing conditions and exemplar conditions into the testing phase. Novel conditions present the same stimuli from the encoding phase against previously unseen stimuli, completely different to that of the encoding stimuli. Exemplar conditions present the same stimuli from the encoding phase against previously unseen stimuli similar to that of the encoding stimuli. Both conditions task participants to accurately identify the stimulus presented in the encoding phase. The results of this experiment indicate the existence of a significantly lower directed forgetting effect for novel testing conditions. This indication of significantly higher accuracy in participant recognition for novel testing conditions than exemplar testing conditions serves as a motivation for my experiment.
 
-Traditional directed forgetting experiments employed both recall-based testing procedures and verbage stimuli to determine the existence of a directed forgetting effect amongst participants. Epstein (1972) defines the directed forgetting effect from the more traditional perspective as a significant decrease in participant ability to accurately recall the verbage stimuli presented during the encoding phase from memory. The issue with recall-based directed forgetting procedures, is that they fail to consider inherently more memorable stimuli. Standing (1973) shows that people possess the ability to remember thousands of pictures, along with the object details within said pictures (MacLeod, 1998). Ahmad et al. (2017) considers this in his experiment through the use of a recognition-based directed forgetting procedure and pictorial stimuli throughout the encoding phase. The results of this experiment indicate that although directed forgetting for pictures and their objects, its effects are extremely small. These results and the memorable ability of images as opposed to word stimuli serves as the motivation for the use of image stimuli throughout my experiment. 
+Traditional directed forgetting experiments employed both recall-based testing procedures and verbage stimuli to determine the existence of a directed forgetting effect amongst participants. @EpsteinW1972 defines the directed forgetting effect from the more traditional perspective as a significant decrease in participant ability to accurately recall the verbage stimuli presented during the encoding phase from memory. The issue with recall-based directed forgetting procedures, is that they fail to consider inherently more memorable stimuli. @standingLearning10000Pictures1973 shows that people possess the ability to remember thousands of pictures, along with the object details within said pictures [@macleodDirectedForgetting1998]. @ahmadEffectsVaryingPresentation2017 considers this in his experiment through the use of a recognition-based directed forgetting procedure and pictorial stimuli throughout the encoding phase. The results of this experiment indicate that although directed forgetting for pictures and their objects, its effects are extremely small. These results and the memorable ability of images as opposed to word stimuli serves as the motivation for the use of image stimuli throughout my experiment. 
 
 <!--
 *** 
@@ -98,7 +98,7 @@ Give some motivation to the reason you are focusing on cue presentation time, st
 
 # Experiment 1
 
-Experiment 1 quite similarly resembles the traditional directed forgetting procedural technique used by Bjork (XXXX) to explore participant recognition of previously seen encoding stimuli when randomly presented with distractors throughout the testing phase. Deviations from the procedure observed in Bjork's experiment include (1) the factorial manipulation of stimuli presentation duration by 500 milliseconds, 1 second and 2 seconds (2) the randomized presentation of novel and exemplar distractors throughout the testing phase (3) the use of inherently more memorable stimuli -images- throughout both the encoding and testing phase, instead of word stimuli. 
+Experiment 1 quite similarly resembles the traditional directed forgetting procedural technique used by @bjorkModificationShorttermMemory1968 to explore participant recognition of previously seen encoding stimuli when randomly presented with distractors throughout the testing phase. Deviations from  Bjork's experimental procedure include (1) the factorial manipulation of stimuli presentation duration by 500 milliseconds, 1 second and 2 seconds (2) the randomized presentation of novel and exemplar distractors throughout the testing phase (3) the use of inherently more memorable stimuli -images- throughout both the encoding and testing phase, instead of word stimuli. 
 
 ## Method
 
@@ -108,9 +108,11 @@ All participants in this experiment were undergraduate students in the City Univ
 
 ### Stimuli and Apparatus.
 
-There were 120 images from a total of 16 categorical scenes presented throughout the encoding phase of this experiment. These sixteen categorical scenes were further classified as being either outdoor scenes or indoor scenes. The eight of sixteen outdoor visual scenes consisted of settings which included bedrooms, churches, classrooms, offices, dining rooms, conference rooms, hair salons & empty rooms. The eight of sixteen indoor visual scenes consisted of settings such as airports, bridges, beaches, castles, cemeteries, houses, tents and playgrounds. These 120 images were of the same database of 320 total images of 24 different categorical scenes created by Xiao et al (2010). Konkle et al (2010b) and Ahmed, Tan & Hockley (2016) made similar use of this image dataset in earlier experiments. 
+There were 120 images from a total of 16 categorical scenes presented throughout the encoding phase of this experiment. These sixteen categorical scenes were further classified as being either outdoor scenes or indoor scenes. The eight of sixteen outdoor visual scenes consisted of settings which included bedrooms, churches, classrooms, offices, dining rooms, conference rooms, hair salons & empty rooms. The eight of sixteen indoor visual scenes consisted of settings such as airports, bridges, beaches, castles, cemeteries, houses, tents and playgrounds. These 120 images were of the same database of 320 total images of 24 different categorical scenes created by @Isola2011. @bradyVisualLongtermMemory2008 and @ahmadDirectedForgettingCategorised2019 made similar use of this image dataset in earlier experiments. 
 
 Alongside the initial 120 images presented during the encoding phase, another 120 images were selected as distractors throughout the testing phase. Sixty of these images were of the same visual scene categories as the images presented during the encoding phase. These images were presented as exemplar distractor testing conditions. The other half of the 120 distractor images were of completely new visual scene categories as the images presented throughout the encoding phase. These distractor images were presented as novel distractor testing conditions. This experiment was programmed in JavaScript using Jspsych and was served onto the web using Jatos. The results of this experiment were analyzed using Rcode.
+
+We used `r cite_r("r-references.bib")` for all our analyses. We collected five subjects worth of pilot data. For each subject we computed mean recognition accuracy in each condition of the design. Figure 1 shows mean recognition accuracy in each condition, collapsed across each subject.
 
 ### Design 
 
@@ -118,7 +120,7 @@ This experiment consisted of a 2x2x3 completely within-subjects experimental des
 
 ## Procedure. 
 
-Participants used the (XXXX) site to access the experiment. As stated earlier, there are two major phases of the experiment. These phases are the encoding phase and the testing phase. Prior to the encoding phase however, participants were presented with a consent form. Upon completion of the consent form, they were presented with encoding phase instructions. 
+Participants used the (JAVOS) site to access the experiment. As stated earlier, there are two major phases of the experiment. These phases are the encoding phase and the testing phase. Prior to the encoding phase however, participants were presented with a consent form. Upon completion of the consent form, they were presented with encoding phase instructions. 
 
 During the encoding phase, participants are presented with the cue instructions followed by the images. The cues instruct participants to either selectively remember or selectively forget the upcoming image stimuli at random. There are a total of 120 cue instructions, which are presented for a duration of (XXXX) seconds. The image stimuli presented during the encoding phase are composed of the 120 images from a total of 16 categorical scenes subsetted from the larger database of 320 images with a total of 24 categorical scenes. These 120 images are presented at random at durations of either 500 milliseconds, 1 second or 2 seconds. The presentation times of the images will also be displayed at random. Seeing as how the presentation of a single cue instruction followed by a single image consists of a single trial, and there are 120 cue instructions and 120 images to be presented, then there will be 120 trials throughout the encoding phase of this experiment. 
 Upon completion of the encoding phase, participants were then taken to the testing phase. Similarly to the encoding phase, during the beginning of the testing phase participants were given instructions of completing the testing phase. During the testing phase, participants are given a series of trials where they are shown either an exemplar distractor image or a novel distractor image alongside an image previously seen during the encoding phase and are tasked with selecting the encoding image. There are 60 novel distractor images and 60 exemplar distractor images, each of which were presented at random throughout the testing procedure. 
@@ -129,9 +131,7 @@ Second thing...describe in detail what happens to a participant from beginning t
 
 -->
 
-## Results
 
-We used `r cite_r("r-references.bib")` for all our analyses. We collected five subjects worth of pilot data. For each subject we computed mean recognition accuracy in each condition of the design. Figure 1 shows mean recognition accuracy in each condition, collapsed across each subject.
 
 ```{r, echo=FALSE}
 # Read the text file from JATOS ...
@@ -184,7 +184,51 @@ get_group_means <- get_means %>%
   group_by(encoding_time,encoding_instruction,test_condition)%>%
   summarize(grp_mean_correct = mean(mean_correct),
             sem = sd(mean_correct)/sqrt(length(mean_correct)))
+
+
+#Average Values for each condition
+
+###Encoding_Instructions  
+get_group_means$test_condition
+  CUE_ME <- filtered_data %>%
+  group_by(encoding_instruction)%>%
+  summarize(mean_correct = mean(correct))
+
+###Test_Conditions
+  TestCond_ME <- filtered_data %>%
+  group_by(test_condition)%>%
+  summarize(mean_correct = mean(correct))
+
+###Stimulus_Duration
+EncDur_ME <- filtered_data %>%
+  group_by(encoding_time)%>%
+  summarize(mean_correct = mean(correct))
+
+#T-test of Independent Samples
+get_group_means$test_condition
+###C1: Cue Instructions
+R_CUE = (filter(get_group_means, encoding_instruction == "R"))$grp_mean_correct
+F_CUE = (filter(get_group_means, encoding_instruction == "F"))$grp_mean_correct
+
+CUE_Test = t.test(R_CUE, F_CUE, var.equal = TRUE)
+
+
+###C2: Stimulus Duration
+MS500 = (filter(get_group_means, encoding_time == "500"))$grp_mean_correct
+MS1000 = (filter(get_group_means, encoding_time == "1000"))$grp_mean_correct
+MS2000 = (filter(get_group_means, encoding_time == "2000"))$grp_mean_correct
+
+EncDur_Test = (aov(grp_mean_correct ~ encoding_time, data = get_group_means))
+EncDur_Test = summary(aov(grp_mean_correct ~ encoding_time, data = get_group_means))
+
+###C3: Testing Condition
+Novel = (filter(get_group_means, test_condition == "novel"))$grp_mean_correct
+Exemplar = (filter(get_group_means, test_condition == "exemplar"))$grp_mean_correct
+
+TestCond_Test = t.test(Novel, Exemplar, var.equal = TRUE) 
+
 ```
+
 
 ```{r, fig.width=4, fig.width=6, fig.cap="Mean recognition accuracy for each condition in the Pilot experiment"}
 # print graph
@@ -200,6 +244,14 @@ ggplot(get_group_means, aes(x=encoding_instruction,y=grp_mean_correct,group=test
   scale_y_continuous(breaks = seq(0.4,1,.1))
 ```
 
+## Results
+The proportion of accurately recognized encoding stimuli was collected for each of the subjects who participated in the pilot study. The recorded proportions were then averaged according to the conditions present in this 2x2x3 within subjects experimental design. A T-test of Independent Samples was conducted on recorded scores for the cue instruction conditions  (R vs F) and  test conditions (Novel vs Exemplar). An analysis of variance was run of the stimuli duration conditions (500ms vs 1000ms vs 2000ms). 
+
+Results of the Independent Samples T-test indicate the presence of a significant main effect of testing conditions. Participants recorded significantly more accurate responses throughout Novel Testing Conditions (M = `r TestCond_ME$mean_correct[2]`; SD = `r sd((filter(get_means, test_condition == "novel"))$mean_correct)`) than for Exemplar Testing Conditions (M = `r TestCond_ME$mean_correct[1]`; SD = `r sd((filter(get_means, test_condition == "exemplar"))$mean_correct)`) t(`r TestCond_Test$parameter`) = `r TestCond_Test$statistic`, p = `r TestCond_Test$p.value` 
+
+Results of the Independent Samples T-test also indicates the lack of a significant main effect of Cue Instruction Conditions. Participants recorded slightly more accurate responses when presented with “Remember” - Cue conditions (M = `r CUE_ME$mean_correct[2]`; SD = `r sd((filter(get_means, encoding_instruction == "R"))$mean_correct)`) than when presented with  “Forget” - Cue conditions  (M = `r CUE_ME$mean_correct[1]`; SD = `r sd((filter(get_means, encoding_instruction == "F"))$mean_correct)`) t(`r CUE_Test$parameter`) = `r CUE_Test$statistic`, p = `r CUE_Test$p.value`.
+
+Results of the analysis of variance indicates the lack of a significant effect of stimulus presentation duration. Participants had a higher average recognition accuracy proportion when exposed to  stimulus durations of 500 milliseconds  (M = `r EncDur_ME$mean_correct[1]`; SD = `r sd((filter(get_means, encoding_time == "500"))$mean_correct)`) and 1000 milliseconds  (M = `r EncDur_ME$mean_correct[2]`; SD = `r sd((filter(get_means, encoding_time == "1000"))$mean_correct)`), than when exposed to a stimulus duration of 2000 milliseconds  (M = `r EncDur_ME$mean_correct[3]`; SD = `r sd((filter(get_means, encoding_time == "2000"))$mean_correct)`),  F(1,10) = 0.074, p = 0.791.  
 
 
 ## Discussion
