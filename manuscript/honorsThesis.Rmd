@@ -123,6 +123,7 @@ This experiment consisted of a 2x2x3 completely within-subjects experimental des
 Participants used the (JAVOS) site to access the experiment. As stated earlier, there are two major phases of the experiment. These phases are the encoding phase and the testing phase. Prior to the encoding phase however, participants were presented with a consent form. Upon completion of the consent form, they were presented with encoding phase instructions. 
 
 During the encoding phase, participants are presented with the cue instructions followed by the images. The cues instruct participants to either selectively remember or selectively forget the upcoming image stimuli at random. There are a total of 120 cue instructions, which are presented for a duration of (XXXX) seconds. The image stimuli presented during the encoding phase are composed of the 120 images from a total of 16 categorical scenes subsetted from the larger database of 320 images with a total of 24 categorical scenes. These 120 images are presented at random at durations of either 500 milliseconds, 1 second or 2 seconds. The presentation times of the images will also be displayed at random. Seeing as how the presentation of a single cue instruction followed by a single image consists of a single trial, and there are 120 cue instructions and 120 images to be presented, then there will be 120 trials throughout the encoding phase of this experiment. 
+
 Upon completion of the encoding phase, participants were then taken to the testing phase. Similarly to the encoding phase, during the beginning of the testing phase participants were given instructions of completing the testing phase. During the testing phase, participants are given a series of trials where they are shown either an exemplar distractor image or a novel distractor image alongside an image previously seen during the encoding phase and are tasked with selecting the encoding image. There are 60 novel distractor images and 60 exemplar distractor images, each of which were presented at random throughout the testing procedure. 
 
 <!--
@@ -131,7 +132,7 @@ Second thing...describe in detail what happens to a participant from beginning t
 
 -->
 
-
+## Results
 
 ```{r, echo=FALSE}
 # Read the text file from JATOS ...
@@ -189,7 +190,8 @@ get_group_means <- get_means %>%
 #Average Values for each condition
 
 ###Encoding_Instructions  
-get_group_means$test_condition
+#get_group_means$test_condition
+
   CUE_ME <- filtered_data %>%
   group_by(encoding_instruction)%>%
   summarize(mean_correct = mean(correct))
@@ -205,12 +207,13 @@ EncDur_ME <- filtered_data %>%
   summarize(mean_correct = mean(correct))
 
 #T-test of Independent Samples
-get_group_means$test_condition
+#get_group_means$test_condition
+
 ###C1: Cue Instructions
 R_CUE = (filter(get_group_means, encoding_instruction == "R"))$grp_mean_correct
 F_CUE = (filter(get_group_means, encoding_instruction == "F"))$grp_mean_correct
 
-CUE_Test = t.test(R_CUE, F_CUE, var.equal = TRUE)
+CUE_Test = t.test(R_CUE, F_CUE, paired=TRUE)
 
 
 ###C2: Stimulus Duration
@@ -244,7 +247,6 @@ ggplot(get_group_means, aes(x=encoding_instruction,y=grp_mean_correct,group=test
   scale_y_continuous(breaks = seq(0.4,1,.1))
 ```
 
-## Results
 The proportion of accurately recognized encoding stimuli was collected for each of the subjects who participated in the pilot study. The recorded proportions were then averaged according to the conditions present in this 2x2x3 within subjects experimental design. A T-test of Independent Samples was conducted on recorded scores for the cue instruction conditions  (R vs F) and  test conditions (Novel vs Exemplar). An analysis of variance was run of the stimuli duration conditions (500ms vs 1000ms vs 2000ms). 
 
 Results of the Independent Samples T-test indicate the presence of a significant main effect of testing conditions. Participants recorded significantly more accurate responses throughout Novel Testing Conditions (M = `r TestCond_ME$mean_correct[2]`; SD = `r sd((filter(get_means, test_condition == "novel"))$mean_correct)`) than for Exemplar Testing Conditions (M = `r TestCond_ME$mean_correct[1]`; SD = `r sd((filter(get_means, test_condition == "exemplar"))$mean_correct)`) t(`r TestCond_Test$parameter`) = `r TestCond_Test$statistic`, p = `r TestCond_Test$p.value` 
@@ -255,6 +257,7 @@ Results of a one way analysis of variance indicates the lack of a significant ef
 
 
 ## Discussion
+
 Statistical analysis of pilot data indicates the presence of a directed forgetting effect for Testing conditions, as participant accuracy in novel conditions is significantly greater compared to participant accuracy in exemplar conditions. A potential explanation of this difference in accuracy lies within the visual scene details information processed by participants during novel conditions versus exemplar conditions. Since novel testing conditions present distractor images from completely different categories than those shown in the encoding phase, less specific or gist information of the visual scenes details suffices. With less visual scene details required for visual scene processing in novel conditions relative to exemplar conditions, more gist information can be processed and stored in long term memory [@ahmadEffectsVaryingPresentation2017] with greater efficiency.  This efficient storage of gist information in long term memory may explain the difference in performance across testing conditions. 
 
 A directed forgetting effect fails to exist for both cue instruction and stimulus presentation duration conditions however, as there are no such significant differences in performance between R or F cues and 500ms, 1000ms or 2000ms. 
