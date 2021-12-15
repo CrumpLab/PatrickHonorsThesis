@@ -68,6 +68,22 @@ for( sub in unique(data$ID)){
 }
 ```
 
+## Determine encoding performance
+
+```{r}
+encoding_data <- data %>%
+  filter(experiment_phase == "study",
+         is.na(correct) == FALSE )
+
+# get mean accuracy in each condition for each subject
+get_means <- encoding_data %>%
+  group_by(ID)%>%
+  summarize(mean_correct = mean(correct))
+
+knitr::kable(get_means)
+
+```
+
 ## Get means across Conditions
 
 ```{r}
