@@ -34,6 +34,7 @@ cat('
 <script src="jspsych-6.3.1/plugins/jspsych-image-keyboard-response.js"></script>
 <script src="jspsych-6.3.1/plugins/jspsych-survey-html-form.js"></script>
 <script src="jspsych-6.3.1/plugins/jspsych-survey-text.js"></script>
+<script src="jspsych-6.3.1/plugins/jspsych-video-button-response.js"></script>
 ')
 ```
 
@@ -430,6 +431,18 @@ var demographics = {
   autofocus: 'test-resp-box'
 };
 
+var movie_instructions = {
+  type: 'video-button-response',
+  stimulus: [
+    'consent/imgs/DF_Movie.mp4'
+  ],
+  width: 700,
+  choices: ['Next'],
+  prompt: `<p> 2 minute video explaining the task.</p>
+           <p> Press button to continue after video </p>`,
+  response_allowed_while_playing: false
+}
+
 var study_instructions = {
   type: "html-keyboard-response",
   stimulus: `
@@ -594,6 +607,7 @@ timeline.push(welcome);
 timeline.push(preload);
 timeline.push(consent);
 timeline.push(demographics);
+timeline.push(movie_instructions);
 timeline.push(study_instructions);
 timeline.push(encoding_phase);
 timeline.push(test_instructions);
