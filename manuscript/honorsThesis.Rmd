@@ -166,6 +166,22 @@ The interaction between encoding instruction and encoding time was significant, 
 
 ## Discussion
 
+<!-- 
+
+1. Restate the pattern of main effects in plain language...Start out with a couple sentences that summarize the pattern of the main effects.
+
+2. State the pattern of the significant interaction
+
+3. discuss whether or not you replicated Ahmad, Tan and Hockley...because our designs were very similar, the only thing we changed was to add picture presentation duration... remind the reader what Ahmad et al found, and how it is different from what we found.
+
+4. Come up with some explanations of why the directed forgetting effect is reversed in the 1000ms condition, and was not detected in the other two conditions.
+
+- maybe there was a coding error...but we checked that, and it wasn't
+- Maybe it's a fluke, and this finding is noise, and wouldn't replicate
+- maybe the random timing of stimulus presentation made it more difficult for people to reliably process the instructional cues...maybe people found the forgetting instruction surprising in the 1000ms condition, which caused them to ...?
+
+-->
+
 Statistical analysis of pilot data indicates the presence of a significant directed forgetting effect for Testing conditions, as participant accuracy in novel conditions is significantly greater compared to participant accuracy in exemplar conditions. A potential explanation of this difference in accuracy lies within the visual scene details information processed by participants during novel conditions versus exemplar conditions. Since novel testing conditions present distractor images from completely different categories than those shown in the encoding phase, less specific or gist information of the visual scenes details suffices. With less visual scene details required for visual scene processing in novel conditions relative to exemplar conditions, more gist information can be processed and stored in long term memory [@ahmadEffectsVaryingPresentation2017] with greater efficiency.  This efficient storage of gist information in long term memory may explain the difference in performance across testing conditions. 
 
 A directed forgetting effect fails to exist for both cue instruction and stimulus presentation duration conditions however, as there are no such significant differences in performance between R or F cues and 500ms, 1000ms or 2000ms. 
