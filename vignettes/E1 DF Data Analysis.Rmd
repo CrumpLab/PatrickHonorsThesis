@@ -72,7 +72,7 @@ knitr::kable(condition_means)
 # print graph
 library(ggplot2)
 
-ggplot(condition_means, aes(x=encoding_instruction,y=grp_mean_correct,group=test_condition, color=test_condition))+
+e1_figure1 <- ggplot(condition_means, aes(x=encoding_instruction,y=grp_mean_correct,group=test_condition, color=test_condition))+
   geom_line()+
   geom_errorbar(aes(ymin = grp_mean_correct-sem,
                     ymax = grp_mean_correct+sem),
@@ -82,6 +82,8 @@ ggplot(condition_means, aes(x=encoding_instruction,y=grp_mean_correct,group=test
   coord_cartesian(ylim=c(.4,1))+
   geom_hline(yintercept=.5)+
   scale_y_continuous(breaks = seq(0.4,1,.1))
+
+e1_figure1
 
 ```
 
@@ -274,4 +276,11 @@ sub_1 <- all_data %>%
   count()
 
 ```
+
+## save environment
+
+```{r}
+save.image("data/E1/E1_data.RData")
+```
+
 

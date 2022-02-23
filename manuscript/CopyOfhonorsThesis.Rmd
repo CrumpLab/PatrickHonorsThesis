@@ -135,10 +135,37 @@ Second thing...describe in detail what happens to a participant from beginning t
 ## Results
 
 ```{r}
-load("../vignettes/data/E1/E1_data.RData")
-```
+###Experiment 1
 
-```{r e1fig, fig.cap = "This is the figure caption."}
+##Plots Interaction Effect between all 3 variables
+read_file('../experiments/DF_pictures_1/jatos_results_20220216174226.txt') %>%
+  # ... split it into lines ...
+  str_split('\n') %>% first() %>%
+  # ... filter empty rows ...
+  discard(function(x) x == '') %>%
+  # ... parse JSON into a data.frame
+  map_dfr(fromJSON, flatten=T) -> all_data
+# select data from test phase
+filtered_data <- all_data %>%
+  filter(experiment_phase == "test")
+# get mean accuracy in each condition for each subject
+subject_means <- filtered_data %>%
+  group_by(ID,
+           encoding_stimulus_time,
+           encoding_instruction,
+           test_condition)%>%
+  summarize(mean_correct = mean(correct))
+# get mean accuracy in each condition across subjects
+condition_means <- subject_means %>%
+  group_by(encoding_stimulus_time,
+           encoding_instruction,
+           test_condition)%>%
+  summarize(grp_mean_correct = mean(mean_correct),
+            sem = sd(mean_correct)/sqrt(length(mean_correct)))
+# print table
+knitr::kable(condition_means)
+# print graph
+library(ggplot2)
 ggplot(condition_means, aes(x=encoding_instruction,y=grp_mean_correct,group=test_condition, color=test_condition))+
   geom_line()+
   geom_errorbar(aes(ymin = grp_mean_correct-sem,
@@ -148,21 +175,131 @@ ggplot(condition_means, aes(x=encoding_instruction,y=grp_mean_correct,group=test
   facet_wrap(~encoding_stimulus_time)+
   coord_cartesian(ylim=c(.4,1))+
   geom_hline(yintercept=.5)+
-  scale_y_continuous(breaks = seq(0.4,1,.1))+
-  theme_classic()
-```
+  scale_y_continuous(breaks = seq(0.4,1,.1))
 
+## Main effect of test condition
+condition_means <- subject_means %>%
+  group_by(test_condition)%>%
+  summarize(grp_mean_correct = mean(mean_correct),
+            sem = sd(mean_correct)/sqrt(length(mean_correct)))
+
+ggplot(condition_means, aes(x=test_condition,y=grp_mean_correct))+
+  geom_bar(stat="identity")+
+  geom_errorbar(aes(ymin = grp_mean_correct-sem,
+                    ymax = grp_mean_correct+sem),
+                width=.2)+
+  geom_point()+
+  coord_cartesian(ylim=c(.4,1))+
+  geom_hline(yintercept=.5)+
+  scale_y_continuous(breaks = seq(0.4,1,.1))
+
+## Main effect of stimulus duration
+condition_means <- subject_means %>%
+  group_by(encoding_stimulus_time)%>%
+  summarize(grp_mean_correct = mean(mean_correct),
+            sem = sd(mean_correct)/sqrt(length(mean_correct)))
+ggplot(condition_means, aes(x=encoding_stimulus_time,y=grp_mean_correct))+
+  geom_bar(stat="identity")+
+  geom_errorbar(aes(ymin = grp_mean_correct-sem,
+                    ymax = grp_mean_correct+sem),
+                width=.2)+
+  geom_point()+
+  coord_cartesian(ylim=c(.4,1))+
+  geom_hline(yintercept=.5)+
+  scale_y_continuous(breaks = seq(0.4,1,.1))
+
+## Main effect of directed forgetting
+condition_means <- subject_means %>%
+  group_by(encoding_instruction)%>%
+  summarize(grp_mean_correct = mean(mean_correct),
+            sem = sd(mean_correct)/sqrt(length(mean_correct)))
+ggplot(condition_means, aes(x=encoding_instruction,y=grp_mean_correct))+
+  geom_bar(stat="identity")+
+  geom_errorbar(aes(ymin = grp_mean_correct-sem,
+                    ymax = grp_mean_correct+sem),
+                width=.2)+
+  geom_point()+
+  coord_cartesian(ylim=c(.4,1))+
+  geom_hline(yintercept=.5)+
+  scale_y_continuous(breaks = seq(0.4,1,.1))
+  
+## 2-way encoding_instruction x encoding_stimulus_time
+condition_means <- subject_means %>%
+  group_by(encoding_stimulus_time,encoding_instruction)%>%
+  summarize(grp_mean_correct = mean(mean_correct),
+            sem = sd(mean_correct)/sqrt(length(mean_correct)))
+
+ggplot(condition_means, aes(x=encoding_stimulus_time,
+                            y=grp_mean_correct,
+                            group=encoding_instruction,
+                            fill=encoding_instruction))+
+  geom_bar(stat="identity", position="dodge")+
+  geom_errorbar(aes(ymin = grp_mean_correct-sem,
+                    ymax = grp_mean_correct+sem),
+                width=.2,
+                position=position_dodge(width=0.9))+
+  coord_cartesian(ylim=c(.4,1))+
+  geom_hline(yintercept=.5)+
+  scale_y_continuous(breaks = seq(0.4,1,.1))
+
+## 2-way Cue Duration & Test Condition  
+condition_means <- subject_means %>%
+  group_by(test_condition,encoding_stimulus_time)%>%
+  summarize(grp_mean_correct = mean(mean_correct),
+            sem = sd(mean_correct)/sqrt(length(mean_correct)))
+
+ggplot(condition_means, aes(x=encoding_stimulus_time,
+                            y=grp_mean_correct,
+                            group=test_condition,
+                            fill=test_condition))+
+  geom_bar(stat="identity", position="dodge")+
+  geom_errorbar(aes(ymin = grp_mean_correct-sem,
+                    ymax = grp_mean_correct+sem),
+                width=.2,
+                position=position_dodge(width=0.9))+
+  coord_cartesian(ylim=c(.4,1))+
+  geom_hline(yintercept=.5)+
+  scale_y_continuous(breaks = seq(0.4,1,.1))
+
+## 2-way Encoding instruction & Test condition  
+condition_means <- subject_means %>%
+  group_by(test_condition,encoding_instruction)%>%
+  summarize(grp_mean_correct = mean(mean_correct),
+            sem = sd(mean_correct)/sqrt(length(mean_correct)))
+
+ggplot(condition_means, aes(x=encoding_instruction,
+                            y=grp_mean_correct,
+                            group=test_condition,
+                            fill=test_condition))+
+  geom_bar(stat="identity", position="dodge")+
+  geom_errorbar(aes(ymin = grp_mean_correct-sem,
+                    ymax = grp_mean_correct+sem),
+                width=.2,
+                position=position_dodge(width=0.9))+
+  coord_cartesian(ylim=c(.4,1))+
+  geom_hline(yintercept=.5)+
+  scale_y_continuous(breaks = seq(0.4,1,.1))
+
+
+##ANOVA
+subject_means$ID <- as.factor(subject_means$ID)
+subject_means$encoding_stimulus_time <- as.factor(subject_means$encoding_stimulus_time)
+subject_means$encoding_instruction <- as.factor(subject_means$encoding_instruction)
+subject_means$test_condition <- as.factor(subject_means$test_condition)
+aov.out <- aov(mean_correct ~ encoding_stimulus_time*encoding_instruction*test_condition + Error(ID/(encoding_stimulus_time*encoding_instruction*test_condition)), subject_means)
+aov_summary <- summary(aov.out)
+print_anova <- papaja::apa_print(aov_summary)
+```
 
 The proportion of accurately recognized encoding stimuli was collected for each of the subjects who participated in the pilot study. The recorded proportions were then averaged according to the conditions present in this 2x2x3 within subjects experimental design. Mean proportion correct for each subject was then submitted to a 2: Cue instruction conditions  (R vs F), by 2: Test conditions (Novel vs Exemplar), by 3: Stimulus duration conditions (500ms vs 1000ms vs 2000ms), repeated measures analysis of variance.
 
+The main effect of cue instruction condition was, `r print_anova$full_result$encoding_instruction`. Mean accuracy in the remember condition was `r mean(subset(subject_means, encoding_instruction == "R")$mean_correct)`, and mean accuracy in the forget condition was `r mean(subset(subject_means, encoding_instruction == "F")$mean_correct)`. 
 
-The main effect of encoding time was, `r E1_ANOVA$full_result$encoding_stimulus_time`. Proportion correct was `r round(duration_means[duration_means$encoding_stimulus_time == "500",]$grp_mean_correct, digits=3)` (`r round(duration_means[duration_means$encoding_stimulus_time == "500",]$sem,digits=3)`), `r round(duration_means[duration_means$encoding_stimulus_time == "1000",]$grp_mean_correct, digits=3)` (`r round(duration_means[duration_means$encoding_stimulus_time == "1000",]$sem,digits=3)`), and `r round(duration_means[duration_means$encoding_stimulus_time == "2000",]$grp_mean_correct, digits=3)` (`r round(duration_means[duration_means$encoding_stimulus_time == "2000",]$sem,digits=3)`) for the 500ms, 1000ms, and 2000ms intervals, respectively.
+The main effect of test condition was, `r print_anova$full_result$test_condition`. Mean accuracy in the novel test condition was `r mean(subset(subject_means, test_condition == "novel")$mean_correct)`, and mean accuracy in the exemplar test condition was `r mean(subset(subject_means, test_condition == "exemplar")$mean_correct)`. 
 
-The main effect of test lure was significant, `r E1_ANOVA$full_result$test_condition`. Proportion correct was higher for novel lures (`r round(test_means[test_means$test_condition == "novel",]$grp_mean_correct, digits=3)`, SEM = `r round(test_means[test_means$test_condition == "novel",]$sem, digits=3)`), compared to exemplar lures (`r round(test_means[test_means$test_condition == "exemplar",]$grp_mean_correct, digits=3)`, SEM = `r round(test_means[test_means$test_condition == "exemplar",]$sem, digits=3)`).
+The main effect of stimulus duration was, `r print_anova$full_result$encoding_stimulus_time`. Mean accuracy in the 500 ms condition was `r mean(subset(subject_means, encoding_stimulus_time == 500)$mean_correct)`, mean accuracy in the 1000 ms condition was `r mean(subset(subject_means, encoding_stimulus_time == 1000)$mean_correct)`, and mean accuracy in the 2000 ms condition was `r `r mean(subset(subject_means, encoding_stimulus_time == 2000)$mean_correct)``. 
 
-The main effect of encoding instruction was, `r E1_ANOVA$full_result$encoding_instruction`. Proportion correct was similar for forget cued (`r round(instruction_means[instruction_means$encoding_instruction == "F",]$grp_mean_correct, digits=3)`, SEM = `r round(instruction_means[instruction_means$encoding_instruction == "F",]$sem, digits=3)`) and remember cued (`r round(instruction_means[instruction_means$encoding_instruction == "R",]$grp_mean_correct, digits=3)`, SEM = `r round(instruction_means[instruction_means$encoding_instruction == "R",]$sem, digits=3)`) items
-
-The interaction between encoding instruction and encoding time was significant, `r E1_ANOVA$full_result$encoding_stimulus_time_encoding_instruction`. To further interpret this interaction, paired sample t-tests were used to assess the directed forgetting effect at each encoding time duration. The directed forgetting effect is taken as the difference between proportion correct for remember minus forget items. At 500 ms, the directed forgetting effect was not detected, `r IT500_report$full_result`. At 1000ms, the directed forgetting effect was reversed, `r IT1000_report$full_result`. And, at 2000 ms, the directed forgetting effect was again not detected, `r IT2000_report$full_result`. The remaining interactions were not significant. 
+The two-way interaction between encoding instruction and test condition was, `r print_anova$full_result$encoding_instruction_test_condition`. The two-way interaction between encoding instruction and stimulus duration was, `r print_anova$full_result$encoding_instruction_encoding_time`. The two-way interaction between test condition and stimulus duration was, `r print_anova$full_result$test_condition_encoding_time`. Finally, the three-way interaction was, `r print_anova$full_result$encoding_instruction_test_condition_encoding_time`.
 
 ## Discussion
 

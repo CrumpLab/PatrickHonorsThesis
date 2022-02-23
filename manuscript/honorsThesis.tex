@@ -3,12 +3,11 @@
 \PassOptionsToPackage{hyphens}{url}
 %
 \documentclass[
-  english,
   man,floatsintext]{apa6}
+\usepackage{amsmath,amssymb}
 \usepackage{lmodern}
-\usepackage{amssymb,amsmath}
-\usepackage{ifxetex,ifluatex}
-\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+\usepackage{iftex}
+\ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
@@ -44,7 +43,7 @@
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 \urlstyle{same} % disable monospaced font for URLs
-\usepackage{graphicx,grffile}
+\usepackage{graphicx}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
 \def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
@@ -70,6 +69,38 @@
   \let\oldsubparagraph\subparagraph
   \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
 \fi
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newlength{\cslentryspacingunit} % times entry-spacing
+\setlength{\cslentryspacingunit}{\parskip}
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+  \let\oldpar\par
+  \def\par{\hangindent=\cslhangindent\oldpar}
+  \fi
+  % set entry spacing
+  \setlength{\parskip}{#2\cslentryspacingunit}
+ }%
+ {}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+\ifLuaTeX
+\usepackage[bidi=basic]{babel}
+\else
+\usepackage[bidi=default]{babel}
+\fi
+\babelprovide[main,import]{english}
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
 % Manuscript styling
 \usepackage{upgreek}
 \captionsetup{font=singlespacing,justification=justified}
@@ -130,12 +161,8 @@
 
 \linenumbers
 \usepackage{csquotes}
-\ifxetex
-  % Load polyglossia as late as possible: uses bidi with RTL langages (e.g. Hebrew, Arabic)
-  \usepackage{polyglossia}
-  \setmainlanguage[]{english}
-\else
-  \usepackage[shorthands=off,main=english]{babel}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
 \fi
 
 \title{The effect of stimulus duration on directed forgetting for pictures}
@@ -178,7 +205,7 @@ The directed forgetting procedure instructs participants to selectively remember
 \subsection{A classic demonstration of directed forgetting}\label{a-classic-demonstration-of-directed-forgetting}}
 
 Bjork (1972) provides a description of traditional directed forgetting procedures. Generally, these procedures present participants with a series of items and cues. There are a number of ways to cue various item sets, including intraserial cuing, postinput cuing and pre-input cuing. The most common method of cuing item sets throughout traditional directed forgetting procedures is intraserial cuing. Intra-serial cuing sequentially presents participants with a set of items and directs them to either forget or remember said item using the cue's instruction. Though the item presented during such experiments may vary, traditional directed-forgetting procedures discussed throughout this paper use word stimuli as the presented items.
-Traditional directed forgetting procedures also determine the presence and magnitude of a directed forgetting effect using either recognition or recall based testing conditions. Testing conditions which operationalize the directed forgetting effect as the accurate recall of \enquote{Forget-cued} stimuli do so by having participants recall as many wordage items as possible, without regard to the cue instructions. Previous research employing this recall-based directed forgetting procedure has identified a directed forgetting effect of 10-15\% for F- cued wordage stimuli, compared to the R- cued wordage stimuli (Weiner \& Reed, 1969). Testing conditions which operationalize the directed forgetting effect as the accurate recognition of \enquote{Forget-cued} stimuli do so by having participants identify as many previously seen wordage items as possible, without regard to the cue instructions.
+Traditional directed forgetting procedures also determine the presence and magnitude of a directed forgetting effect using either recognition or recall based testing conditions. Testing conditions which operationalize the directed forgetting effect as the accurate recall of ``Forget-cued'' stimuli do so by having participants recall as many wordage items as possible, without regard to the cue instructions. Previous research employing this recall-based directed forgetting procedure has identified a directed forgetting effect of 10-15\% for F- cued wordage stimuli, compared to the R- cued wordage stimuli (Weiner \& Reed, 1969). Testing conditions which operationalize the directed forgetting effect as the accurate recognition of ``Forget-cued'' stimuli do so by having participants identify as many previously seen wordage items as possible, without regard to the cue instructions.
 
 \hypertarget{what-do-we-empirically-know-about-directed-forgetting}{%
 \subsection{What do we empirically know about directed forgetting?}\label{what-do-we-empirically-know-about-directed-forgetting}}
@@ -211,12 +238,12 @@ There were 120 images from a total of 16 categorical scenes presented throughout
 
 Alongside the initial 120 images presented during the encoding phase, another 120 images were selected as distractors throughout the testing phase. Sixty of these images were of the same visual scene categories as the images presented during the encoding phase. These images were presented as exemplar distractor testing conditions. The other half of the 120 distractor images were of completely new visual scene categories as the images presented throughout the encoding phase. These distractor images were presented as novel distractor testing conditions. This experiment was programmed in JavaScript using Jspsych and was served onto the web using Jatos. The results of this experiment were analyzed using Rcode.
 
-We used R (Version 4.0.2; R Core Team, 2021) and the R-packages \emph{dplyr} (Version 1.0.7; Wickham et al., 2021), \emph{forcats} (Version 0.5.0; Wickham, 2021a), \emph{ggplot2} (Version 3.3.5; Wickham, 2016), \emph{jsonlite} (Version 1.7.2; Ooms, 2014), \emph{pacman} (Version 0.5.1; Rinker \& Kurkiewicz, 2018), \emph{papaja} (Version 0.1.0.9997; Aust \& Barth, 2020), \emph{purrr} (Version 0.3.4; Henry \& Wickham, 2020), \emph{readr} (Version 2.1.1; Wickham \& Hester, 2021), \emph{stringr} (Version 1.4.0; Wickham, 2019), \emph{tibble} (Version 3.1.6; Müller \& Wickham, 2021), \emph{tidyr} (Version 1.1.4; Wickham, 2021b), \emph{tidyverse} (Version 1.3.0; Wickham, Averick, et al., 2019), and \emph{tinylabels} (Version 0.2.1; Barth, 2021) for all our analyses. We collected five subjects worth of pilot data. For each subject we computed mean recognition accuracy in each condition of the design. Figure 1 shows mean recognition accuracy in each condition, collapsed across each subject.
+We used R (Version 4.1.0; R Core Team, 2021) and the R-packages \emph{dplyr} (Version 1.0.7; Wickham, François, Henry, \& Müller, 2021), \emph{forcats} (Version 0.5.1; Wickham, 2021a), \emph{ggplot2} (Version 3.3.5; Wickham, 2016), \emph{jsonlite} (Version 1.7.2; Ooms, 2014), \emph{pacman} (Version 0.5.1; Rinker \& Kurkiewicz, 2018), \emph{papaja} (Version 0.1.0.9997; Aust \& Barth, 2020), \emph{purrr} (Version 0.3.4; Henry \& Wickham, 2020), \emph{readr} (Version 2.0.2; Wickham \& Hester, 2021), \emph{stringr} (Version 1.4.0; Wickham, 2019), \emph{tibble} (Version 3.1.6; Müller \& Wickham, 2021), \emph{tidyr} (Version 1.2.0; Wickham, 2021b), \emph{tidyverse} (Version 1.3.1; Wickham et al., 2019), and \emph{tinylabels} (Version 0.2.1; Barth, 2021) for all our analyses. We collected five subjects worth of pilot data. For each subject we computed mean recognition accuracy in each condition of the design. Figure 1 shows mean recognition accuracy in each condition, collapsed across each subject.
 
 \hypertarget{design}{%
 \subsubsection{Design}\label{design}}
 
-This experiment consisted of a 2x2x3 completely within-subjects experimental design, with the manipulated variables including the Distractor Test, Cue \& picture encoding time. The distractor testing condition variable possessed two distinct manipulations, being novel testing conditions and exemplar testing conditions. Novel testing conditions display images with previously unseen or unrelated visual scene categories as distractors during the testing phase. Exemplar testing conditions display images with similar visual scene categories as distractors during the testing phase. The picture presentation time variable possessed three distinct manipulations to the duration of images presented during the encoding phase of the experiment. These three manipulations included durations of 500 milliseconds, 1 second and 2 seconds. The cue presentation variable possessed two distinct manipulations. These two manipulations included the \enquote{Remember} cue and the \enquote{Forget} cue. The Remember cue instructs participants to remember the upcoming image stimuli, while the \enquote{Forget} cue instructs participants to selectively forget the upcoming image stimuli.
+This experiment consisted of a 2x2x3 completely within-subjects experimental design, with the manipulated variables including the Distractor Test, Cue \& picture encoding time. The distractor testing condition variable possessed two distinct manipulations, being novel testing conditions and exemplar testing conditions. Novel testing conditions display images with previously unseen or unrelated visual scene categories as distractors during the testing phase. Exemplar testing conditions display images with similar visual scene categories as distractors during the testing phase. The picture presentation time variable possessed three distinct manipulations to the duration of images presented during the encoding phase of the experiment. These three manipulations included durations of 500 milliseconds, 1 second and 2 seconds. The cue presentation variable possessed two distinct manipulations. These two manipulations included the ``Remember'' cue and the ``Forget'' cue. The Remember cue instructs participants to remember the upcoming image stimuli, while the ``Forget'' cue instructs participants to selectively forget the upcoming image stimuli.
 
 \hypertarget{procedure.}{%
 \subsection{Procedure.}\label{procedure.}}
@@ -230,47 +257,21 @@ Upon completion of the encoding phase, participants were then taken to the testi
 \hypertarget{results}{%
 \subsection{Results}\label{results}}
 
-\begin{tabular}{r|l|l|r|r}
-\hline
-encoding\_stimulus\_time & encoding\_instruction & test\_condition & grp\_mean\_correct & sem\\
-\hline
-500 & F & exemplar & 0.5133333 & 0.0278474\\
-\hline
-500 & F & novel & 0.7200000 & 0.0353635\\
-\hline
-500 & R & exemplar & 0.5566667 & 0.0261223\\
-\hline
-500 & R & novel & 0.7100000 & 0.0435098\\
-\hline
-1000 & F & exemplar & 0.6333333 & 0.0399233\\
-\hline
-1000 & F & novel & 0.7633333 & 0.0337276\\
-\hline
-1000 & R & exemplar & 0.5600000 & 0.0337673\\
-\hline
-1000 & R & novel & 0.7066667 & 0.0371184\\
-\hline
-2000 & F & exemplar & 0.5566667 & 0.0294327\\
-\hline
-2000 & F & novel & 0.7500000 & 0.0302290\\
-\hline
-2000 & R & exemplar & 0.5733333 & 0.0248829\\
-\hline
-2000 & R & novel & 0.7666667 & 0.0413378\\
-\hline
-\end{tabular}
-
-\includegraphics{honorsThesis_files/figure-latex/unnamed-chunk-1-1.pdf} \includegraphics{honorsThesis_files/figure-latex/unnamed-chunk-1-2.pdf} \includegraphics{honorsThesis_files/figure-latex/unnamed-chunk-1-3.pdf} \includegraphics{honorsThesis_files/figure-latex/unnamed-chunk-1-4.pdf} \includegraphics{honorsThesis_files/figure-latex/unnamed-chunk-1-5.pdf} \includegraphics{honorsThesis_files/figure-latex/unnamed-chunk-1-6.pdf} \includegraphics{honorsThesis_files/figure-latex/unnamed-chunk-1-7.pdf}
+\begin{figure}
+\centering
+\includegraphics{honorsThesis_files/figure-latex/e1fig-1.pdf}
+\caption{\label{fig:e1fig}This is the figure caption.}
+\end{figure}
 
 The proportion of accurately recognized encoding stimuli was collected for each of the subjects who participated in the pilot study. The recorded proportions were then averaged according to the conditions present in this 2x2x3 within subjects experimental design. Mean proportion correct for each subject was then submitted to a 2: Cue instruction conditions (R vs F), by 2: Test conditions (Novel vs Exemplar), by 3: Stimulus duration conditions (500ms vs 1000ms vs 2000ms), repeated measures analysis of variance.
 
-The main effect of cue instruction condition was, \(F(1, 29) = 0.59\), \(\mathit{MSE} = 0.02\), \(p = .448\), \(\hat{\eta}^2_G = .001\). Mean accuracy in the remember condition was 0.65, and mean accuracy in the forget condition was 0.66.
+The main effect of encoding time was, \(F(2, 58) = 2.78\), \(\mathit{MSE} = 0.02\), \(p = .070\), \(\hat{\eta}^2_G = .010\). Proportion correct was 0.62 (0.02), 0.67 (0.02), and 0.66 (0.02) for the 500ms, 1000ms, and 2000ms intervals, respectively.
 
-The main effect of test condition was, \(F(1, 29) = 67.82\), \(\mathit{MSE} = 0.04\), \(p < .001\), \(\hat{\eta}^2_G = .177\). Mean accuracy in the novel test condition was 0.74, and mean accuracy in the exemplar test condition was 0.57.
+The main effect of test lure was significant, \(F(1, 29) = 67.82\), \(\mathit{MSE} = 0.04\), \(p < .001\), \(\hat{\eta}^2_G = .177\). Proportion correct was higher for novel lures (0.74, SEM = 0.02), compared to exemplar lures (0.57, SEM = 0.01).
 
-The main effect of stimulus duration was, \(F(2, 58) = 2.78\), \(\mathit{MSE} = 0.02\), \(p = .070\), \(\hat{\eta}^2_G = .010\). Mean accuracy in the 500 ms condition was 0.62, mean accuracy in the 1000 ms condition was 0.67, and mean accuracy in the 2000 ms condition was \texttt{r\ 0.66}.
+The main effect of encoding instruction was, \(F(1, 29) = 0.59\), \(\mathit{MSE} = 0.02\), \(p = .448\), \(\hat{\eta}^2_G = .001\). Proportion correct was similar for forget cued (0.66, SEM = 0.02) and remember cued (0.65, SEM = 0.02) items
 
-The two-way interaction between encoding instruction and test condition was, \(F(1, 29) = 0.12\), \(\mathit{MSE} = 0.03\), \(p = .728\), \(\hat{\eta}^2_G = .000\). The two-way interaction between encoding instruction and stimulus duration was, . The two-way interaction between test condition and stimulus duration was, . Finally, the three-way interaction was, .
+The interaction between encoding instruction and encoding time was significant, \(F(2, 58) = 4.40\), \(\mathit{MSE} = 0.02\), \(p = .017\), \(\hat{\eta}^2_G = .011\). To further interpret this interaction, paired sample t-tests were used to assess the directed forgetting effect at each encoding time duration. The directed forgetting effect is taken as the difference between proportion correct for remember minus forget items. At 500 ms, the directed forgetting effect was not detected, \(M = 0.02\), 95\% CI \([-0.03, 0.06]\), \(t(29) = 0.75\), \(p = .458\). At 1000ms, the directed forgetting effect was reversed, \(M = -0.06\), 95\% CI \([-0.11, -0.02]\), \(t(29) = -2.67\), \(p = .012\). And, at 2000 ms, the directed forgetting effect was again not detected, \(M = 0.02\), 95\% CI \([-0.03, 0.06]\), \(t(29) = 0.75\), \(p = .458\). The remaining interactions were not significant.
 
 \hypertarget{discussion}{%
 \subsection{Discussion}\label{discussion}}
@@ -289,77 +290,80 @@ A directed forgetting effect fails to exist for both cue instruction and stimulu
 \setlength{\leftskip}{0.5in}
 
 \hypertarget{refs}{}
-\leavevmode\hypertarget{ref-ahmadEffectsVaryingPresentation2017}{}%
-Ahmad, F. N., Moscovitch, M., \& Hockley, W. E. (2017). Effects of varying presentation time on long-term recognition memory for scenes: Verbatim and gist representations. \emph{Memory \& Cognition}, \emph{45}(3), 390--403. \url{https://doi.org/10/gmgg4q}
+\begin{CSLReferences}{1}{0}
+\leavevmode\vadjust pre{\hypertarget{ref-ahmadEffectsVaryingPresentation2017}{}}%
+Ahmad, F. N., Moscovitch, M., \& Hockley, W. E. (2017). Effects of varying presentation time on long-term recognition memory for scenes: {Verbatim} and gist representations. \emph{Memory \& Cognition}, \emph{45}(3), 390--403. \url{https://doi.org/gmgg4q}
 
-\leavevmode\hypertarget{ref-ahmadDirectedForgettingCategorised2019}{}%
-Ahmad, F. N., Tan, P., \& Hockley, W. E. (2019). Directed forgetting for categorised pictures: Recognition memory for perceptual details versus gist. \emph{Memory}, \emph{27}(7), 894--903. \url{https://doi.org/10/gmgg3g}
+\leavevmode\vadjust pre{\hypertarget{ref-ahmadDirectedForgettingCategorised2019}{}}%
+Ahmad, F. N., Tan, P., \& Hockley, W. E. (2019). Directed forgetting for categorised pictures: Recognition memory for perceptual details versus gist. \emph{Memory}, \emph{27}(7), 894--903. \url{https://doi.org/gmgg3g}
 
-\leavevmode\hypertarget{ref-R-papaja}{}%
-Aust, F., \& Barth, M. (2020). \emph{papaja: Prepare reproducible APA journal articles with R Markdown}. Retrieved from \url{https://github.com/crsh/papaja}
+\leavevmode\vadjust pre{\hypertarget{ref-R-papaja}{}}%
+Aust, F., \& Barth, M. (2020). \emph{{papaja}: {Prepare} reproducible {APA} journal articles with {R Markdown}}. Retrieved from \url{https://github.com/crsh/papaja}
 
-\leavevmode\hypertarget{ref-R-tinylabels}{}%
-Barth, M. (2021). \emph{tinylabels: Lightweight variable labels}. Retrieved from \url{https://github.com/mariusbarth/tinylabels}
+\leavevmode\vadjust pre{\hypertarget{ref-R-tinylabels}{}}%
+Barth, M. (2021). \emph{{tinylabels}: Lightweight variable labels}. Retrieved from \url{https://github.com/mariusbarth/tinylabels}
 
-\leavevmode\hypertarget{ref-bjorkTheoreticalImplicationsDirected1972}{}%
-Bjork, R. A. (1972). Theoretical implications of directed forgetting. In A. W. Melton \& E. Martin (Eds.), \emph{Coding processes in human memory} (pp. 217--235). Washington, DC: Winston.
+\leavevmode\vadjust pre{\hypertarget{ref-bjorkTheoreticalImplicationsDirected1972}{}}%
+Bjork, R. A. (1972). Theoretical implications of directed forgetting. In A. W. Melton \& E. Martin (Eds.), \emph{Coding processes in human memory} (pp. 217--235). {Washington, DC}: {Winston}.
 
-\leavevmode\hypertarget{ref-bjorkModificationShorttermMemory1968}{}%
-Bjork, R. A., Laberge, D., \& Legrand, R. (1968). The modification of short-term memory through instructions to forget. \emph{Psychonomic Science}, \emph{10}(2), 55--56. \url{https://doi.org/10/gmt488}
+\leavevmode\vadjust pre{\hypertarget{ref-bjorkModificationShorttermMemory1968}{}}%
+Bjork, R. A., Laberge, D., \& Legrand, R. (1968). The modification of short-term memory through instructions to forget. \emph{Psychonomic Science}, \emph{10}(2), 55--56. \url{https://doi.org/gmt488}
 
-\leavevmode\hypertarget{ref-bradyVisualLongtermMemory2008}{}%
-Brady, T. F., Konkle, T., Alvarez, G. A., \& Oliva, A. (2008). Visual long-term memory has a massive storage capacity for object details. \emph{Proceedings of the National Academy of Sciences}, \emph{105}(38), 14325--14329. \url{https://doi.org/10/c268jz}
+\leavevmode\vadjust pre{\hypertarget{ref-bradyVisualLongtermMemory2008}{}}%
+Brady, T. F., Konkle, T., Alvarez, G. A., \& Oliva, A. (2008). Visual long-term memory has a massive storage capacity for object details. \emph{Proceedings of the National Academy of Sciences}, \emph{105}(38), 14325--14329. \url{https://doi.org/c268jz}
 
-\leavevmode\hypertarget{ref-EpsteinW1972}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-EpsteinW1972}{}}%
 Epstein, D. W. W., William. Massaro. (1972). Selective search in directed forgetting. \emph{Journal of Experimental Psychology}, \emph{94}(1), 18--24. \url{https://doi.org/10.1037/h0032791}
 
-\leavevmode\hypertarget{ref-R-purrr}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-R-purrr}{}}%
 Henry, L., \& Wickham, H. (2020). \emph{Purrr: Functional programming tools}. Retrieved from \url{https://CRAN.R-project.org/package=purrr}
 
-\leavevmode\hypertarget{ref-Isola2011}{}%
-Isola, P., Xiao, J., Torralba, A., \& Oliva, A. (2011). What makes an image memorable? \emph{IEEE conference on computer vision and pattern recognition (cvpr)}, 145--152.
+\leavevmode\vadjust pre{\hypertarget{ref-Isola2011}{}}%
+Isola, P., Xiao, J., Torralba, A., \& Oliva, A. (2011). What makes an image memorable? \emph{IEEE conference on computer vision and pattern recognition (CVPR)}, 145--152.
 
-\leavevmode\hypertarget{ref-macleodDirectedForgetting1998}{}%
-MacLeod, C. M. (1998). Directed forgetting. In J. M. Golding \& C. M. MacLeod (Eds.), \emph{Intentional forgetting: Interdisciplinary approaches} (pp. 1--57). Mahwah, NJ: Lawrence Erlbaum Associates.
+\leavevmode\vadjust pre{\hypertarget{ref-macleodDirectedForgetting1998}{}}%
+MacLeod, C. M. (1998). Directed forgetting. In J. M. Golding \& C. M. MacLeod (Eds.), \emph{Intentional forgetting: {Interdisciplinary} approaches} (pp. 1--57). {Mahwah, NJ}: {Lawrence Erlbaum Associates}.
 
-\leavevmode\hypertarget{ref-R-tibble}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-R-tibble}{}}%
 Müller, K., \& Wickham, H. (2021). \emph{Tibble: Simple data frames}. Retrieved from \url{https://CRAN.R-project.org/package=tibble}
 
-\leavevmode\hypertarget{ref-R-jsonlite}{}%
-Ooms, J. (2014). The jsonlite package: A practical and consistent mapping between json data and r objects. \emph{arXiv:1403.2805 {[}stat.CO{]}}. Retrieved from \url{https://arxiv.org/abs/1403.2805}
+\leavevmode\vadjust pre{\hypertarget{ref-R-jsonlite}{}}%
+Ooms, J. (2014). The jsonlite package: A practical and consistent mapping between JSON data and r objects. \emph{arXiv:1403.2805 {[}Stat.CO{]}}. Retrieved from \url{https://arxiv.org/abs/1403.2805}
 
-\leavevmode\hypertarget{ref-R-base}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-R-base}{}}%
 R Core Team. (2021). \emph{R: A language and environment for statistical computing}. Vienna, Austria: R Foundation for Statistical Computing. Retrieved from \url{https://www.R-project.org/}
 
-\leavevmode\hypertarget{ref-R-pacman}{}%
-Rinker, T. W., \& Kurkiewicz, D. (2018). \emph{pacman: Package management for R}. Buffalo, New York. Retrieved from \url{http://github.com/trinker/pacman}
+\leavevmode\vadjust pre{\hypertarget{ref-R-pacman}{}}%
+Rinker, T. W., \& Kurkiewicz, D. (2018). \emph{{pacman}: {P}ackage management for {R}}. Buffalo, New York. Retrieved from \url{http://github.com/trinker/pacman}
 
-\leavevmode\hypertarget{ref-standingLearning10000Pictures1973}{}%
-Standing, L. (1973). Learning 10000 pictures. \emph{The Quarterly Journal of Experimental Psychology}, \emph{25}(2), 207--222. \url{https://doi.org/10/fnjhs5}
+\leavevmode\vadjust pre{\hypertarget{ref-standingLearning10000Pictures1973}{}}%
+Standing, L. (1973). Learning 10000 pictures. \emph{The Quarterly Journal of Experimental Psychology}, \emph{25}(2), 207--222. \url{https://doi.org/fnjhs5}
 
-\leavevmode\hypertarget{ref-WetzelC1977}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-WetzelC1977}{}}%
 Wetzel, R. E., Douglas C. Hunt. (1977). Cue delay and the role of rehearsal in directed forgetting. \emph{Journal of Experimental Psychology: Human Learning and Memory}, \emph{3}(2), 233--245. \url{https://doi.org/10.1037/0278-7393.3.2.233}
 
-\leavevmode\hypertarget{ref-R-ggplot2}{}%
-Wickham, H. (2016). \emph{Ggplot2: Elegant graphics for data analysis}. Springer-Verlag New York. Retrieved from \url{https://ggplot2.tidyverse.org}
+\leavevmode\vadjust pre{\hypertarget{ref-R-ggplot2}{}}%
+Wickham, H. (2016). \emph{ggplot2: Elegant graphics for data analysis}. Springer-Verlag New York. Retrieved from \url{https://ggplot2.tidyverse.org}
 
-\leavevmode\hypertarget{ref-R-stringr}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-R-stringr}{}}%
 Wickham, H. (2019). \emph{Stringr: Simple, consistent wrappers for common string operations}. Retrieved from \url{https://CRAN.R-project.org/package=stringr}
 
-\leavevmode\hypertarget{ref-R-forcats}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-R-forcats}{}}%
 Wickham, H. (2021a). \emph{Forcats: Tools for working with categorical variables (factors)}. Retrieved from \url{https://CRAN.R-project.org/package=forcats}
 
-\leavevmode\hypertarget{ref-R-tidyr}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-R-tidyr}{}}%
 Wickham, H. (2021b). \emph{Tidyr: Tidy messy data}. Retrieved from \url{https://CRAN.R-project.org/package=tidyr}
 
-\leavevmode\hypertarget{ref-R-tidyverse}{}%
-Wickham, H., Averick, M., Bryan, J., Chang, W., McGowan, L. D., François, R., \ldots{} Yutani, H. (2019). Welcome to the tidyverse. \emph{Journal of Open Source Software}, \emph{4}(43), 1686. \url{https://doi.org/10.21105/joss.01686}
+\leavevmode\vadjust pre{\hypertarget{ref-R-tidyverse}{}}%
+Wickham, H., Averick, M., Bryan, J., Chang, W., McGowan, L. D., François, R., \ldots{} Yutani, H. (2019). Welcome to the {tidyverse}. \emph{Journal of Open Source Software}, \emph{4}(43), 1686. \url{https://doi.org/10.21105/joss.01686}
 
-\leavevmode\hypertarget{ref-R-dplyr}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-R-dplyr}{}}%
 Wickham, H., François, R., Henry, L., \& Müller, K. (2021). \emph{Dplyr: A grammar of data manipulation}. Retrieved from \url{https://CRAN.R-project.org/package=dplyr}
 
-\leavevmode\hypertarget{ref-R-readr}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-R-readr}{}}%
 Wickham, H., \& Hester, J. (2021). \emph{Readr: Read rectangular text data}. Retrieved from \url{https://CRAN.R-project.org/package=readr}
+
+\end{CSLReferences}
 
 \endgroup
 
