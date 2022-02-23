@@ -1,0 +1,169 @@
+---
+title: "Pilot analysis"
+author: "Matt Crump"
+date: "10/5/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This is a pilot analysis of 5 subjects worth of data collected from a pilot version of this experiment. Data collected 12/2021.
+
+## Load libraries
+
+```{r}
+library(pacman)
+library(dplyr)
+library(tidyverse)
+library(jsonlite)
+```
+
+
+
+## Import Data
+
+```{r}
+# Read the text file from JATOS ...
+read_file('jatos_results_20211206204357.txt') %>%
+  # ... split it into lines ...
+  str_split('\n') %>% first() %>%
+  # ... filter empty rows ...
+  discard(function(x) x == '') %>%
+  # ... parse JSON into a data.frame
+  map_dfr(fromJSON, flatten=T) -> data
+```
+
+## Pre-processing
+
+Note: In the pilot experiment script, the stimulus duration time was encoded to the data file during the encoding phase, but not during the recognition memory test phase. The following R code chunk, analyzes the encoding phase for each participant, and adds the stimulus duration time factor to the recognition memory test phase data.
+
+```{r}
+
+# add stimulus encoding factor
+
+all_data <- data.frame()
+for( sub in unique(data$ID)){
+  
+  temp_data <- data %>%
+    filter(ID==sub)
+  
+  temp_study <- temp_data %>%
+    filter(experiment_phase == "study")
+  
+  temp_test <- temp_data %>%
+    filter(experiment_phase == "test")
+  
+  encoding_time <- c()
+  for(i in 1: dim(temp_test)[1]){
+    im_name <- temp_test[i,]$study_item_image_name
+    get_trial <- temp_study %>%
+      filter(image_name == im_name)
+    encoding_time[i]<-get_trial$stimulus_time
+  }
+  
+  temp_test <- cbind(temp_test,encoding_time)
+  all_data <- rbind(all_data,temp_test)
+}
+```
+
+## Get means across Conditions
+
+```{r}
+# select data from test phase
+filtered_data <- all_data %>%
+  filter(experiment_phase == "test")
+
+# get mean accuracy in each condition for each subject
+get_means <- filtered_data %>%
+  group_by(ID,encoding_time,encoding_instruction,test_condition)%>%
+  summarize(mean_correct = mean(correct))
+
+# get mean accuracy in each condition across subjects
+get_group_means <- get_means %>%
+  group_by(encoding_time,encoding_instruction,test_condition)%>%
+  summarize(grp_mean_correct = mean(mean_correct),
+            sem = sd(mean_correct)/sqrt(length(mean_correct)))
+
+# print table
+knitr::kable(get_group_means)
+
+# print graph
+library(ggplot2)
+
+ggplot(get_group_means, aes(x=encoding_instruction,y=grp_mean_correct,group=test_condition, color=test_condition))+
+  geom_line()+
+  geom_errorbar(aes(ymin = grp_mean_correct-sem,
+                    ymax = grp_mean_correct+sem),
+                width=.2)+
+  geom_point()+
+  facet_wrap(~encoding_time)+
+  coord_cartesian(ylim=c(.4,1))+
+  geom_hline(yintercept=.5)+
+  scale_y_continuous(breaks = seq(0.4,1,.1))
+
+```
+
+## Main effect of test condition
+
+```{r}
+
+get_group_means <- get_means %>%
+  group_by(test_condition)%>%
+  summarize(grp_mean_correct = mean(mean_correct),
+            sem = sd(mean_correct)/sqrt(length(mean_correct)))
+
+ggplot(get_group_means, aes(x=test_condition,y=grp_mean_correct))+
+  geom_bar(stat="identity")+
+  geom_errorbar(aes(ymin = grp_mean_correct-sem,
+                    ymax = grp_mean_correct+sem),
+                width=.2)+
+  geom_point()+
+  coord_cartesian(ylim=c(.4,1))+
+  geom_hline(yintercept=.5)+
+  scale_y_continuous(breaks = seq(0.4,1,.1))
+
+```
+
+## Main effect of stimulus duration
+
+```{r}
+
+get_group_means <- get_means %>%
+  group_by(encoding_time)%>%
+  summarize(grp_mean_correct = mean(mean_correct),
+            sem = sd(mean_correct)/sqrt(length(mean_correct)))
+
+ggplot(get_group_means, aes(x=encoding_time,y=grp_mean_correct))+
+  geom_bar(stat="identity")+
+  geom_errorbar(aes(ymin = grp_mean_correct-sem,
+                    ymax = grp_mean_correct+sem),
+                width=.2)+
+  geom_point()+
+  coord_cartesian(ylim=c(.4,1))+
+  geom_hline(yintercept=.5)+
+  scale_y_continuous(breaks = seq(0.4,1,.1))
+
+```
+
+## Main effect of directed forgetting
+
+```{r}
+
+get_group_means <- get_means %>%
+  group_by(encoding_instruction)%>%
+  summarize(grp_mean_correct = mean(mean_correct),
+            sem = sd(mean_correct)/sqrt(length(mean_correct)))
+
+ggplot(get_group_means, aes(x=encoding_instruction,y=grp_mean_correct))+
+  geom_bar(stat="identity")+
+  geom_errorbar(aes(ymin = grp_mean_correct-sem,
+                    ymax = grp_mean_correct+sem),
+                width=.2)+
+  geom_point()+
+  coord_cartesian(ylim=c(.4,1))+
+  geom_hline(yintercept=.5)+
+  scale_y_continuous(breaks = seq(0.4,1,.1))
+
+```

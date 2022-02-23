@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Matthew Crump" />
+
+
+<title>Audio Test</title>
+
+<script src="index_files/header-attrs-2.6/header-attrs.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+      .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+
+
+
+
+
+
+<link rel="stylesheet" href="jspsych-6.3.0/css/jspsych.css" type="text/css" />
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Audio Test</h1>
+<h4 class="author">Matthew Crump</h4>
+
+
+
+<script src="jspsych-6.3.0/jspsych.js"></script>
+<script src="jspsych-6.3.0/plugins/jspsych-html-keyboard-response.js"></script>
+<script src="jspsych-6.3.0/plugins/jspsych-audio-keyboard-response.js"></script>
+<script src="jspsychr/jspsychr.js"></script>
+<script> var  test_stimuli =  [
+  {
+    "stimulus": "flute/A3.mp3",
+    "data": [
+      "flute"
+    ]
+  },
+  {
+    "stimulus": "flute/A4.mp3",
+    "data": [
+      "flute"
+    ]
+  },
+  {
+    "stimulus": "flute/A5.mp3",
+    "data": [
+      "flute"
+    ]
+  },
+  {
+    "stimulus": "flute/C3.mp3",
+    "data": [
+      "flute"
+    ]
+  },
+  {
+    "stimulus": "flute/C4.mp3",
+    "data": [
+      "flute"
+    ]
+  },
+  {
+    "stimulus": "flute/C5.mp3",
+    "data": [
+      "flute"
+    ]
+  },
+  {
+    "stimulus": "flute/C6.mp3",
+    "data": [
+      "flute"
+    ]
+  },
+  {
+    "stimulus": "flute/E3.mp3",
+    "data": [
+      "flute"
+    ]
+  },
+  {
+    "stimulus": "flute/E4.mp3",
+    "data": [
+      "flute"
+    ]
+  },
+  {
+    "stimulus": "flute/E5.mp3",
+    "data": [
+      "flute"
+    ]
+  }
+] ; </script>
+<script type="text/javascript">
+/* Note this is a js (javascript) code chunk
+
+/* experiment parameters */
+var reps_per_trial_type = 1;
+
+/*set up welcome block*/
+var welcome = {
+  type: "html-keyboard-response",
+  stimulus: "Welcome to the experiment. Press any key to begin."
+};
+
+/*set up instructions block*/
+var instructions = {
+  type: "html-keyboard-response",
+  stimulus: "<p>In this task, you will hear a sound on each trial. Press O or N after hearing the sound. </p>",
+  post_trial_gap: 1000
+};
+
+/* defining test timeline */
+var test = {
+  timeline: [{
+    type: 'audio-keyboard-response',
+    choices: ["o","n"],
+    trial_duration: 2000,
+    response_allowed_while_playing: true,
+    response_ends_trial: true,
+    stimulus: jsPsych.timelineVariable('stimulus'),
+    data: jsPsych.timelineVariable('data'),
+  }],
+  timeline_variables: test_stimuli,
+  sample: {type: 'fixed-repetitions', size: reps_per_trial_type}
+};
+
+/*defining debriefing block*/
+var debrief = {
+  type: "html-keyboard-response",
+  stimulus: "<p> Thank you for participating </p>"
+};
+
+/*set up experiment structure*/
+var timeline = [];
+timeline.push(welcome);
+timeline.push(instructions);
+timeline.push(test);
+timeline.push(debrief);
+
+/*start experiment*/
+jsPsych.init({
+    timeline: timeline,
+    on_finish: function() {
+        jsPsych.data.displayData();
+    }
+});
+</script>
+
+
+
+<!-- code folding -->
+
+
+
+</body>
+</html>

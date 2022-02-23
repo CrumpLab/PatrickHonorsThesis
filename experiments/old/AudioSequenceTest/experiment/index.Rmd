@@ -1,0 +1,116 @@
+---
+title: "JS PSYCh TOP GUN test"
+author: "Matthew Crump"
+output:
+  html_document:
+    mathjax: null
+    highlight: null
+    theme: null
+    css: jspsych-6.3.0/css/jspsych.css
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message=FALSE, warning=FALSE)
+# load the plugin scripts in plugins.html which is included in the header.
+```
+
+```{r}
+# load jspsych and plugin scripts
+# note: this is an r code chunk
+library(htmltools)
+tagList(
+tags$script(src='jspsych-6.3.0/jspsych.js'),
+tags$script(src='jspsych-6.3.0/plugins/jspsych-html-keyboard-response.js'),
+tags$script(src='jspsych-6.3.0/plugins/jspsych-audio-keyboard-response.js'),
+tags$script(src='jspsychr/jspsychr.js')
+)
+```
+
+```{r, results="asis"}
+# Define stimuli in R, output as script 
+# note: this is an r code chunk, with results = "asis"
+library(jspsychr)
+library(dplyr)
+
+equal_temperment <- 2^((0:12)/12)
+c_scale <- c(1,3,5,6,8,10,12,13)
+c_notes <- equal_temperment[c_scale]
+top_gun <- c(1,5,5,4,3,4,3,2,2,1,2,3,2,3,4,3,2,3,2)
+timing <- c(1,1,1,.5,.5,.5,.5,1,1,.5,.5,1,.5,.5,1,.5,.5,.5,1)
+my_notes <- c_notes[top_gun]
+
+#define dataframe for stimuli
+my_stims <- data.frame(stimulus  = rep('instruments/EGuitar_C3.mp3'),
+                       myrate = my_notes,
+                       timing = timing,
+                       instrument = "EGuitar")
+
+# create json object from dataframe
+stimulus_json <- stimulus_df_to_json(df = my_stims,
+                                     stimulus = "stimulus",
+                                     data = c("instrument","myrate","timing"))
+
+# write json object to script
+write_to_script(stimulus_json,"test_stimuli")
+```
+
+
+```{js}
+/* Note this is a js (javascript) code chunk
+
+/* experiment parameters */
+var reps_per_trial_type = 1;
+
+/*set up welcome block*/
+var welcome = {
+  type: "html-keyboard-response",
+  stimulus: "Welcome to the experiment. Press any key to begin."
+};
+
+/*set up instructions block*/
+var instructions = {
+  type: "html-keyboard-response",
+  stimulus: "<p>In this task, you will hear a sound on each trial. Press O or N after hearing the sound. </p>",
+  post_trial_gap: 1000
+};
+
+/* defining test timeline */
+var test = {
+  timeline: [{
+    type: 'audio-keyboard-response',
+    choices: ["o","n"],
+    trial_duration: function() {
+      return 1000*jsPsych.timelineVariable('data').timing;
+    },
+    response_allowed_while_playing: false,
+    response_ends_trial: false,
+    stimulus: jsPsych.timelineVariable('stimulus'),
+    data: jsPsych.timelineVariable('data'),
+  }],
+  timeline_variables: test_stimuli,
+  randomize_order: false
+  /*sample: {type: 'fixed-repetitions', size: reps_per_trial_type}*/
+};
+
+/*defining debriefing block*/
+var debrief = {
+  type: "html-keyboard-response",
+  stimulus: "<p> Thank you for participating </p>"
+};
+
+/*set up experiment structure*/
+var timeline = [];
+timeline.push(welcome);
+timeline.push(instructions);
+timeline.push(test);
+timeline.push(debrief);
+
+/*start experiment*/
+jsPsych.init({
+    timeline: timeline,
+    on_finish: function() {
+        jsPsych.data.displayData();
+    }
+});
+```

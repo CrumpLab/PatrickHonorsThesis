@@ -1,0 +1,15 @@
+---
+title: "Audio Test"
+author: "Matthew Crump"
+date: "8/16/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+Testing jspsych audio plugins
+
+Use the index.Rmd in the experiment folder to write the script to run the experiment.
+
