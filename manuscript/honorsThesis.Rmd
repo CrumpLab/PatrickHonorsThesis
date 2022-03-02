@@ -182,11 +182,49 @@ Potential explanations of the reversed directed forgetting effect observed in Ex
 - Maybe it's a fluke, and this finding is noise, and wouldn't replicate
 - maybe the random timing of stimulus presentation made it more difficult for people to reliably process the instructional cues...maybe people found the forgetting instruction surprising in the 1000ms condition, which caused them to ...?
 
--->
+
 
 Statistical analysis of pilot data indicates the presence of a significant directed forgetting effect for Testing conditions, as participant accuracy in novel conditions is significantly greater compared to participant accuracy in exemplar conditions. A potential explanation of this difference in accuracy lies within the visual scene details information processed by participants during novel conditions versus exemplar conditions. Since novel testing conditions present distractor images from completely different categories than those shown in the encoding phase, less specific or gist information of the visual scenes details suffices. With less visual scene details required for visual scene processing in novel conditions relative to exemplar conditions, more gist information can be processed and stored in long term memory [@ahmadEffectsVaryingPresentation2017] with greater efficiency.  This efficient storage of gist information in long term memory may explain the difference in performance across testing conditions. 
 
 A directed forgetting effect fails to exist for both cue instruction and stimulus presentation duration conditions however, as there are no such significant differences in performance between R or F cues and 500ms, 1000ms or 2000ms. 
+
+-->
+
+# Experiment 2
+
+Explain and motivate the reason for conducting experiment 2. How is it different from E1. Give a brief description of the manipulation...what we expect to find.
+
+## Method
+
+### Participants.
+
+<!-- 
+
+All participants in this experiment were from the Amazon Turks online website. In total, 30 subjects participated in Experiment 1. Participants received monetary compensation for participation in this experiment according to current NYC minimum wage rates. All procedures issued by the Brooklyn College Institutional Review Board were followed and consent was received from all subjects throughout each phase of this experiment.
+
+-->
+
+### Stimuli and Apparatus.
+
+The stimuli and apparatus were the same as Experiment 1, except for the following changes (if any).
+
+### Design 
+
+<!-- This experiment consisted of a 2x2x3 completely within-subjects experimental design, with the manipulated variables including the Distractor Test, Cue & picture encoding time. The distractor testing condition variable possessed two distinct manipulations, being novel testing conditions and exemplar testing conditions. Novel testing conditions display images with previously unseen or unrelated visual scene categories as distractors during the testing phase. Exemplar testing conditions display images with similar visual scene categories as distractors during the testing phase. The picture presentation time variable possessed three distinct manipulations to the duration of images presented during the encoding phase of the experiment. These three manipulations included durations of 500 milliseconds, 1 second and 2 seconds. The cue presentation variable possessed two distinct manipulations. These two manipulations included the "Remember" cue and the "Forget" cue. The Remember cue instructs participants to remember the upcoming image stimuli, while the "Forget" cue instructs participants to selectively forget the upcoming image stimuli.  
+
+-->
+
+## Procedure. 
+
+The procedure for Experiment 2 was the same as Experiment 1, except for the following details. Describe details if any.
+
+<!--Participants used the Just Another Tool for Online Studies (JAVOS) site to access the experiment. As stated earlier, there are two major phases of the experiment. These phases are the encoding phase and the testing phase. Prior to the encoding phase however, participants were presented with a consent form. Upon completion of the consent form, they were presented with encoding phase instructions. 
+
+During the encoding phase, participants are presented with the cue instructions followed by the images. The cues instruct participants to either selectively remember or selectively forget the upcoming image stimuli at random. There are a total of 120 cue instructions, which are presented for a duration of (XXXX) seconds. The image stimuli presented during the encoding phase are composed of the 120 images from a total of 16 categorical scenes subsetted from the larger database of 320 images with a total of 24 categorical scenes. These 120 images are presented at random at durations of either 500 milliseconds, 1 second or 2 seconds. The presentation times of the images will also be displayed at random. Seeing as how the presentation of a single cue instruction followed by a single image consists of a single trial, and there are 120 cue instructions and 120 images to be presented, then there will be 120 trials throughout the encoding phase of this experiment. 
+
+Upon completion of the encoding phase, participants were then taken to the testing phase. Similarly to the encoding phase, during the beginning of the testing phase participants were given instructions of completing the testing phase. During the testing phase, participants are given a series of trials where they are shown either an exemplar distractor image or a novel distractor image alongside an image previously seen during the encoding phase and are tasked with selecting the encoding image. There are 60 novel distractor images and 60 exemplar distractor images, each of which were presented at random throughout the testing procedure. 
+
+-->
 
 
 
