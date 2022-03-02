@@ -277,6 +277,29 @@ sub_1 <- all_data %>%
 
 ```
 
+## Demographics
+
+```{r}
+library(tidyr)
+
+demographics <- all_data %>%
+  filter(trial_type == "survey-html-form") %>%
+  select(ID,response) %>%
+  unnest_wider(response) %>%
+  mutate(age = as.numeric(age))
+
+age_demographics <- demographics %>%
+  summarize(mean_age = mean(age),
+            sd_age = sd(age),
+            min_age = min(age),
+            max_age = max(age))
+
+factor_demographics <- apply(demographics[-1], 2, table)
+
+```
+
+A total of `r dim(demographics)[1]` participants were recruited from Amazon's Mechanical Turk. Mean age was `r round(age_demographics$mean_age, digits=1)` (range = `r age_demographics$min_age` to `r age_demographics$max_age` ). There were `r as.numeric(factor_demographics$sex["female"])` females, and `r as.numeric(factor_demographics$sex["male"])` males. There were `r as.numeric(factor_demographics$hand["Right"])` right-handed participants, and `r as.numeric(factor_demographics$hand["Both"])+as.numeric(factor_demographics$hand["Left"])` left or both handed participants. `r as.numeric(factor_demographics$vision["Normal"])` participants reported normal vision, and `r as.numeric(factor_demographics$vision["Corrected"])` participants reported corrected-to-normal vision. `r as.numeric(factor_demographics$english["First"])` participants reported english as a first language, and `r as.numeric(factor_demographics$english["Second"])` participants reported english as a second language.
+
 ## save environment
 
 ```{r}
