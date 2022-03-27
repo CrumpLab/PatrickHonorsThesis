@@ -201,9 +201,12 @@ A directed forgetting effect fails to exist for both cue instruction and stimulu
 
 # Experiment 2
 
-we are going to block stimulus encoding time...1/3 trials 500 ms, 1/3 trials 1000ms, 1/3 trials 2000ms. We will randomly order the blocks across participants.
+A potential explanation of experiment 1’s failure to replicate Ahamd, Tan & Hockley () is the randomized manipulations to stimulus presentation duration from 500ms, 1000ms and 2000ms. Experiment 2 resolves this using block stimulus encoding conditions with three total blocks. Stimulus encoding duration consists of 500ms, 1000ms and 2000ms for 1/3 of block conditions each. These blocks are randomized across participants. Block designs allow attempted replications of both Ahmad Tan & Hockley and Experiment 1. By doing this, one can determine whether effects detailed by Ahmad Tan and Hockley, and experiment 1 are observed only in conditions specific to each experiment, thus reducing the generalizability of their results.  
+A directed forgetting effect intensity similar to that observed by Ahmad et al. is expected for 2000ms blocked conditions, as it is an identical replication of their methodology. Similarly, we expect to find progressive lower DFE magnitudes from 2000ms blocks to 1000ms blocks to 500ms blocks. Finally, we expect to observe higher DFE magnitudes for novel test conditions than exemplar test conditions, as novel conditions require the recognition of the lowest gistidual details.
 
-Explain and motivate the reason for conducting experiment 2. How is it different from E1. Give a brief description of the manipulation...what we expect to find.
+<!-- we are going to block stimulus encoding time...1/3 trials 500 ms, 1/3 trials 1000ms, 1/3 trials 2000ms. We will randomly order the blocks across participants. -->
+
+<!-- Explain and motivate the reason for conducting experiment 2. How is it different from E1. Give a brief description of the manipulation...what we expect to find. -->
 
 ## Method
 
