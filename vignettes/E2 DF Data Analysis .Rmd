@@ -1,5 +1,5 @@
 ---
-title: "E1 Data analysis"
+title: "E2 Data analysis"
 author: "Matt Crump"
 date: "10/5/2021"
 output: html_document
@@ -26,7 +26,7 @@ library(jsonlite)
 
 ```{r}
 # Read the text file from JATOS ...
-read_file('data/E2/jatos_results_20220328135032.txt') %>%
+read_file('data/E2/jatos_results_20220329195903.txt') %>%
   # ... split it into lines ...
   str_split('\n') %>% first() %>%
   # ... filter empty rows ...
@@ -303,7 +303,7 @@ A total of `r dim(demographics)[1]` participants were recruited from Amazon's Me
 ## save environment
 
 ```{r}
-save.image("data/E1/E1_data.RData")
+save.image("data/E2/E2_data.RData")
 ```
 
 
