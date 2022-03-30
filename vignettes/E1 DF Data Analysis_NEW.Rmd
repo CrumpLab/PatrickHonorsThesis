@@ -26,7 +26,7 @@ library(jsonlite)
 
 ```{r}
 # Read the text file from JATOS ...
-read_file('data/E1/jatos_results_20220330174346.txt') %>%
+read_file('data/E1/jatos_results_20220330235250.txt') %>%
   # ... split it into lines ...
   str_split('\n') %>% first() %>%
   # ... filter empty rows ...
@@ -175,23 +175,22 @@ condition_means <- subject_means %>%
 # print table
 knitr::kable(condition_means)
 
-e1_figure1 <- ggplot(condition_means, aes(x=encoding_instruction,
+e1_figure1 <- ggplot(condition_means, aes(x=test_condition,
                                           y=grp_mean_correct,
-                                          group=test_condition, 
-                                          color=test_condition))+
-  geom_line()+
+                                          group=encoding_instruction, 
+                                          fill=encoding_instruction))+
+  geom_bar(stat="identity", position="dodge")+
   geom_errorbar(aes(ymin = grp_mean_correct-sem,
                     ymax = grp_mean_correct+sem),
-                width=.2)+
-  geom_point()+
+                width=.9, position=position_dodge2(width = 0.5, padding = 0.5))+
   facet_wrap(~encoding_stimulus_time)+
   coord_cartesian(ylim=c(.4,1))+
   geom_hline(yintercept=.5)+
   scale_y_continuous(breaks = seq(0.4,1,.1))+
-  theme_classic(base_size=14)+
+  theme_classic(base_size=12)+
   ylab("Proportion Correct")+
-  xlab("Encoding Instruction")+
-  scale_color_discrete(name = "Lure Type") +
+  xlab("Lure Type")+
+  scale_fill_discrete(name = " Encoding \n Instruction") +
   ggtitle("1A: Proportion Correct by Stimulus Encoding Duration, \n Encoding Instruction, and Lure Type")
 
 e1_figure1
@@ -199,26 +198,31 @@ e1_figure1
 ```
 
 
-## 2-way encoding_instruction x encoding_stimulus_time
+## Encoding_instruction x encoding_stimulus_time
 
 ```{r}
 instruction_time <- subject_means %>%
+  mutate(encoding_stimulus_time = as.factor(encoding_stimulus_time)) %>%
   group_by(encoding_stimulus_time,encoding_instruction)%>%
   summarize(grp_mean_correct = mean(mean_correct),
             sem = sd(mean_correct)/sqrt(length(mean_correct)))
 
 ggplot(instruction_time, aes(x=encoding_stimulus_time,
-                            y=grp_mean_correct,
-                            group=encoding_instruction,
-                            fill=encoding_instruction))+
+                             y=grp_mean_correct,
+                             group=encoding_instruction,
+                             fill=encoding_instruction))+
   geom_bar(stat="identity", position="dodge")+
   geom_errorbar(aes(ymin = grp_mean_correct-sem,
                     ymax = grp_mean_correct+sem),
-                width=.2,
-                position=position_dodge(width=0.9))+
+                width=.9, position=position_dodge2(width = 0.5, padding = 0.5))+
   coord_cartesian(ylim=c(.4,1))+
   geom_hline(yintercept=.5)+
-  scale_y_continuous(breaks = seq(0.4,1,.1))
+  scale_y_continuous(breaks = seq(0.4,1,.1))+
+  theme_classic(base_size=12)+
+  ylab("Proportion Correct")+
+  xlab("Stimulus Encoding Duration")+
+  scale_fill_discrete(name = " Encoding \n Instruction") +
+  ggtitle("1A: Proportion Correct by Stimulus Encoding Duration \n and Encoding Instruction")
 
 ```
 
@@ -300,12 +304,12 @@ The interaction between encoding instruction and encoding time was significant, 
 
 ```{r}
 # select data from test phase
-filtered_data <- all_data %>%
+filtered_data_rt <- all_data %>%
   filter(experiment_phase == "test",
          correct == TRUE)
 
 # get mean accuracy in each condition for each subject
-subject_means <- filtered_data %>%
+subject_means_rt <- filtered_data_rt %>%
   group_by(ID,
            encoding_stimulus_time,
            encoding_instruction,
@@ -313,7 +317,7 @@ subject_means <- filtered_data %>%
   summarize(mean_RT = mean(rt))
 
 # get mean accuracy in each condition across subjects
-condition_means <- subject_means %>%
+condition_means_rt <- subject_means_rt %>%
   group_by(encoding_stimulus_time,
            encoding_instruction,
            test_condition)%>%
@@ -321,122 +325,41 @@ condition_means <- subject_means %>%
             sem = sd(mean_RT)/sqrt(length(mean_RT)))
 
 # print table
-knitr::kable(condition_means)
+knitr::kable(condition_means_rt)
 
-# print graph
-library(ggplot2)
-
-e1_figure1_rt <- ggplot(condition_means, aes(x=encoding_instruction,y=grp_mean_RT,group=test_condition, color=test_condition))+
-  geom_line()+
+e1_figure1_rt <- ggplot(condition_means_rt, aes(x=test_condition,
+                                          y=grp_mean_RT,
+                                          group=encoding_instruction, 
+                                          fill=encoding_instruction))+
+  geom_bar(stat="identity", position="dodge")+
   geom_errorbar(aes(ymin = grp_mean_RT-sem,
                     ymax = grp_mean_RT+sem),
-                width=.2)+
-  geom_point()+
+                width=.9, position=position_dodge2(width = 0.5, padding = 0.5))+
   facet_wrap(~encoding_stimulus_time)+
   coord_cartesian(ylim=c(1000,2000))+
-  scale_y_continuous(breaks = seq(0,3000,250))
+  theme_classic(base_size=12)+
+  ylab("Mean RT (ms)")+
+  xlab("Lure Type")+
+  scale_fill_discrete(name = " Encoding \n Instruction") +
+  ggtitle("1A: Proportion Correct by Stimulus Encoding Duration, \n Encoding Instruction, and Lure Type")
 
 e1_figure1_rt
 
 ```
 
-## Main effect of test condition
-
-```{r}
-
-test_means_rt <- subject_means %>%
-  group_by(test_condition)%>%
-  summarize(grp_mean_RT = mean(mean_RT),
-            sem = sd(mean_RT)/sqrt(length(mean_RT)))
-
-ggplot(test_means, aes(x=test_condition,y=grp_mean_RT))+
-  geom_bar(stat="identity")+
-  geom_errorbar(aes(ymin = grp_mean_RT-sem,
-                    ymax = grp_mean_RT+sem),
-                width=.2)+
-  geom_point()+
-  coord_cartesian(ylim=c(1000,2000))+
-  scale_y_continuous(breaks = seq(0,3000,250))
-
-
-```
-
-## Main effect of stimulus duration
-
-```{r}
-
-duration_means_rt <- subject_means %>%
-  group_by(encoding_stimulus_time)%>%
-  summarize(grp_mean_RT = mean(mean_RT),
-            sem = sd(mean_RT)/sqrt(length(mean_RT)))
-
-ggplot(duration_means, aes(x=encoding_stimulus_time,y=grp_mean_RT))+
-  geom_bar(stat="identity")+
-  geom_errorbar(aes(ymin = grp_mean_RT-sem,
-                    ymax = grp_mean_RT+sem),
-                width=.2)+
-  geom_point()+
-  coord_cartesian(ylim=c(1000,2000))+
-  scale_y_continuous(breaks = seq(0,3000,250))
-
-```
-
-## Main effect of directed forgetting
-
-```{r}
-
-instruction_means <- subject_means %>%
-  group_by(encoding_instruction)%>%
-  summarize(grp_mean_RT = mean(mean_RT),
-            sem = sd(mean_RT)/sqrt(length(mean_RT)))
-
-ggplot(instruction_means, aes(x=encoding_instruction,y=grp_mean_RT))+
-  geom_bar(stat="identity")+
-  geom_errorbar(aes(ymin = grp_mean_RT-sem,
-                    ymax = grp_mean_RT+sem),
-                width=.2)+
-  geom_point()+
-  coord_cartesian(ylim=c(1000,2000))+
-  scale_y_continuous(breaks = seq(0,3000,250))
-
-```
-
-## 2-way encoding_instruction x encoding_stimulus_time
-
-```{r}
-instruction_time <- subject_means %>%
-  group_by(encoding_stimulus_time,encoding_instruction)%>%
-  summarize(grp_mean_RT = mean(mean_RT),
-            sem = sd(mean_RT)/sqrt(length(mean_RT)))
-
-ggplot(instruction_time, aes(x=encoding_stimulus_time,
-                            y=grp_mean_RT,
-                            group=encoding_instruction,
-                            fill=encoding_instruction))+
-  geom_bar(stat="identity", position="dodge")+
-  geom_errorbar(aes(ymin = grp_mean_RT-sem,
-                    ymax = grp_mean_RT+sem),
-                width=.2,
-                position=position_dodge(width=0.9))+
-  coord_cartesian(ylim=c(1000,2000))+
-  scale_y_continuous(breaks = seq(0,3000,250))
-
-```
-
-
 ## ANOVA
 
 ```{r}
 
-subject_means$ID <- as.factor(subject_means$ID)
+subject_means_rt$ID <- as.factor(subject_means_rt$ID)
 
-subject_means$encoding_stimulus_time <- as.factor(subject_means$encoding_stimulus_time)
+subject_means_rt$encoding_stimulus_time <- as.factor(subject_means_rt$encoding_stimulus_time)
 
-subject_means$encoding_instruction <- as.factor(subject_means$encoding_instruction)
+subject_means_rt$encoding_instruction <- as.factor(subject_means_rt$encoding_instruction)
 
-subject_means$test_condition <- as.factor(subject_means$test_condition)
+subject_means_rt$test_condition <- as.factor(subject_means_rt$test_condition)
 
-aov.out_rt <- aov(mean_RT ~ encoding_stimulus_time*encoding_instruction*test_condition + Error(ID/(encoding_stimulus_time*encoding_instruction*test_condition)), subject_means)
+aov.out_rt <- aov(mean_RT ~ encoding_stimulus_time*encoding_instruction*test_condition + Error(ID/(encoding_stimulus_time*encoding_instruction*test_condition)), subject_means_rt)
 
 summary(aov.out_rt)
 
@@ -457,7 +380,7 @@ E1_ANOVA_RT$full_result$encoding_instruction
 E1_ANOVA_RT$full_result$encoding_stimulus_time_encoding_instruction
 
 ## simple effects
-IT500 <- subject_means %>%
+IT500 <- subject_means_rt %>%
   filter(encoding_stimulus_time == "500") %>%
   group_by(ID,encoding_instruction) %>%
   summarize(grp_mean_RT = mean(mean_RT))
