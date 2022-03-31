@@ -232,11 +232,8 @@ ggplot(instruction_time, aes(x=encoding_stimulus_time,
 ```{r}
 
 subject_means$ID <- as.factor(subject_means$ID)
-
 subject_means$encoding_stimulus_time <- as.factor(subject_means$encoding_stimulus_time)
-
 subject_means$encoding_instruction <- as.factor(subject_means$encoding_instruction)
-
 subject_means$test_condition <- as.factor(subject_means$test_condition)
 
 aov.out <- aov(mean_correct ~ encoding_stimulus_time*encoding_instruction*test_condition + Error(ID/(encoding_stimulus_time*encoding_instruction*test_condition)), subject_means)
