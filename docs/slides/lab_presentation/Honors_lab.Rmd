@@ -1,0 +1,86 @@
+---
+title: 'The effect of stimulus duration on directed forgetting for pictures'
+author: "Patrick Ihejirika"
+date: "Last compiled `r format(Sys.time(), '%m/%d/%y')`"
+output:
+  revealjs::revealjs_presentation:
+    includes:
+      in_header: header.html
+    self_contained: false
+    theme: white
+    transition: fade
+    center: false
+    incremental: true
+    css: style.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                      fig.align = "center",
+                      out.width = "80%")
+library(fontawesome)
+```
+
+# What is directed forgetting?
+
+- Directed forgetting Effect (DFE) is the ability to selectively remember and forget events
+
+- Has been shown to exist across a number of stimuli, but what about inherently memorable stimuli (i.e. image stimuli)
+
+# Ahmad, Tan & Hockley (2019)
+
+>- Investigated participant's ability to selectively remember or forget images.
+
+:::: {.row}
+::: {.col-md-6}
+
+```{r}
+knitr::include_graphics("imgs/Tan_methods.png")
+```
+
+:::
+
+::: {.col-md-6}
+
+
+```{r}
+knitr::include_graphics("imgs/Test_Conditions.png")
+```
+
+:::
+::::
+
+# Ahmad, Tan & Hockley (2019) Results
+
+```{r, out.width = "50%"}
+knitr::include_graphics("imgs/Tan_results.png")
+```
+
+>- Small directed forgetting effect for exemplar lures
+
+
+# Experiment 1 
+
+>- To identify which conditions increase DFE magnitudes for images, we weakened the image stimuli memorability. 
+
+# Predictions
+
+# Methods
+
+# Results
+
+# Discussion
+
+# Experiment 2
+
+# Methods
+
+# Results
+
+# General Discussion
+
+# Conclusion
+
+# Thank you {.middle .center}
+
+
