@@ -2,7 +2,8 @@ pandoc: '2.16'
 pkgdown: 2.0.1
 pkgdown_sha: ~
 articles:
-  Pilot_E1_analysis: Pilot_E1_analysis.html
-  som: som.html
-last_built: 2022-02-23T19:00Z
+  E1_DF_Mixed: E1_DF_Mixed.html
+  E2_DF_Blocked: E2_DF_Blocked.html
+  power_analysis: power_analysis.html
+last_built: 2022-03-31T18:56Z
 

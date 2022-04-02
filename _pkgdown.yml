@@ -18,22 +18,26 @@ navbar:
     manuscript:
       text: Manuscript
       menu:
-      - text: APA6 PDF
-        href: manuscript/manuscript.pdf
+      - text: The effect of stimulus duration on directed forgetting for pictures
+        href: manuscript/honorsThesis.pdf
     articles:
       text: Supplementary
       menu:
-      - text: Supplementary
-        href: articles/som.html
+      - text: Power analysis
+        href: articles/power_analysis.html
+      - text: E1 Mixed
+        href: articles/E1_DF_Mixed.html
+      - text: E2 Blocked
+        href: articles/E2_DF_Blocked.html
     slides:
       text: Slides
       menu:
-      - text: R Markdown slides
-        href: slides/slides.html
+      - text: Lab Presentation
+        href: slides/lab_presentation/Honors_lab.html
     posters:
       text: Posters
       menu:
-      - text: Conference 2019
+      - text: coming soon
         href: posters/poster.html
     reference:
       text: Functions
@@ -44,9 +48,8 @@ navbar:
       href: https://github.com/user/repo
 
 home:
-  strip_header: true
   links:
-    - text: A link to X
+    - text: Github Repository
       href: some link
   Authors:
     - text: Author 1

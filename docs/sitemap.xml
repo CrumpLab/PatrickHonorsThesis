@@ -4,13 +4,19 @@
     <loc>/404.html</loc>
   </url>
   <url>
-    <loc>/articles/Pilot_E1_analysis.html</loc>
+    <loc>/LICENSE.html</loc>
+  </url>
+  <url>
+    <loc>/articles/E1_DF_Mixed.html</loc>
+  </url>
+  <url>
+    <loc>/articles/E2_DF_Blocked.html</loc>
   </url>
   <url>
     <loc>/articles/index.html</loc>
   </url>
   <url>
-    <loc>/articles/som.html</loc>
+    <loc>/articles/power_analysis.html</loc>
   </url>
   <url>
     <loc>/authors.html</loc>
@@ -20,5 +26,41 @@
   </url>
   <url>
     <loc>/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>/slides/lab_presentation/Honors_lab.html</loc>
+  </url>
+  <url>
+    <loc>/slides/lab_presentation/Honors_lab_files/reveal.js-3.3.0.1/demo.html</loc>
+  </url>
+  <url>
+    <loc>/slides/lab_presentation/Honors_lab_files/reveal.js-3.3.0.1/index.html</loc>
+  </url>
+  <url>
+    <loc>/slides/lab_presentation/Honors_lab_files/reveal.js-3.3.0.1/plugin/markdown/example.html</loc>
+  </url>
+  <url>
+    <loc>/slides/lab_presentation/Honors_lab_files/reveal.js-3.3.0.1/plugin/notes/notes.html</loc>
+  </url>
+  <url>
+    <loc>/slides/lab_presentation/Honors_lab_files/reveal.js-3.3.0.1/plugin/notes-server/notes.html</loc>
+  </url>
+  <url>
+    <loc>/slides/lab_presentation/Honors_lab_files/reveal.js-3.3.0.1/test/test-markdown-element-attributes.html</loc>
+  </url>
+  <url>
+    <loc>/slides/lab_presentation/Honors_lab_files/reveal.js-3.3.0.1/test/test-markdown-slide-attributes.html</loc>
+  </url>
+  <url>
+    <loc>/slides/lab_presentation/Honors_lab_files/reveal.js-3.3.0.1/test/test-markdown.html</loc>
+  </url>
+  <url>
+    <loc>/slides/lab_presentation/Honors_lab_files/reveal.js-3.3.0.1/test/test-pdf.html</loc>
+  </url>
+  <url>
+    <loc>/slides/lab_presentation/Honors_lab_files/reveal.js-3.3.0.1/test/test.html</loc>
+  </url>
+  <url>
+    <loc>/slides/lab_presentation/header.html</loc>
   </url>
 </urlset>
