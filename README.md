@@ -5,13 +5,19 @@
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
-## The effect of stimulus duration on directed forgetting for pictures
+## Try and forget this image: The role of stimulus duration in directed forgetting for natural scenes
 
 Author: Patrick Ihejirika | Advisor: Matt Crump
 
 Undergraduate Honor's Thesis submitted in partial fulfillment of the requirements for graduating with Departmental Honors in Psychology.
 
 ## Abstract
+
+How useful would it be for you to selectively forget events that you choose to forget? Directed forgetting research is a tool used to investigate limitations on deliberate forgetting abilities. In a directed forgetting task people encode individual items and are instructed (cued) to either remember or forget them. A directed forgetting effect is observed when performance on a memory test is higher for remember-cued items than forget-cued items. Directed forgetting effects have been reproduced numerous times, and are commonly demonstrated in tasks using lists of words as the items to be remembered and forgotten (Epstein, 1969). Much less is known about directed forgetting for more memorable stimuli like images, pictures, and visual scenes. Ahmad, Tan & Hockley showed that a weak directed forgetting effect can in fact be observed for image stimuli (2019).
+
+This honors thesis project investigates a general memory strength hypothesis of directed forgetting for pictures. According to this hypothesis, pictures are difficult to intentionally forget because they are encoded so well that attempts to forget the information are ineffective. I propose that weakening the encoding strength of images could allow intentional forgetting processes to operate more effectively, causing an increased directed forgetting effect. 
+My experiments used the same general procedures as Ahmad, Tan, and Hockley (2019). In two experiments (n=45 each), I reduced encoding strength by manipulating stimulus duration during encoding (2000 ms [original amount], 1000ms, or 500 ms per picture). I predicted that greater directed forgetting would be observed as stimulus duration decreased. I discuss the results of my two experiments in relation to the general memory strength hypothesis.
+
 
 ## Project Information
 
