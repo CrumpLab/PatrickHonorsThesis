@@ -15,7 +15,8 @@ knitr::opts_chunk$set(
 ```
 
 This project currently involves two experiments. The design and motivation for each are described in the honors thesis manuscript. 
-If you are interested in participating in the experiments, then you can try them out here. There is no compensation for participation except for our appreciation that you have contributed to our research project. If you agree to participate and you complete the experiment, then your data will added to the public data repository in this project. All data that is collected is completely anonymous. 
+
+If you are interested in participating in the experiments, then you can try them out here. There is no compensation for participation except for our appreciation that you have contributed to our research project. If you agree to participate and you complete the experiment, then your data will added to the public data repository in this project. All data that is collected is completely anonymous.
 
 We plan to leave these links here on a permanent basis. This will allow us to assess how the results stabilize across large groups of participants. 
 
