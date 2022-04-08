@@ -2,6 +2,8 @@
 
 template:
   bootstrap: 5
+  params:
+    ganalytics: G-628G5YKZRM
 
 navbar:
   structure:
