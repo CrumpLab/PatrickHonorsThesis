@@ -22,4 +22,6 @@ You have completed the task. Thank you for participating.
 
 Your completion code will be displayed on the next page.
 
+If you completed this study on SONA, then click the button to receive your participation credit.
+
 <button type="button" id="continue" class="jspsych-btn">Continue</button>

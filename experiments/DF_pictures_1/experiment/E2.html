@@ -5,7 +5,7 @@
 <meta name="generator" content="pandoc" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
 <meta name="author" content="Matt Crump" />
-<title>DF1</title>
+<title>DF2</title>
 <link rel="stylesheet" href="css/custom.css" />
 <link rel="stylesheet" href="jspsych-6.3.1/css/jspsych.css" />
 <script src="E2_files/header-attrs-2.11/header-attrs.js"></script>
@@ -242,6 +242,8 @@ http://learnjsdata.com/
 
 </script>
 <script type="text/javascript">
+
+
 /* Run Experiment
 Define jsPsych plugins
 Initialize and run
@@ -541,12 +543,33 @@ var run_jatos = true;
 
 if(run_jatos === true){
   jatos.onLoad(function() {
+  
+    /* check for SONA system participant */
+    if (window.jatos && jatos.urlQueryParameters.SONA_ID) {
+        console.log('Sona information is available');
+        sona_participant_id = jatos.urlQueryParameters.SONA_ID;
+    } else {
+        console.log('Sona information is not available (setting value to -1)');
+        sona_participant_id = -1;
+    }
+    console.log('sona_participant_id = ' + sona_participant_id);
+
+  
     jsPsych.init({
         timeline: timeline,
         show_progress_bar: true,
         on_finish: function() {
           var resultJson = jsPsych.data.get().json();
-          jatos.submitResultData(resultJson, jatos.startNextComponent);
+          
+          /*PermaLink save and return */
+          if(sona_participant_id == -1){
+            jatos.submitResultData(resultJson, jatos.endStudyAndRedirect("https://www.crumplab.com/PatrickHonorsThesis/articles/Experiments.html"));
+          }
+          
+          /*Credit SONA system participant */
+          if(sona_participant_id != -1){
+           jatos.submitResultData(resultJson,jatos.endStudyAndRedirect("https://brooklyncollege.sona-systems.com/webstudy_credit.aspx?experiment_id=439&credit_token=796bf56490554454ae5aaddd5f4c9e1d&survey_code=[sonaId]"));
+          }
         },
         on_trial_start: function(trial) {
           if(run_simulation == true){
