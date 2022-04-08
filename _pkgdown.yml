@@ -45,11 +45,9 @@ navbar:
     github:
       text: source code
       icon: fa-lg fa-github
-      href: https://github.com/user/repo
+      href: https://github.com/CrumpLab/PatrickHonorsThesis
 
 home:
   links:
     - text: Github Repository
-      href: some link
-  Authors:
-    - text: Author 1
+      href: https://github.com/CrumpLab/PatrickHonorsThesis
