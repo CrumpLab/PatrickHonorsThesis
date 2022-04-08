@@ -1,5 +1,8 @@
 # see https://pkgdown.r-lib.org/articles/pkgdown.html for yml help
 
+template:
+  bootstrap: 5
+
 navbar:
   structure:
     left:
@@ -7,10 +10,11 @@ navbar:
     - manuscript
     - articles
     - slides
-    - posters
+    - poster
     - experiments
+    right:
     - reference
-    right: github
+    - github
   components:
     home:
       icon: fa-home fa-lg
@@ -34,16 +38,19 @@ navbar:
       menu:
       - text: Lab Presentation
         href: slides/lab_presentation/Honors_lab.html
-    posters:
-      text: Posters
+    poster:
+      text: Poster
       menu:
-      - text: coming soon
+      - text: BC Science Day 2022
         href: posters/poster.html
+    experiments:
+      text: Experiments
+      href: articles/Experiments.html
     reference:
-      text: Functions
+      text: Dev
       href: reference/index.html
     github:
-      text: source code
+      text:
       icon: fa-lg fa-github
       href: https://github.com/CrumpLab/PatrickHonorsThesis
 
