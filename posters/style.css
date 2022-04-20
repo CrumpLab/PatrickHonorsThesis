@@ -5,6 +5,11 @@
   --darkaccent: #F0027F;
 }
 
+.row {
+  margin-right: 0!important;
+  margin-left: 0!important;
+}
+
 img {
   margin-top: 0!important;
 }
@@ -29,7 +34,7 @@ p {
 }
 
 .logo_right {
-  width: 5%!important;
+  /*width: 5%!important;*/
   background-image: linear-gradient(to top, #fff, 30%, var(--primary))!important;
 }
 
@@ -66,8 +71,8 @@ font-weight: normal;
 .draw-border {
   border: 1mm solid var(--darkaccent);
   border-radius: 4mm 0mm;
-  margin-left: 4mm;
-  margin-right: -4mm;
+  margin-left: 0mm;
+  margin-right: 0mm;
   margin-top: 2mm;
   margin-bottom: 4mm;
   padding-right: -2mm;

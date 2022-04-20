@@ -10,7 +10,7 @@ affiliation:
   - num: 1
     address: Department of Psychology, Brooklyn College of CUNY
 column_numbers: 3
-logoright_name: imgs/qr_thesis.png
+logoright_name: imgs/qr_more.png
 logoleft_name: imgs/BC_logo.png
 poster_height: "15.75in" #"38in"
 poster_width: "28in" #"45in"
@@ -141,7 +141,7 @@ power$power_analysis$prediction_graph +
 ::::
 
 
-# Methods: Replication with stimulus duration manipulation
+# Methods: We conducted a replication of Ahmad et al. (2019) and manipulated stimulus duration during encoding to reduce picture memorability
 
 :::: {.row}
 ::: {.col-md-6}
@@ -160,12 +160,10 @@ power$power_analysis$prediction_graph +
 :::
 ::::
 
-```{r}
+```{r, out.width="100%"}
 knitr::include_graphics("imgs/Methods.png")
 ```
 
-
-<br>
 
 # Results: Inconsistent directed forgetting effects
 
@@ -218,7 +216,7 @@ E2$Accuracy$graphs$figure+
 
 
 
-## Poster information
+## Project website <https://www.crumplab.com/PatrickHonorsThesis/>
 
 This poster was prepared as a computationally reproducible project using [vertical](https://www.crumplab.com/vertical/) [@vuorre2021sharing], and several libraries from the open-source community.
 

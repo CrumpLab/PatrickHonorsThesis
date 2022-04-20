@@ -8,7 +8,7 @@
 <title>DF2</title>
 <link rel="stylesheet" href="css/custom.css" />
 <link rel="stylesheet" href="jspsych-6.3.1/css/jspsych.css" />
-<script src="E2_files/header-attrs-2.11/header-attrs.js"></script>
+<script src="E2_files/header-attrs-2.13/header-attrs.js"></script>
 </head>
 <body>
 <script src="stimlist.js"></script>
@@ -532,7 +532,7 @@ timeline.push(encoding_phase_1);
 timeline.push(encoding_phase_2);
 timeline.push(encoding_phase_3);
 timeline.push(test_instructions);
-timeline.push(testing_phase);
+timeline.push(testing_phase); 
 timeline.push(end_task_questions);
 timeline.push(debrief_mturk);
 
@@ -548,6 +548,7 @@ if(run_jatos === true){
     if (window.jatos && jatos.urlQueryParameters.SONA_ID) {
         console.log('Sona information is available');
         sona_participant_id = jatos.urlQueryParameters.SONA_ID;
+        jsPsych.data.addProperties({ID: sona_participant_id});
     } else {
         console.log('Sona information is not available (setting value to -1)');
         sona_participant_id = -1;
@@ -568,7 +569,7 @@ if(run_jatos === true){
           
           /*Credit SONA system participant */
           if(sona_participant_id != -1){
-           jatos.submitResultData(resultJson,jatos.endStudyAndRedirect("https://brooklyncollege.sona-systems.com/webstudy_credit.aspx?experiment_id=439&credit_token=796bf56490554454ae5aaddd5f4c9e1d&survey_code=[sonaId]"));
+           jatos.submitResultData(resultJson,jatos.endStudyAndRedirect("https://brooklyncollege.sona-systems.com/webstudy_credit.aspx?experiment_id=439&credit_token=796bf56490554454ae5aaddd5f4c9e1d&survey_code="+sona_participant_id));
           }
         },
         on_trial_start: function(trial) {
