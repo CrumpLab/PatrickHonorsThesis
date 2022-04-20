@@ -1,5 +1,5 @@
 ---
-title: Stimulus duration and directed forgetting for pictures of natural scenes
+title: 'Try and forget this image: The role of stimulus duration in directed forgetting for natural scenes'
 author:
   - name: Patrick Ihejirika
     affil: 1
@@ -10,11 +10,11 @@ affiliation:
   - num: 1
     address: Department of Psychology, Brooklyn College of CUNY
 column_numbers: 3
-logoright_name: https&#58;//raw.githubusercontent.com/brentthorne/posterdown/master/images/betterhexlogo.png
+logoright_name: imgs/qr_more.png
 logoleft_name: imgs/BC_logo.png
 poster_height: "15.75in" #"38in"
 poster_width: "28in" #"45in"
-title_textsize: "350%"
+title_textsize: "280%"
 author_textsize: "170%"
 affiliation_textsize: "150%"
 body_textsize: "175%"
@@ -46,13 +46,13 @@ library(ggplot2)
 
 Directed forgetting research investigates people's ability to intentionally forget information [@macleodDirectedForgetting1998]. For example, in a memory task for words participants are instructed to remember some words and forget others for a later memory test. A directed forgetting effect is observed when people show worse memory for the words they attempted to forget. Directed forgetting tasks often use word stimuli, and the limitations of intentional forgetting for other kinds of information remain unclear.
 
-# Can people intentionally forget memorable picture information?
-
 We are investigating directed forgetting for pictures. The picture-superiority effect suggests that pictures are inherently more memorable than words [@gehring1976recognition].  @standingLearning10000Pictures1973 showed that people had little difficulty in memorizing over 10,000 pictures.
+
+
+# Can people intentionally forget memorable picture information?
 
 ## Prior work: Limited Directed Forgetting for Pictures
 
-@ahmadDirectedForgettingCategorised2019 found **limited directed forgetting for pictures** of natural scenes and everyday objects.
 
 :::: {.row}
 ::: {.col-md-6 .draw-border}
@@ -96,9 +96,6 @@ ggplot(tan_et_al,aes(x=Lure.Type, y=Proportion.Correct,fill=Encoding.Cue))+
 
 - They found a small directed forgetting effect. 
 - The effect was only observed for items given a more difficult recognition test, involving a similar (exemplar) lure.
-
-## What factors determine intentional forgetting of pictures?
-
 
 :::
 ::::
@@ -144,7 +141,7 @@ power$power_analysis$prediction_graph +
 ::::
 
 
-# Methods: Replication with stimulus duration manipulation
+# Methods: We conducted a replication of Ahmad et al. (2019) and manipulated stimulus duration during encoding to reduce picture memorability
 
 :::: {.row}
 ::: {.col-md-6}
@@ -163,12 +160,10 @@ power$power_analysis$prediction_graph +
 :::
 ::::
 
-```{r}
+```{r, out.width="100%"}
 knitr::include_graphics("imgs/Methods.png")
 ```
 
-
-<br>
 
 # Results: Inconsistent directed forgetting effects
 
@@ -221,7 +216,7 @@ E2$Accuracy$graphs$figure+
 
 
 
-## Poster information
+## Project website <https://www.crumplab.com/PatrickHonorsThesis/>
 
 This poster was prepared as a computationally reproducible project using [vertical](https://www.crumplab.com/vertical/) [@vuorre2021sharing], and several libraries from the open-source community.
 

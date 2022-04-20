@@ -44,7 +44,7 @@ navbar:
       text: Poster
       menu:
       - text: BC Science Day 2022
-        href: posters/poster.html
+        href: posters/Science_day_2022.pdf
     experiments:
       text: Experiments
       href: articles/Experiments.html
