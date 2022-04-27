@@ -7,7 +7,7 @@ author:
     affiliation   : "1"
     corresponding : yes    # Define only one corresponding author
     address       : "Postal address"
-    email         : "my@email.com"
+    email         : "pihej121@gmail.com"
 
 affiliation:
   - id            : "1"
@@ -17,12 +17,10 @@ authornote: |
   This paper is submitted as partial fulfillment for PSYC 5001.
 
 abstract: |
-  Write your abstract here.
-  
+  How useful would it be for you to selectively forget events that you choose to forget? Directed forgetting research is a tool used to investigate limitations on deliberate forgetting abilities. In a directed forgetting task people encode individual items and are instructed (cued) to either remember or forget them. A directed forgetting effect is observed when performance on a memory test is higher for remember-cued items than forget-cued items. Directed forgetting effects have been reproduced numerous times, and are commonly demonstrated in tasks using lists of words as the items to be remembered and forgotten (Epstein, 1969). Much less is known about directed forgetting for more memorable stimuli like images, pictures, and visual scenes. Ahmad, Tan & Hockley showed that a weak directed forgetting effect can in fact be observed for image stimuli (2019). This poster investigates a general memory strength hypothesis of directed forgetting for pictures. According to this hypothesis, pictures are difficult to intentionally forget because they are encoded so well that attempts to forget the information are ineffective. I propose that weakening the encoding strength of images could allow intentional forgetting processes to operate more effectively, causing an increased directed forgetting effect. My experiments used the same general procedures as Ahmad, Tan, and Hockley (2019). In two experiments (n=45 each), I reduced encoding strength by manipulating stimulus duration during encoding (2000 ms [original amount], 1000ms, or 500 ms per picture). I predicted that greater directed forgetting would be observed as stimulus duration decreased. I discuss the results of my two experiments in relation to the general memory strength hypothesis.
   <!-- https://tinyurl.com/ybremelq -->
   
 keywords          : "Directed Forgetting, Picture Memory"
-wordcount         : "X"
 
 bibliography      : ["r-references.bib","Directed_Forgetting.bib"]
 
@@ -211,20 +209,12 @@ The main effect of lure type was significant, `r E1$RT$apa_print$full_result$tes
 The remaining main effects and interactions were not significant.
 
 ## Discussion
-Resulting analysis of data gathered fails to identify several main effects between the experimental condition of Stimuli Duration and mean proportion and between  Encoding Instruction and the mean proportion. Differences in Mean Proportion between both Remember vs Forget Encoding Instruction and  500ms vs 1000ms vs 2000ms Stimuli Duration were not significant, while the difference in Mean Proportion between Novel and Exemplar Test conditions was significant. The existence of a main effect of Mean Proportion Correct for test conditions, but not for Encoding Instructions fails to indicate the existence of a directed forgetting effect in Experiment 1. Resulting analysis also indicates a significant interaction effect between encoding instructions and stimulus duration time. We failed to identify a directed forgetting effect specifically at 500ms and 2000ms, yet managed to identify a reversed directed forgetting effect at 1000ms. 
-
-The procedure followed for this experiment was identical with that of Ahmad, Tan and Hockley, with the exception of manipulating the duration of stimuli presentation from 500ms, 1000ms and 2000ms. Experiment 1 fails to replicate the results observed by Ahmad et al (). Ahmad, Tan and Hockley identified main effects of encoding instruction and test condition on Average Proportion of Correct Responses, along with an interaction effect between both variables. 
-
-Potential explanations of the reversed directed forgetting effect observed in Experiment 1 were explored. These explanations included programming errors which led to mislabeling of the remember-cued and forget-cued encoding instructions for the 1000ms encoding duration condition. After revising the code however, this explanation fails to remain accurate. Alternative explanations propose that the observed results were a consequence of experimental noise which fails to replicate, random timing of stimulus presentation making it more difficult for participants to reliably process the encoding cues and making the forgetting instructions surprising. Each of these alternative explanations are further explored in Experiments 2 and 3 of this paper respectively with the goal of understanding the observed reversed directed forgetting effect.
-
-Discuss as many specific differences between our design and their design, which might account for the failed replication
-
-mixed encoding time for pictures
-had to press R or F key after encoding instruction...could have disrupted people from doing the actual task of remembering vs forgetting
-we used randomly chosen indoor and outdoor categories, they used a fixed set
-
-
-
+Resulting analysis of data gathered fails to identify several main effects between the experimental conditions of Stimuli Duration and Encoding Instruction on the mean proportion of correctly recognized visual scenes, yet identifies a main effect of lure condition. 
+There also appears to be a strong interaction effect between encoding duration and lure condition.Results of experiment 1 fails to replicate the findings of @ahmadDirectedForgettingCategorised2019 at 2000ms, and also fails to support the initial prediction of increased effect magnitudes for exemplar conditions from 2000ms to 1000ms to finally 500ms. Several reversed directed forgetting effects were observed for exemplar lures at 1000ms and 500ms conditions. Potential explanations of the reversed directed forgetting effect observed in Experiment 1 were explored. 
+These explanations included experimental programming errors and noise yielded from the random encoding image durations. 
+Potential proramming errors includes the mislabeling of remember-cued and forget-cued encoding instructions for the 1000ms encoding duration condition. After revising the code however, this explanation is shown to be incorrect.
+According to the previous research exploring the effects of suprise on memory, noise yielded from the random presentation of images at 2000ms, 1000ms and 500ms durations would make more difficult for participants to reliably process the encoding cues. This explanation is explored in experiment 2, as I present identical visual scenes in blocks of 500ms, 1000ms and 2000ms. The incorporation of a blocked procedure will allow me to further replicate experimental conditions of @ahmadDirectedForgettingCategorised2019, to observe whether we will receive similar results.
+Additional data of reaction time was also recorded and analyzed. Significant main effects of encoding instuctions and lure conditions were the only observed main effects. 
 <!-- 
 
 1. Restate the pattern of main effects in plain language...Start out with a couple sentences that summarize the pattern of the main effects.
@@ -282,7 +272,7 @@ This experiment consisted of a 2x2x3 completely within-subjects experimental des
 
 The procedure for Experiment 2 was the same as Experiment 1, except for the presentation of image stimuli in blocks of 500ms, 1000ms and 2000ms.Participants used the Just Another Tool for Online Studies (JAVOS) site to access the experiment. As stated earlier, there are two major phases of the experiment. These phases are the encoding phase and the testing phase. Prior to the encoding phase however, participants were presented with a consent form. Upon completion of the consent form, they were presented with encoding phase instructions. 
 
-During the encoding phase, participants are presented with the cue instructions followed by the images. The cues instruct participants to either selectively remember or selectively forget the upcoming image stimuli at random. There are a total of 120 cue instructions, which are presented for a duration of (XXXX) seconds. The image stimuli presented during the encoding phase are composed of the 120 images from a total of 16 categorical scenes subsetted from the larger database of 320 images with a total of 24 categorical scenes. These 120 images are presented in blocks at durations of either 500 milliseconds, 1 second or 2 seconds. The presentation times of the images will also be displayed at random. Seeing as how the presentation of a single cue instruction followed by a single image consists of a single trial, and there are 120 cue instructions and 120 images to be presented, then there will be 120 trials throughout the encoding phase of this experiment. 
+During the encoding phase, participants are presented with the cue instructions followed by the images. The cues instruct participants to either selectively remember or selectively forget the upcoming image stimuli at random. There are a total of 120 cue instructions. The image stimuli presented during the encoding phase are composed of the 120 images from a total of 16 categorical scenes subsetted from the larger database of 320 images with a total of 24 categorical scenes. These 120 images are presented in blocks at durations of either 500 milliseconds, 1 second or 2 seconds. The presentation times of the images will also be displayed at random. Seeing as how the presentation of a single cue instruction followed by a single image consists of a single trial, and there are 120 cue instructions and 120 images to be presented, then there will be 120 trials throughout the encoding phase of this experiment. 
 
 Upon completion of the encoding phase, participants were then taken to the testing phase. Similarly to the encoding phase, during the beginning of the testing phase participants were given instructions of completing the testing phase. During the testing phase, participants are given a series of trials where they are shown either an exemplar distractor image or a novel distractor image alongside an image previously seen during the encoding phase and are tasked with selecting the encoding image. There are 60 novel distractor images and 60 exemplar distractor images, each of which were presented at random throughout the testing procedure. 
 
@@ -326,7 +316,13 @@ The remaining main effects and interactions were not significant.
 
 ## Discussion
 
+
+\newpage
+
 # General Discussion
+
+Overall, we failed to replicate the findings of @ahmadDirectedForgettingCategorised2019 across both experiments for 2000ms. We also failed to obtain experimental results which support initial predictions of an increased directed forgetting effect magnitude for exemplar conditions from 2000ms to 1000ms to 500ms. A potential explanation of this lies in the number of participants ran across both experiments. Initial power analyses estimated that nearly 200 participants would be required for the predicted results to occur, yet only 47 and 45 participants were ran in experiments 1 and 2 respectively. Higher proportions of correctly recognized images were observed during experiment 1 for Forget-cues than Remember-cues for exemplar conditions at 500ms and 1000ms, and novel lure conditions at 1000ms. Directed forgetting effects could be observed during experiment 2 for novel conditions at 500ms and for exemplar conditions at 1000ms conditions, while a reversed directed forgetting effect can be observed for novel conditions at 1000ms and 2000ms conditions.
+
 
 # Conclusion
 
