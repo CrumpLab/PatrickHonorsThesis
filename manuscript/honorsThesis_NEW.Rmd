@@ -120,6 +120,22 @@ Give some motivation to the reason you are focusing on cue presentation time, st
 
 -->
 
+# Testing a general trace strength account of directed forgetting
+
+The purpose of this honors thesis is to test our general trace strength account of directed forgetting for pictures. The general trace strength account suggests that directed forgetting for highly memorably stimuli like pictures will increase as a function of manipulations that degrade encoding quality. This section explains the theoretical account and generates predictions for our experiments
+
+# The trace strength account
+
+The general trace strength account operates under several assumptions. The first is that Individual experiences are encoded as memory traces. The strength of these traces refer to the quality with which the experiences are encoded to memory traces. In other words, low strength means the trace is noisy and missing information and high strength means the trace contains detailed information about the experience. The final assumption made by our general trace strength account is that traces which surpass a strength threshold can be remembered, but traces that are below the threshold will be forgotten.
+
+# What happens to trace quality/strength in a directed forgetting experiment?
+
+We currently have two separate explanations for what happens to the strength of a trace during a directed forgetting experiment. These explanations are the Active Inhibition Account and the Passive Decay Account. The Active Inhibition Account proposes that the instruction to forget causes a reduction of trace strength. If the trace is weakened below the threshold, then directed forgetting will be observed. Alternatively, if the trace is well encoded with high strength and if the instruction to forget causes a small decrement in encoding strength, the trace will not be forgotten because it was not weakened enough. On another hand, the Passive Decay Account proposes that the instruction to forget does not actively weaken the memory trace, instead the instruction to remember does actively strengthen the memory trace. Memory traces strengthened enough to surpass the threshold will be remembered. Alternatively, traces that are really well encoded will be difficult to forget as they are not weakened enough to fall below the threshold.
+
+## The trace strength account and directed forgetting for pictures
+
+Due to pictures being very memorable stimuli, we expect minimal directed forgetting for pictures because trace strengths for pictures in both instruction conditions will be high and above threshold. This could partly explain the limited directed forgetting effects yielded by Ahmad, Tan and Hockley. According to the trace strength account, directed forgetting for pictures should increase as presentation duration (or encoding time for each picture) decreases. Meaning that short encoding durations should cause weaker trace strengths which are closer to the remembering threshold. Traces close to the threshold may be pushed beneath or above the threshold by the instructional manipulation, allowing the directed forgetting effect to be expressed in performance
+
 
 # Experiment 1
 
