@@ -25,7 +25,7 @@ navbar:
     manuscript:
       text: Manuscript
       menu:
-      - text: The effect of stimulus duration on directed forgetting for pictures
+      - text: 'Try and forget this image: The role of stimulus duration in directed forgetting for natural scenes'
         href: manuscript/Ihejirika_honors_thesis_Spring_2022.pdf
     articles:
       text: Supplementary
