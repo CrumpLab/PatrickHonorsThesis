@@ -1,10 +1,13 @@
 pandoc: '2.16'
-pkgdown: 2.0.1
+pkgdown: 2.0.3
 pkgdown_sha: ~
 articles:
   E1_DF_Mixed: E1_DF_Mixed.html
   E2_DF_Blocked: E2_DF_Blocked.html
   Experiments: Experiments.html
   power_analysis: power_analysis.html
-last_built: 2022-04-20T18:59Z
+last_built: 2022-05-18T19:07Z
+urls:
+  reference: https://crumplab.com/PatrickHonorsThesis/reference
+  article: https://crumplab.com/PatrickHonorsThesis/articles
 

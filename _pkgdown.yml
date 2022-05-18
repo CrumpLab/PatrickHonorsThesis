@@ -1,4 +1,5 @@
 # see https://pkgdown.r-lib.org/articles/pkgdown.html for yml help
+url: https://crumplab.com/PatrickHonorsThesis
 
 template:
   bootstrap: 5
@@ -25,7 +26,7 @@ navbar:
       text: Manuscript
       menu:
       - text: The effect of stimulus duration on directed forgetting for pictures
-        href: manuscript/honorsThesis.pdf
+        href: manuscript/Ihejirika_honors_thesis_Spring_2022.pdf
     articles:
       text: Supplementary
       menu:
