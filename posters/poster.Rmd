@@ -205,14 +205,38 @@ E2$Accuracy$graphs$figure+
 :::
 ::::
 
+:::: {.row}
+::: {.col-md-6}
+
+## E3 N=17 (ongoing)
+
+```{r, out.width = '100%'}
+E3 <- new.env()
+load("../vignettes/data/E3/E3_data_write_up.RData", E3)
+E3$Accuracy$graphs$figure+
+  scale_fill_brewer(palette = "Accent")+
+  theme_classic(base_size=20)+ggtitle("")+
+  theme(legend.position = "top",
+        plot.margin = unit(c(-2,0,0,0),units="line"),
+        legend.margin = unit(c(-1,0,0,0),units="line"))+
+  labs(fill = "Encoding Cue")
+```
+
+:::
+
+::: {.col-md-6}
+
 ## Conclusions and Next Steps
 
 1. We did not replicate @ahmadDirectedForgettingCategorised2019
-2. We did find a main effect of stimulus duration
-3. We did not find that reducing stimulus duration systematically increased the directed forgetting effect.
+2. Our power analysis suggests we need over 200 subjects to reliably detect the higher-order interaction
+3. Online experiment design should be considered.
 
-- Our power analysis suggests we need over 200 subjects to reliably detect the higher-order interaction
-- Directed forgetting may be limited by the cognitive demands associated with processing the instruction to forget
+:::
+::::
+
+
+
 
 
 
