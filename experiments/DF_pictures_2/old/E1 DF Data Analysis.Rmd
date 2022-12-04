@@ -1,0 +1,300 @@
+---
+title: "E1 Data analysis"
+author: "Matt Crump"
+date: "10/5/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Data collected 2/10/22
+
+## Load libraries
+
+```{r}
+library(pacman)
+library(dplyr)
+library(tidyverse)
+library(jsonlite)
+```
+
+
+
+## Import Data
+
+```{r}
+# Read the text file from JATOS ...
+read_file('jatos_results_20220216174226.txt') %>%
+  # ... split it into lines ...
+  str_split('\n') %>% first() %>%
+  # ... filter empty rows ...
+  discard(function(x) x == '') %>%
+  # ... parse JSON into a data.frame
+  map_dfr(fromJSON, flatten=T) -> all_data
+```
+
+## Pre-processing
+
+```{r}
+
+```
+
+## Get means across Conditions
+
+```{r}
+# select data from test phase
+filtered_data <- all_data %>%
+  filter(experiment_phase == "test")
+
+# get mean accuracy in each condition for each subject
+subject_means <- filtered_data %>%
+  group_by(ID,
+           encoding_stimulus_time,
+           encoding_instruction,
+           test_condition)%>%
+  summarize(mean_correct = mean(correct))
+
+# get mean accuracy in each condition across subjects
+condition_means <- subject_means %>%
+  group_by(encoding_stimulus_time,
+           encoding_instruction,
+           test_condition)%>%
+  summarize(grp_mean_correct = mean(mean_correct),
+            sem = sd(mean_correct)/sqrt(length(mean_correct)))
+
+# print table
+knitr::kable(condition_means)
+
+# print graph
+library(ggplot2)
+
+ggplot(condition_means, aes(x=encoding_instruction,y=grp_mean_correct,group=test_condition, color=test_condition))+
+  geom_line()+
+  geom_errorbar(aes(ymin = grp_mean_correct-sem,
+                    ymax = grp_mean_correct+sem),
+                width=.2)+
+  geom_point()+
+  facet_wrap(~encoding_stimulus_time)+
+  coord_cartesian(ylim=c(.4,1))+
+  geom_hline(yintercept=.5)+
+  scale_y_continuous(breaks = seq(0.4,1,.1))
+
+```
+
+## Main effect of test condition
+
+```{r}
+
+condition_means <- subject_means %>%
+  group_by(test_condition)%>%
+  summarize(grp_mean_correct = mean(mean_correct),
+            sem = sd(mean_correct)/sqrt(length(mean_correct)))
+
+ggplot(condition_means, aes(x=test_condition,y=grp_mean_correct))+
+  geom_bar(stat="identity")+
+  geom_errorbar(aes(ymin = grp_mean_correct-sem,
+                    ymax = grp_mean_correct+sem),
+                width=.2)+
+  geom_point()+
+  coord_cartesian(ylim=c(.4,1))+
+  geom_hline(yintercept=.5)+
+  scale_y_continuous(breaks = seq(0.4,1,.1))
+
+```
+
+## Main effect of stimulus duration
+
+```{r}
+
+condition_means <- subject_means %>%
+  group_by(encoding_stimulus_time)%>%
+  summarize(grp_mean_correct = mean(mean_correct),
+            sem = sd(mean_correct)/sqrt(length(mean_correct)))
+
+ggplot(condition_means, aes(x=encoding_stimulus_time,y=grp_mean_correct))+
+  geom_bar(stat="identity")+
+  geom_errorbar(aes(ymin = grp_mean_correct-sem,
+                    ymax = grp_mean_correct+sem),
+                width=.2)+
+  geom_point()+
+  coord_cartesian(ylim=c(.4,1))+
+  geom_hline(yintercept=.5)+
+  scale_y_continuous(breaks = seq(0.4,1,.1))
+
+```
+
+## Main effect of directed forgetting
+
+```{r}
+
+condition_means <- subject_means %>%
+  group_by(encoding_instruction)%>%
+  summarize(grp_mean_correct = mean(mean_correct),
+            sem = sd(mean_correct)/sqrt(length(mean_correct)))
+
+ggplot(condition_means, aes(x=encoding_instruction,y=grp_mean_correct))+
+  geom_bar(stat="identity")+
+  geom_errorbar(aes(ymin = grp_mean_correct-sem,
+                    ymax = grp_mean_correct+sem),
+                width=.2)+
+  geom_point()+
+  coord_cartesian(ylim=c(.4,1))+
+  geom_hline(yintercept=.5)+
+  scale_y_continuous(breaks = seq(0.4,1,.1))
+
+```
+
+## 2-way encoding_instruction x encoding_stimulus_time
+
+```{r}
+condition_means <- subject_means %>%
+  group_by(encoding_stimulus_time,encoding_instruction)%>%
+  summarize(grp_mean_correct = mean(mean_correct),
+            sem = sd(mean_correct)/sqrt(length(mean_correct)))
+
+ggplot(condition_means, aes(x=encoding_stimulus_time,
+                            y=grp_mean_correct,
+                            group=encoding_instruction,
+                            fill=encoding_instruction))+
+  geom_bar(stat="identity", position="dodge")+
+  geom_errorbar(aes(ymin = grp_mean_correct-sem,
+                    ymax = grp_mean_correct+sem),
+                width=.2,
+                position=position_dodge(width=0.9))+
+  coord_cartesian(ylim=c(.4,1))+
+  geom_hline(yintercept=.5)+
+  scale_y_continuous(breaks = seq(0.4,1,.1))
+
+```
+
+
+```{r}
+condition_means <- subject_means %>%
+  group_by(encoding_stimulus_time,encoding_instruction)%>%
+  summarize(grp_mean_correct = mean(mean_correct),
+            sem = sd(mean_correct)/sqrt(length(mean_correct)))
+
+ggplot(condition_means, aes(x=encoding_instruction,
+                            y=grp_mean_correct,
+                            group=encoding_stimulus_time,
+                            fill=encoding_stimulus_time))+
+  geom_bar(stat="identity", position="dodge")+
+  geom_errorbar(aes(ymin = grp_mean_correct-sem,
+                    ymax = grp_mean_correct+sem),
+                width=.2,
+                position=position_dodge(width=0.9))+
+  coord_cartesian(ylim=c(.4,1))+
+  geom_hline(yintercept=.5)+
+  scale_y_continuous(breaks = seq(0.4,1,.1))
+
+```
+
+
+#2-way Encoding instruction & Test condition  
+```{r}
+condition_means <- subject_means %>%
+  group_by(test_condition,encoding_instruction)%>%
+  summarize(grp_mean_correct = mean(mean_correct),
+            sem = sd(mean_correct)/sqrt(length(mean_correct)))
+
+ggplot(condition_means, aes(x=encoding_instruction,
+                            y=grp_mean_correct,
+                            group=test_condition,
+                            fill=test_condition))+
+  geom_bar(stat="identity", position="dodge")+
+  geom_errorbar(aes(ymin = grp_mean_correct-sem,
+                    ymax = grp_mean_correct+sem),
+                width=.2,
+                position=position_dodge(width=0.9))+
+  coord_cartesian(ylim=c(.4,1))+
+  geom_hline(yintercept=.5)+
+  scale_y_continuous(breaks = seq(0.4,1,.1))
+
+```
+
+
+```{r}
+condition_means <- subject_means %>%
+  group_by(test_condition,encoding_instruction)%>%
+  summarize(grp_mean_correct = mean(mean_correct),
+            sem = sd(mean_correct)/sqrt(length(mean_correct)))
+
+ggplot(condition_means, aes(x=test_condition,
+                            y=grp_mean_correct,
+                            group=encoding_instruction,
+                            fill=encoding_instruction))+
+  geom_bar(stat="identity", position="dodge")+
+  geom_errorbar(aes(ymin = grp_mean_correct-sem,
+                    ymax = grp_mean_correct+sem),
+                width=.2,
+                position=position_dodge(width=0.9))+
+  coord_cartesian(ylim=c(.4,1))+
+  geom_hline(yintercept=.5)+
+  scale_y_continuous(breaks = seq(0.4,1,.1))
+
+```
+
+
+#2-way Cue Duration & Test Condition  
+```{r}
+condition_means <- subject_means %>%
+  group_by(test_condition,encoding_stimulus_time)%>%
+  summarize(grp_mean_correct = mean(mean_correct),
+            sem = sd(mean_correct)/sqrt(length(mean_correct)))
+
+ggplot(condition_means, aes(x=encoding_stimulus_time,
+                            y=grp_mean_correct,
+                            group=test_condition,
+                            fill=test_condition))+
+  geom_bar(stat="identity", position="dodge")+
+  geom_errorbar(aes(ymin = grp_mean_correct-sem,
+                    ymax = grp_mean_correct+sem),
+                width=.2,
+                position=position_dodge(width=0.9))+
+  coord_cartesian(ylim=c(.4,1))+
+  geom_hline(yintercept=.5)+
+  scale_y_continuous(breaks = seq(0.4,1,.1))
+```
+```{r}
+condition_means <- subject_means %>%
+  group_by(test_condition,encoding_stimulus_time)%>%
+  summarize(grp_mean_correct = mean(mean_correct),
+            sem = sd(mean_correct)/sqrt(length(mean_correct)))
+
+ggplot(condition_means, aes(x=test_condition,
+                            y=grp_mean_correct,
+                            group=encoding_stimulus_time,
+                            fill=encoding_stimulus_time))+
+  geom_bar(stat="identity", position="dodge")+
+  geom_errorbar(aes(ymin = grp_mean_correct-sem,
+                    ymax = grp_mean_correct+sem),
+                width=.2,
+                position=position_dodge(width=0.9))+
+  coord_cartesian(ylim=c(.4,1))+
+  geom_hline(yintercept=.5)+
+  scale_y_continuous(breaks = seq(0.4,1,.1))
+```
+
+
+## ANOVA
+
+```{r}
+
+subject_means$ID <- as.factor(subject_means$ID)
+
+subject_means$encoding_stimulus_time <- as.factor(subject_means$encoding_stimulus_time)
+
+subject_means$encoding_instruction <- as.factor(subject_means$encoding_instruction)
+
+subject_means$test_condition <- as.factor(subject_means$test_condition)
+
+aov.out <- aov(mean_correct ~ encoding_stimulus_time*encoding_instruction*test_condition + Error(ID/(encoding_stimulus_time*encoding_instruction*test_condition)), subject_means)
+
+summary(aov.out)
+
+```
+
+
+
